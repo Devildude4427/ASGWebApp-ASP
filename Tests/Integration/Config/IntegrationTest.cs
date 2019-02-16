@@ -1,0 +1,38 @@
+using System;
+using Autofac;
+using Autofac.Core.Lifetime;
+using Web;
+
+namespace Tests.Integration.Config
+{
+    public class IntegrationTest : IDisposable
+    {
+        private readonly TestDatabaseInitialiser _db;
+        private static IContainer Container { get; set; }
+
+        public IntegrationTest()
+        {
+            InitialiseContainer();
+            Console.WriteLine("Setting up database");
+            _db = new TestDatabaseInitialiser(Container);
+        }
+        
+        private static void InitialiseContainer()
+        {
+            if (Container != null) return;
+            var b = new ContainerBuilder();
+            DIConfig.Configure(new TestConfig(), b);
+            Container = b.Build();
+        }
+
+        protected ILifetimeScope GetContainer()
+        {
+            return Container.BeginLifetimeScope(MatchingScopeLifetimeTags.RequestLifetimeScopeTag);
+        }
+        
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
+    }
+}
