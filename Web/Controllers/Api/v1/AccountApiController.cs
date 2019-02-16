@@ -33,7 +33,8 @@ namespace Web.Controllers.Api.v1
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            if (_user.IsAuthenticated) return Json(new { Success = false, Response = LoginResponse.AlreadyLoggedIn});
+            if (_user.IsAuthenticated)
+                return Json(new { Success = false, Response = LoginResponse.AlreadyLoggedIn});
 
             var result = await _accountService.Login(loginRequest.Email, loginRequest.Password);
 

@@ -108,6 +108,9 @@ namespace Web
             app.UseSession();
             app.UseAuthentication();
             
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            
             app.UseMvc();
         }
         
@@ -119,21 +122,21 @@ namespace Web
         
         private static void RunMigrations()
         {
-            using (var dbInitialiser = new DatabaseInitialiser(DatabaseConnectionStringProvider.GetConnectionString()))
+            using (var dbInitializer = new DatabaseInitializer(DatabaseConnectionStringProvider.GetConnectionString()))
             {
                 Console.WriteLine("Running migrations.");
-                dbInitialiser.InitialiseDatabase();
+                dbInitializer.InitialiseDatabase();
             }
         }
 
         private static async Task ResetDb(IHostingEnvironment env)
         {
-            using (var dbInitialiser = new DatabaseInitialiser(DatabaseConnectionStringProvider.GetConnectionString()))
+            using (var dbInitializer = new DatabaseInitializer(DatabaseConnectionStringProvider.GetConnectionString()))
             {
                 Console.WriteLine("Dropping database objects");
-                dbInitialiser.DropDatabase();
+                dbInitializer.DropDatabase();
                 Console.WriteLine("Creating database objects");
-                dbInitialiser.InitialiseDatabase();
+                dbInitializer.InitialiseDatabase();
                 await Seed(env);
                 Console.WriteLine("Database ready");
             }

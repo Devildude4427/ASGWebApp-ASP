@@ -6,16 +6,16 @@ using Persistence.Seeding;
 
 namespace Tests.Integration.Config
 {
-    public class TestDatabaseInitialiser : IDisposable
+    public class TestDatabaseInitializer : IDisposable
     {
-        public TestDatabaseInitialiser(IContainer container)
+        public TestDatabaseInitializer(IContainer container)
         {
-            using (var dbInitialiser = new DatabaseInitialiser(DatabaseConnectionStringProvider.GetConnectionString()))
+            using (var dbInitializer = new DatabaseInitializer(DatabaseConnectionStringProvider.GetConnectionString()))
             {
                 Console.WriteLine("Dropping database objects");
-                dbInitialiser.DropDatabase();
+                dbInitializer.DropDatabase();
                 Console.WriteLine("Creating database objects");
-                dbInitialiser.InitialiseDatabase();
+                dbInitializer.InitialiseDatabase();
                 Console.WriteLine();
                 Task.Run(async () => await Testseed.Execute(container)).Wait();
                 Console.WriteLine("Database ready");

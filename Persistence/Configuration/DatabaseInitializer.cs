@@ -5,11 +5,11 @@ using SimpleMigrations.DatabaseProvider;
 
 namespace Persistence.Configuration
 {
-    public class DatabaseInitialiser : IDisposable
+    public class DatabaseInitializer : IDisposable
     {
         private readonly NpgsqlConnection _con;
 
-        public DatabaseInitialiser(string connectionString)
+        public DatabaseInitializer(string connectionString)
         {
             _con = new NpgsqlConnection(connectionString);
             _con.Open();
@@ -17,7 +17,7 @@ namespace Persistence.Configuration
 
         public void InitialiseDatabase()
         {
-            var migrator = new SimpleMigrator(typeof(DatabaseInitialiser).Assembly,
+            var migrator = new SimpleMigrator(typeof(DatabaseInitializer).Assembly,
                 new PostgresqlDatabaseProvider(_con));
             migrator.Load();
             migrator.MigrateTo(1);

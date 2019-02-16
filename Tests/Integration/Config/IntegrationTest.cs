@@ -7,14 +7,14 @@ namespace Tests.Integration.Config
 {
     public class IntegrationTest : IDisposable
     {
-        private readonly TestDatabaseInitialiser _db;
+        private readonly TestDatabaseInitializer _db;
         private static IContainer Container { get; set; }
 
         public IntegrationTest()
         {
             InitialiseContainer();
             Console.WriteLine("Setting up database");
-            _db = new TestDatabaseInitialiser(Container);
+            _db = new TestDatabaseInitializer(Container);
         }
         
         private static void InitialiseContainer()

@@ -5,14 +5,21 @@ using Services;
 
 namespace Web.Controllers.Api.v1
 {
-    [Route("/api/v1/examples")]
-    public class ExampleApiController : RootApiController
+    [Route("/register")]
+    public class AccountRegistrationApiController : RootApiController
     {
         private readonly ExampleService _exampleService;
 
-        public ExampleApiController(ExampleService exampleService)
+        public AccountRegistrationApiController(ExampleService exampleService)
         {
             _exampleService = exampleService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Register()
+        {
+            var example = new Example {Id = 1, Name="Ryan"};
+            return Json(example);
         }
 
         [HttpPost("")]
@@ -22,7 +29,7 @@ namespace Web.Controllers.Api.v1
             return Ok();
         }
 
-        [HttpGet("")]
+        [HttpGet("Find")]
         public async Task<IActionResult> Find()
         {
             var filteredPageRequest = Request.FilteredPageRequest("id", true);
