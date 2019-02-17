@@ -10,14 +10,13 @@ namespace Persistence.Migrations
             Execute(@"
                 CREATE TABLE users (
                   id SERIAL PRIMARY KEY,
-                  first_name TEXT NOT NULL,
-                  last_name TEXT NOT NULL,
+                  name TEXT NOT NULL,
                   email TEXT NOT NULL,
                   password TEXT NOT NULL,
                   role INTEGER NOT NULL,
                   activated BOOLEAN NOT NULL DEFAULT FALSE,
                   enabled BOOLEAN NOT NULL DEFAULT TRUE,
-                  activation_token TEXT,
+                  authentication_token TEXT,
                   expiry_datetime TIMESTAMP,
                   CONSTRAINT unique_email UNIQUE(email)
                 );
