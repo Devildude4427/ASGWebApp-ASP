@@ -9,15 +9,28 @@ namespace Persistence.Migrations
         {
             Execute(@"
                 CREATE TABLE users (
-                  id BIGSERIAL PRIMARY KEY,
-                  name text NOT NULL,
-                  email text NOT NULL,
-                  role BIGINT NOT NULL,
-                  password_hash text,
+                  id SERIAL PRIMARY KEY,
+                  first_name TEXT NOT NULL,
+                  last_name TEXT NOT NULL,
+                  email TEXT NOT NULL,
+                  password TEXT NOT NULL,
+                  role INTEGER NOT NULL,
                   activated BOOLEAN NOT NULL DEFAULT FALSE,
+                  enabled BOOLEAN NOT NULL DEFAULT TRUE,
                   activation_token TEXT,
-                  disabled BOOLEAN NOT NULL DEFAULT FALSE,
+                  expiry_datetime TIMESTAMP,
                   CONSTRAINT unique_email UNIQUE(email)
+                );
+            ");
+            
+            Execute(@"
+                CREATE TABLE candidates (
+                  id SERIAL PRIMARY KEY,
+                  user_id INTEGER NOT NULL,
+                  reference_number TEXT NOT NULL,
+                  contact_info_id INTEGER NOT NULL,
+                  general_info_id INTEGER NOT NULL,
+                  CONSTRAINT unique_reference_number UNIQUE(reference_number)
                 );
             ");
         }
