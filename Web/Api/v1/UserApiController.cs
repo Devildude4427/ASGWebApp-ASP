@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
-namespace Web.Controllers.Api.v1
+namespace Web.Api.v1
 {
     [Route("/api/v1/users")]
     //TODO fix this later

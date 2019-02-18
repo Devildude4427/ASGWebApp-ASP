@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Domain;
@@ -6,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Services;
 using Web.Auth;
 
-namespace Web.Controllers.Api.v1
+namespace Web.Api.v1
 {
     [Route("/api/v1/account")]
     public class AccountApiController : RootApiController

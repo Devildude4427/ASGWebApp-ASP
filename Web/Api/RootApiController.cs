@@ -1,8 +1,9 @@
 using Domain;
 using Microsoft.AspNetCore.Http;
+using Web.Controllers;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
-namespace Web.Controllers.Api
+namespace Web.Api
 {
     [AppExceptionFilter]
     public class RootApiController : Controller
