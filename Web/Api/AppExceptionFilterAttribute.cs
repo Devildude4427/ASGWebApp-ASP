@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Web.Controllers
+namespace Web.Api
 {
     public class AppExceptionFilterAttribute : ExceptionFilterAttribute
     {

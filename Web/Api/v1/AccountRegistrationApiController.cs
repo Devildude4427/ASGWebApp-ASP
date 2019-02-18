@@ -3,7 +3,7 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
-namespace Web.Controllers.Api.v1
+namespace Web.Api.v1
 {
     [Route("/register")]
     public class AccountRegistrationApiController : RootApiController
