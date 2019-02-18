@@ -15,7 +15,7 @@ namespace Persistence.Configuration
             _con.Open();
         }
 
-        public void InitialiseDatabase()
+        public void InitializeDatabase()
         {
             var migrator = new SimpleMigrator(typeof(DatabaseInitializer).Assembly,
                 new PostgresqlDatabaseProvider(_con));

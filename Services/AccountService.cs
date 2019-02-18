@@ -28,7 +28,7 @@ namespace Services
             if (!Hashing.PasswordsMatch(password, hashedPassword))
                 return new UserResponse(user, LoginResponse.IncorrectPassword);
             
-            if (user.Disabled)
+            if (!user.Enabled)
                 return new UserResponse(user, LoginResponse.UserDisabled);
             
             return new UserResponse(user, LoginResponse.Successful);

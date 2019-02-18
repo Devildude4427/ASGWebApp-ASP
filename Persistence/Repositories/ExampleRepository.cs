@@ -30,18 +30,21 @@ namespace Persistence.Repositories
         
         public async Task<PaginatedList<Example>> Find(FilteredPageRequest pageRequest)
         {
-            var sqlTemplate = @"
-                SELECT *
-                FROM example e
-                WHERE e.name ILIKE :searchTerm
-                {0}
-                OFFSET :offset
-                LIMIT :pageSize;
-
-                SELECT COUNT(*)
-                FROM example e
-                WHERE e.name ILIKE :searchTerm;
-            ";
+            const string sqlTemplate = @"SELECT * FROM users OFFSET :offset LIMIT :pageSize;
+                                SELECT COUNT(*) FROM users;";
+            
+            // var sqlTemplate = @"
+            //     SELECT *
+            //     FROM example e
+            //     WHERE e.name ILIKE :searchTerm
+            //     {0}
+            //     OFFSET :offset
+            //     LIMIT :pageSize;
+            //
+            //     SELECT COUNT(*)
+            //     FROM example e
+            //     WHERE e.name ILIKE :searchTerm;
+            // ";
             
             var sanitisedSql = new SanitisedSql<Example>(sqlTemplate, pageRequest.OrderBy, pageRequest.OrderByAsc, "p");
 
@@ -82,7 +85,7 @@ namespace Persistence.Repositories
 
             var rowsAffected = await _con.Db.ExecuteAsync(sql, new
             {
-                updatedEntity.Name,
+                updatedEntity.FirstName,
                 id
             });
 
