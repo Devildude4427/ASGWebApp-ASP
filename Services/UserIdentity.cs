@@ -35,7 +35,7 @@ namespace Services
             Email = email;
             switch (role)
             {
-                case 1:
+                case 1001:
                     Role = UserRole.Standard;
                     break;
                 case 9001:

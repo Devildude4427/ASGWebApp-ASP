@@ -15,7 +15,7 @@ namespace Tests.Integration.Config
                 Console.WriteLine("Dropping database objects");
                 dbInitializer.DropDatabase();
                 Console.WriteLine("Creating database objects");
-                dbInitializer.InitialiseDatabase();
+                dbInitializer.InitializeDatabase();
                 Console.WriteLine();
                 Task.Run(async () => await Testseed.Execute(container)).Wait();
                 Console.WriteLine("Database ready");

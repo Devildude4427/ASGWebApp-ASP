@@ -21,8 +21,9 @@ namespace Services
 
         public async Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest)
         {
-            if (!_user.IsAuthorisedAtLevel(UserRole.Admin))
-                throw new UnauthorizedAccessException();
+            //TODO come back to fix this later
+            // if (!_user.IsAuthorisedAtLevel(UserRole.Admin))
+            //     throw new UnauthorizedAccessException();
             
             return await _userRepository.Find(filteredPageRequest);
         }

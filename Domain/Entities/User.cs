@@ -7,7 +7,7 @@ namespace Domain.Entities
         public string Email { get; set; }
         public UserRole Role { get; set; }
         public bool Activated { get; set; }
-        public bool Disabled { get; set; }
+        public bool Enabled { get; set; }
     }
 
     public class NewUser

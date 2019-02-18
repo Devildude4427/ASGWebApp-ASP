@@ -42,7 +42,7 @@ namespace Web
 
             services.Configure<CookiePolicyOptions>(options =>
             {
-//                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = _env.IsDevelopment() ? SameSiteMode.None : SameSiteMode.Strict;
             });
             
@@ -110,8 +110,7 @@ namespace Web
             
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            
-            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
         
         private static async Task InitialiseDatabase(SeedSettings seedSettings, IHostingEnvironment env)
@@ -125,7 +124,7 @@ namespace Web
             using (var dbInitializer = new DatabaseInitializer(DatabaseConnectionStringProvider.GetConnectionString()))
             {
                 Console.WriteLine("Running migrations.");
-                dbInitializer.InitialiseDatabase();
+                dbInitializer.InitializeDatabase();
             }
         }
 
@@ -136,7 +135,7 @@ namespace Web
                 Console.WriteLine("Dropping database objects");
                 dbInitializer.DropDatabase();
                 Console.WriteLine("Creating database objects");
-                dbInitializer.InitialiseDatabase();
+                dbInitializer.InitializeDatabase();
                 await Seed(env);
                 Console.WriteLine("Database ready");
             }

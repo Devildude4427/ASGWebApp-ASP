@@ -62,12 +62,28 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
       <_ContentIncludedByDefault Remove="Views\login.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\index.html" />
+      <_ContentIncludedByDefault Remove="wwwroot\site.js" />
+      <_ContentIncludedByDefault Remove="Views\Views\Home\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Views\Home\Privacy.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Views\Shared\Error.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Views\Shared\_CookieConsentPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Views\Shared\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Views\Shared\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Views\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Views\_ViewStart.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Index.cshtml" />
     </ItemGroup>
 
 
     <ItemGroup>
       <ProjectReference Include="..\Persistence\Persistence.csproj" />
       <ProjectReference Include="..\Services\Services.csproj" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Views\Home\Index.cshtml" />
     </ItemGroup>
 
 </Project>

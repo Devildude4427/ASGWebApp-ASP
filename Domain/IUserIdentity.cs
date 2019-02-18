@@ -11,7 +11,7 @@ namespace Domain
 
     public enum UserRole
     {
-        Standard = 1,
+        Standard = 1001,
         Admin = 9001
     }
     
