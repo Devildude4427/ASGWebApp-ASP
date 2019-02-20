@@ -15,20 +15,18 @@
         <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicon.png">
         
         <title>ASG Admin Dashboard</title>
-        
-        <link href="~/css/personalTouches.css" rel="stylesheet"/>
     </head>
 
     <body>
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
         <!-- ============================================================== -->
-        <div class="preloader">
-            <div class="lds-ripple">
-                <div class="lds-pos"></div>
-                <div class="lds-pos"></div>
-            </div>
-        </div>
+        @* <div class="preloader"> *@
+        @*     <div class="lds-ripple"> *@
+        @*         <div class="lds-pos"></div> *@
+        @*         <div class="lds-pos"></div> *@
+        @*     </div> *@
+        @* </div> *@
         <!-- ============================================================== -->
         <!-- Main wrapper - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -725,5 +723,16 @@
         <!-- ============================================================== -->
         <!-- End Wrapper -->
         <!-- ============================================================== -->
+        
+        @section Scripts {
+            <script src="~/vendors/flot/excanvas.js"></script>
+            <script src="~/vendors/flot/jquery.flot.js"></script>
+            <script src="~/vendors/flot/jquery.flot.pie.js"></script>
+            <script src="~/vendors/flot/jquery.flot.time.js"></script>
+            <script src="~/vendors/flot/jquery.flot.stack.js"></script>
+            <script src="~/vendors/flot/jquery.flot.crosshair.js"></script>
+            <script src="~/vendors/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+            <script src="~/js/pages/chart/chart-page-init.js"></script>
+        }
     </body>
 </html>
