@@ -13,12 +13,19 @@
         <meta name="author" content="">
         
         <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicon.png">
-        
-        <title>ASG Admin Dashboard</title>
     </head>
 
     <body>
         <div id="main-wrapper">
+
+            @section Header {
+                @Html.Partial("_Header");
+            }
+        
+            @section Sidebar {
+                @Html.Partial("_Sidebar");
+            }
+           
             <!-- ============================================================== -->
             <!-- Page wrapper  -->
             <!-- ============================================================== -->
@@ -703,19 +710,27 @@
                 <!-- ============================================================== -->
                 <!-- End Container fluid  -->
                 <!-- ============================================================== -->
+                @section Footer {
+                    <footer class="footer text-center">
+                        All Rights Reserved by Matrix-admin. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
+                    </footer>
+                }
             </div>
         </div>
         
+        
+            
+            
         @section Scripts {
-            <script src="~/vendors/flot/excanvas.js"></script>
-            <script src="~/vendors/flot/jquery.flot.js"></script>
-            <script src="~/vendors/flot/jquery.flot.pie.js"></script>
-            <script src="~/vendors/flot/jquery.flot.time.js"></script>
-            <script src="~/vendors/flot/jquery.flot.stack.js"></script>
-            <script src="~/vendors/flot/jquery.flot.crosshair.js"></script>
-            <script src="~/vendors/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-            <script src="~/js/pages/chart/chart-page-init.js"></script>
-            <script src="~/js/site.js"></script>
+                <script src="~/vendors/flot/excanvas.js"></script>
+                <script src="~/vendors/flot/jquery.flot.js"></script>
+                <script src="~/vendors/flot/jquery.flot.pie.js"></script>
+                <script src="~/vendors/flot/jquery.flot.time.js"></script>
+                <script src="~/vendors/flot/jquery.flot.stack.js"></script>
+                <script src="~/vendors/flot/jquery.flot.crosshair.js"></script>
+                <script src="~/vendors/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+                <script src="~/js/pages/chart/chart-page-init.js"></script>
+                <script src="~/js/dashboardAPIConnection.js"></script>
         }
     </body>
 </html>

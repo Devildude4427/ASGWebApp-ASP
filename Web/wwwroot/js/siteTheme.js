@@ -1,5 +1,6 @@
 $(function() {
     "use strict";
+    const mainWrapper = $("#main-wrapper");
 
     $(".preloader").fadeOut();
     // ============================================================== 
@@ -19,7 +20,7 @@ $(function() {
     );
     // this is for close icon when navigation open in mobile view
     $(".nav-toggler").on('click', function() {
-        $("#main-wrapper").toggleClass("show-sidebar");
+        mainWrapper.toggleClass("show-sidebar");
         $(".nav-toggler i").toggleClass("ti-menu");
     });
     $(".nav-lock").on('click', function() {
@@ -91,27 +92,27 @@ $(function() {
     //****************************
     /* This is for the mini-sidebar if width is less then 1170*/
     //**************************** 
-    var setsidebartype = function() {
-        var width = (window.innerWidth > 0) ? window.innerWidth : this.screen.width;
+    const setsidebartype = function() {
+        const width = (window.innerWidth > 0) ? window.innerWidth : this.screen.width;
         if (width < 1170) {
-            $("#main-wrapper").attr("data-sidebartype", "mini-sidebar");
+            mainWrapper.attr("data-sidebartype", "mini-sidebar");
         } else {
-            $("#main-wrapper").attr("data-sidebartype", "full");
+            mainWrapper.attr("data-sidebartype", "full");
         }
     };
     $(window).ready(setsidebartype);
     $(window).on("resize", setsidebartype);
     //****************************
-    /* This is for sidebartoggler*/
+    /* This is for sidebartoggle*/
     //****************************
-    $('.sidebartoggler').on("click", function() {
-        $("#main-wrapper").toggleClass("mini-sidebar");
-        if ($("#main-wrapper").hasClass("mini-sidebar")) {
-            $(".sidebartoggler").prop("checked", !0);
-            $("#main-wrapper").attr("data-sidebartype", "mini-sidebar");
+    const sideBarToggle = $(".sidebartoggler");
+    sideBarToggle.on("click", function() {
+        if ((mainWrapper.toggleClass("mini-sidebar")).hasClass("mini-sidebar")) {
+            sideBarToggle.prop("checked", !0);
+            mainWrapper.attr("data-sidebartype", "mini-sidebar");
         } else {
-            $(".sidebartoggler").prop("checked", !1);
-            $("#main-wrapper").attr("data-sidebartype", "full");
+            sideBarToggle.prop("checked", !1);
+            mainWrapper.attr("data-sidebartype", "full");
         }
     });
 });
