@@ -19,6 +19,7 @@
                   integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
         </environment>
     </head>
+    
     <body>
         <div class="preloader">
             <div class="lds-ripple">
@@ -27,25 +28,21 @@
             </div>
         </div>
         <div id="main-wrapper">
-            <header class="topbar" data-navbarbg="skin5">
-                @Html.Partial("_Header");
-            </header>
-            
-            <aside class="left-sidebar" data-sidebarbg="skin5">
-                @Html.Partial("_Sidebar");
-            </aside>
-    
             <div>
-                <partial name="_CookieConsentPartial" />
+                @RenderSection("Header", required: false)
+            </div>
+                
+            <div>
+                @RenderSection("Sidebar", required: false)
+            </div>
+        
+            <div>
+                <partial name="_CookieConsentPartial"/>
                 <main role="main" class="pb-3">
                     @RenderBody()
+                    @* @RenderSection("Footer", required: false) *@
                 </main>
             </div>
-            
-            <footer class="footer text-center">
-                All Rights Reserved by Matrix-admin. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
-            </footer>
-        
         </div>
     
         <environment include="Development">
@@ -57,7 +54,7 @@
             <script src="~/js/waves.js"></script>
             
             <script src="~/js/sidebarmenu.js"></script>
-            <script src="~/js/custom.min.js"></script>
+            <script src="~/js/siteTheme.min.js"></script>
             
         </environment>
         <environment exclude="Development">
@@ -75,6 +72,6 @@
             </script>
         </environment>
     
-        @RenderSection("Scripts", required: false);
+        @RenderSection("Scripts", required: false)
     </body>
 </html>

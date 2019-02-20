@@ -3,7 +3,6 @@ $(document).ready(function () {
         url: "/api/v1/users",
         dataType: "json",
         success: function(data) {
-            console.log(data);
             // noinspection JSUnresolvedVariable
             $("#totalUserCount").text(data.totalCount);
         }
