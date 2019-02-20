@@ -4,6 +4,8 @@ $(document).ready(function () {
         dataType: "json",
         success: function(data) {
             console.log(data);
+            // noinspection JSUnresolvedVariable
+            $("#totalUserCount").text(data.totalCount);
         }
     });
 });
