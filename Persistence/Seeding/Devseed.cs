@@ -13,7 +13,7 @@ namespace Persistence.Seeding
 
             await connection.Db.ExecuteAsync(@"
                 INSERT INTO users(name, email, role, password, activated)
-                VALUES('Erwin Schroedinger', 'admin@asg.com', '9001', '$2y$12$sx43vQhbkljyyofORuxz8.4GMc4kysuwroFl8.5pJQGfRhrun1Cwm', true),
+                VALUES('Erwin Schroedinger', 'admin@asg.com', '9001', '$2y$12$IF458i6pDVsY.XJR5OYd.OzjRPaPIsHmQhyE93E2V2SonZszVmzXm', true),
                       ('Johannes Kepler', 'admin2@asg.com', '9001', '$2a$10$cGXMmSfOg2ZrUXUgCxaiaO4pgjJsSvcFYlKPMcFDBgVp3MqrZ2M96', true),
                       ('Blaise Pascal', 'candidate@asg.com', '1001', '$2a$10$S4MOcUgShERWJpI1EpTReeNbwKL09wElxbCLLimHdf3yrOG7H2PWG', true),
                       ('Caroline Herschel', 'candidate2@asg.com', '1001', '$2a$10$uzGe/I2v.1LtdTPBQg8oDOe/07mlgaGyG0UoF8G5VQD7b6PAvTQHq', true),

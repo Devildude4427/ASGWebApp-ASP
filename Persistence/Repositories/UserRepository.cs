@@ -77,7 +77,7 @@ namespace Persistence.Repositories
         public async Task<string> GetHashedPassword(string email)
         {
             var sql = @"
-                SELECT password_hash
+                SELECT password
                 FROM users u
                 WHERE u.email = LOWER(:email);
             ";
