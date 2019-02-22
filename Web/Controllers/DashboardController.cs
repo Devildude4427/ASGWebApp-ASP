@@ -5,7 +5,7 @@ namespace Web.Controllers
 {
     public class DashboardController : Controller
     {
-        [Authorize("Standard")]
+        [Authorize("Admin")]
         public IActionResult Index()
         {
             return View();

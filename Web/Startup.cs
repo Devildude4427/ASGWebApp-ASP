@@ -112,8 +112,11 @@ namespace Web
             }
             else
             {
+                app.UseExceptionHandler("/error");
                 app.UseHttpsRedirection();
             }
+            
+            app.UseStatusCodePagesWithRedirects("/error/index/{0}");
 
             app.UseCookiePolicy();
             app.UseSession();
