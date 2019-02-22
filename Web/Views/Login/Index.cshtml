@@ -27,25 +27,25 @@
         <div class="main-wrapper">
             <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
                 <div class="auth-box bg-dark border-top border-secondary">
-                    <div id="loginform">
+                    <div>
                         <div class="text-center p-t-20 p-b-20">
                             <span class="db"><img src="~/images/logo.png" alt="logo" /></span>
                         </div>
                         <!-- Form -->
-                        <form class="form-horizontal m-t-20" id="loginform" action="index.html">
+                        <form class="form-horizontal m-t-20" id="loginForm" method="POST">
                             <div class="row p-b-30">
                                 <div class="col-12">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
                                         </div>
-                                        <input type="text" class="form-control form-control-lg" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required="">
+                                        <input type="text" class="form-control form-control-lg" id="email" placeholder="Email Address" aria-label="Username" aria-describedby="basic-addon1" required="">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
                                         </div>
-                                        <input type="text" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="">
+                                        <input type="text" class="form-control form-control-lg" id="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="">
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                             </div>
                         </form>
                     </div>
-                    <div id="recoverform">
+                    <div id="recoverForm">
                         <div class="text-center">
                             <span class="text-white">Enter your e-mail address below and we will send you instructions how to recover a password.</span>
                         </div>
@@ -99,13 +99,35 @@
                 // Login and Recover Password 
                 // ============================================================== 
                 $('#to-recover').on("click", function() {
-                    $("#loginform").slideUp();
-                    $("#recoverform").fadeIn();
+                    $("#loginForm").slideUp();
+                    $("#recoverForm").fadeIn();
                 });
                 $('#to-login').click(function(){
+                    $("#recoverForm").hide();
+                    $("#loginForm").fadeIn();
+                });
                 
-                    $("#recoverform").hide();
-                    $("#loginform").fadeIn();
+               
+                
+                $("#loginForm").submit(function(e) {
+                    const loginRequest = { Email : $("#email").val(), Password : $("#password").val() }
+                    $.ajax({
+                        type: "POST",
+                        contentType:"application/json",
+                        url: "/api/v1/account/login",
+                        data: JSON.stringify(loginRequest),
+                        success: function(result)
+                        {
+                            const response = JSON.parse(JSON.stringify(result));
+                            if (response['success']) {
+                                window.location = '/home/dashboard';
+                            }
+                        },
+                        failure: function() {
+                            alert("Failed");
+                        }
+                    });
+                    e.preventDefault();
                 });
             </script>
         }

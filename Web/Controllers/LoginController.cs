@@ -1,3 +1,5 @@
+using System;
+using Domain.AccountViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -8,6 +10,14 @@ namespace Web.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        
+        [HttpPost]
+        public void Login([FromBody] LoginRequest loginRequest)
+        {
+            Console.WriteLine(loginRequest.Email);
+            Console.WriteLine(loginRequest.Password);
+            Redirect("Home/Index");
         }
     }
 }
