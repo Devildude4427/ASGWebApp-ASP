@@ -1,6 +1,6 @@
-using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Domain;
+using Domain.AccountViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Web.Auth;
@@ -55,13 +55,5 @@ namespace Web.Api.v1
     public class SessionData
     {
         public IUserIdentity User { get; set; }
-    }
-    
-    public class LoginRequest
-    {
-        [Required]
-        public string Email { get; set; }
-        [Required]
-        public string Password { get; set; }
     }
 }
