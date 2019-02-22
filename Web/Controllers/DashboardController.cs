@@ -1,19 +1,27 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
     public class DashboardController : Controller
     {
-        [Authorize("Admin")]
+        private readonly IUserIdentity _user;
+        
+        public DashboardController(IUserIdentity user)
+        {
+            _user = user;
+        }
+        
+        [Authorize]
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            switch (_user.Role) {
+                case UserRole.Admin:
+                    return View("Admin");
+                default:
+                    return View("Candidate");
+            }
         }
     }
 }
