@@ -14,11 +14,11 @@ namespace Persistence.Seeding
             await connection.Db.ExecuteAsync(@"
                 INSERT INTO users(name, email, role, password, activated)
                 VALUES('Erwin Schroedinger', 'admin@asg.com', '9001', '$2y$12$IF458i6pDVsY.XJR5OYd.OzjRPaPIsHmQhyE93E2V2SonZszVmzXm', true),
-                      ('Johannes Kepler', 'admin2@asg.com', '9001', '$2a$10$cGXMmSfOg2ZrUXUgCxaiaO4pgjJsSvcFYlKPMcFDBgVp3MqrZ2M96', true),
-                      ('Blaise Pascal', 'candidate@asg.com', '1001', '$2a$10$S4MOcUgShERWJpI1EpTReeNbwKL09wElxbCLLimHdf3yrOG7H2PWG', true),
-                      ('Caroline Herschel', 'candidate2@asg.com', '1001', '$2a$10$uzGe/I2v.1LtdTPBQg8oDOe/07mlgaGyG0UoF8G5VQD7b6PAvTQHq', true),
-                      ('Edmond Halley', 'candidate3@asg.com', '1001', '$2a$10$H2GWvDnlRJD1DuVPkfkSLujsmzSwGmM7ELKpZY0olKQFObp4GWZ56', true),
-                      ('Enrico Fermi', 'candidate4@asg.com', '1001', '$2a$10$1XELQEuTrZ0JbFg0MijjI.4QFWJYMppieYp5XN8Aj6z6LIg9QwgN2', true);
+                      ('Johannes Kepler', 'admin2@asg.com', '9001', '$2y$12$D0lwJAXsCv8IzGfex0wV7uGdKj1nuYweTc6BnMZbS8xss/djGmySO', true),
+                      ('Blaise Pascal', 'candidate@asg.com', '1001', '$2y$12$OZ6iLbvvFeMAPh.w8.ZLFetakRl9B5gA6MvCHgJs9kK2zCm1d5oFC', true),
+                      ('Caroline Herschel', 'candidate2@asg.com', '1001', '$2y$12$hiSBt4DuQMZZAdlaG7osu.EE21jvHklqHbRUovC6qQZPDyCXOQNG2', true),
+                      ('Edmond Halley', 'candidate3@asg.com', '1001', '$2y$12$E9LNbS1h2VZ/lErbbWunVOpA67QJrPmPCqCBuGuLKuMY/r.QjEjea', true),
+                      ('Enrico Fermi', 'candidate4@asg.com', '1001', '$2y$12$YGA1lrJ7MlhgKtNU0qy4UOtrvlYpswFlMjVrqDdaFQLTS54/MYhyy', true);
             ");
         }
     }

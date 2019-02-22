@@ -64,6 +64,17 @@ namespace Web
 
                     return false;
                 }));
+                
+                o.AddPolicy("Standard", p => p.RequireAssertion(c =>
+                {
+                    var claim = c.User.FindFirst(ClaimTypes.Role);
+                    if (claim == null) return false;
+
+                    if (Enum.TryParse(claim.Value, out UserRole userRole))
+                        return userRole >= UserRole.Standard;
+
+                    return false;
+                }));
             });
            
             services.AddScoped(c =>

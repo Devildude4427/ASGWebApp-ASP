@@ -1,12 +1,12 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
 namespace Web.Api.v1
 {
     [Route("/api/v1/users")]
-    //TODO fix this later
-    // [Authorize("Admin")]
+    [Authorize("Admin")]
     public class UserApiController : RootApiController
     {
         private readonly UserService _userService;

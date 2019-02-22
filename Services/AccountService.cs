@@ -28,10 +28,8 @@ namespace Services
             if (!Hashing.PasswordsMatch(password, hashedPassword))
                 return new UserResponse(user, LoginResponse.IncorrectPassword);
             
-            if (!user.Enabled)
-                return new UserResponse(user, LoginResponse.UserDisabled);
-            
-            return new UserResponse(user, LoginResponse.Successful);
+            return !user.Enabled ? new UserResponse(user, LoginResponse.UserDisabled) :
+                new UserResponse(user, LoginResponse.Successful);
         }
     }
     

@@ -45,7 +45,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
                                         </div>
-                                        <input type="text" class="form-control form-control-lg" id="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="">
+                                        <input type="password" class="form-control form-control-lg" id="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="">
                                     </div>
                                 </div>
                             </div>
@@ -66,20 +66,17 @@
                             <span class="text-white">Enter your e-mail address below and we will send you instructions how to recover a password.</span>
                         </div>
                         <div class="row m-t-20">
-                            <!-- Form -->
-                            <form class="col-12" action="index.html">
-                                <!-- email -->
+                            <form class="col-12" method="POST">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-danger text-white" id="basic-addon1"><i class="ti-email"></i></span>
                                     </div>
                                     <input type="text" class="form-control form-control-lg" placeholder="Email Address" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
-                                <!-- pwd -->
                                 <div class="row m-t-20 p-t-20 border-top border-secondary">
                                     <div class="col-12">
-                                        <a class="btn btn-success" href="#" id="to-login" name="action">Back To Login</a>
-                                        <button class="btn btn-info float-right" type="button" name="action">Recover</button>
+                                        <a class="btn btn-success" href="#" id="to-login">Back To Login</a>
+                                        <button class="btn btn-info float-right" type="button" type="submit">Recover</button>
                                     </div>
                                 </div>
                             </form>
@@ -120,13 +117,35 @@
                         {
                             const response = JSON.parse(JSON.stringify(result));
                             if (response['success']) {
-                                window.location = '/home/dashboard';
+                                window.location = '/dashboard';
                             }
                         },
                         failure: function() {
                             alert("Failed");
                         }
                     });
+                    e.preventDefault();
+                });
+                
+                $("#recoverForm").submit(function(e) {
+                    const loginRequest = { Email : $("#email").val(), Password : $("#password").val() }
+                    alert("Recover form was submitted");
+//                    $.ajax({
+//                        type: "POST",
+//                        contentType:"application/json",
+//                        url: "/api/v1/account/login",
+//                        data: JSON.stringify(loginRequest),
+//                        success: function(result)
+//                        {
+//                            const response = JSON.parse(JSON.stringify(result));
+//                            if (response['success']) {
+//                                window.location = '/home/dashboard';
+//                            }
+//                        },
+//                        failure: function() {
+//                            alert("Failed");
+//                        }
+//                    });
                     e.preventDefault();
                 });
             </script>
