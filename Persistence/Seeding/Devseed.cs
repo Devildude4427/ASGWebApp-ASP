@@ -21,10 +21,10 @@ namespace Persistence.Seeding
                       ('Enrico Fermi', 'candidate4@asg.com', '1001', '$2y$12$YGA1lrJ7MlhgKtNU0qy4UOtrvlYpswFlMjVrqDdaFQLTS54/MYhyy', true);
 
                 INSERT INTO candidates(id, user_id, reference_number, contact_info_id, general_info_id, last_completed_stage)
-                VALUES(1, 3, 'ASG-001-02-19', 1, 1, -1),
-                      (2, 4, 'ASG-002-02-19', 2, 2, 4),
-                      (3, 5, 'ASG-003-02-19', 3, 3, 7),
-                      (4, 6, 'ASG-004-02-19', 4, 4, 12);
+                VALUES(1, 3, 'ASG-001-19-02', 1, 1, -1),
+                      (2, 4, 'ASG-002-19-02', 2, 2, 4),
+                      (3, 5, 'ASG-003-19-02', 3, 3, 7),
+                      (4, 6, 'ASG-004-19-02', 4, 4, 12);
             ");
         }
     }
