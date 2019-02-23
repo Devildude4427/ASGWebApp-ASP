@@ -20,11 +20,10 @@
                 padding-bottom: 0 !important;
             }
         </style>
-        
     </head>
     
     <body>
-        <div class="main-wrapper">
+        <div id="main-wrapper">
             <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
                 <div class="auth-box bg-dark border-top border-secondary">
                     <div>
@@ -131,9 +130,9 @@
                     e.preventDefault();
                 });
                 
-                $("#recoverForm").submit(function(e) {
-                    const loginRequest = { Email : $("#email").val(), Password : $("#password").val() }
-                    alert("Recover form was submitted");
+//                $("#recoverForm").submit(function(e) {
+//                    const loginRequest = { Email : $("#email").val(), Password : $("#password").val() }
+//                    alert("Recover form was submitted");
 //                    $.ajax({
 //                        type: "POST",
 //                        contentType:"application/json",
@@ -150,8 +149,8 @@
 //                            alert("Failed");
 //                        }
 //                    });
-                    e.preventDefault();
-                });
+//                    e.preventDefault();
+//                });
             </script>
         }
     </body>
