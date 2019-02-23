@@ -61,6 +61,7 @@
                             </div>
                         </form>
                     </div>
+                    <p id="loginError" style="color: red; display: none;">Please check your login credentials, as they do not match any accounts we have on record.</p>
                     <div id="recoverForm">
                         <div class="text-center">
                             <span class="text-white">Enter your e-mail address below and we will send you instructions how to recover a password.</span>
@@ -118,10 +119,12 @@
                             const response = JSON.parse(JSON.stringify(result));
                             if (response['success']) {
                                 window.location = '/dashboard';
+                            } else {
+                                document.getElementById("loginError").style.display = "block";
                             }
                         },
                         failure: function() {
-                            alert("Failed");
+                            document.getElementById("loginError").innerHTML = "Can't connect to server";
                         }
                     });
                     e.preventDefault();
