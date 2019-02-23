@@ -6,14 +6,17 @@ using Services;
 namespace Web.Api.v1
 {
     [Route("/api/v1/users")]
-    [Authorize("Admin")]
+    // [Authorize("Admin")]
     public class UserApiController : RootApiController
     {
         private readonly UserService _userService;
 
-        public UserApiController(UserService userService)
+        private readonly CandidateService _candidateService;
+
+        public UserApiController(UserService userService, CandidateService candidateService)
         {
             _userService = userService;
+            _candidateService = candidateService;
         }
 
         [HttpGet]
@@ -24,10 +27,17 @@ namespace Web.Api.v1
             return Json(result);
         }
 
+        // [HttpGet("{id:long}")]
+        // public async Task<IActionResult> FindById(long id)
+        // {
+        //     var result = await _userService.FindById(id);
+        //     return Json(result);
+        // }
+        
         [HttpGet("{id:long}")]
-        public async Task<IActionResult> FindById(long id)
+        public async Task<IActionResult> FindCandidateByUserId(long id)
         {
-            var result = await _userService.FindById(id);
+            var result = await _candidateService.FindByUserId(id);
             return Json(result);
         }
     }

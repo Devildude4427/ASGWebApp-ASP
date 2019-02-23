@@ -18,6 +18,7 @@ namespace Web.Controllers
         {
             switch (_user.Role) {
                 case UserRole.Admin:
+                    
                     return View("Admin");
                 default:
                     return View("Candidate");
