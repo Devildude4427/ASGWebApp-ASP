@@ -97,6 +97,7 @@
                 // Login and Recover Password 
                 // ============================================================== 
                 $('#to-recover').on("click", function() {
+                    document.getElementById("loginError").style.display = "none";
                     $("#loginForm").slideUp();
                     $("#recoverForm").fadeIn();
                 });
