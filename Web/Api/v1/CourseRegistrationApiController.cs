@@ -5,14 +5,17 @@ using Services;
 
 namespace Web.Api.v1
 {
-    [Route("/register")]
-    public class AccountRegistrationApiController : RootApiController
+    [Route("/api/v1/course/register")]
+    public class CourseRegistrationApiController : RootApiController
     {
         private readonly ExampleService _exampleService;
 
-        public AccountRegistrationApiController(ExampleService exampleService)
+        private readonly CandidateService _candidateService;
+
+        public CourseRegistrationApiController(ExampleService exampleService, CandidateService candidateService)
         {
             _exampleService = exampleService;
+            _candidateService = candidateService;
         }
 
         [HttpPost("")]
@@ -34,6 +37,13 @@ namespace Web.Api.v1
         public async Task<IActionResult> FindById(long id)
         {
             var result = await _exampleService.FindById(id);
+            return Json(result);
+        }
+        
+        [HttpGet]
+        public async Task<IActionResult> Test()
+        {
+            var result = await _candidateService.GenerateReferenceNumber();
             return Json(result);
         }
 
