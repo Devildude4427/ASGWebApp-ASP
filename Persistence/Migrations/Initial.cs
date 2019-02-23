@@ -29,6 +29,7 @@ namespace Persistence.Migrations
                   reference_number TEXT NOT NULL,
                   contact_info_id INTEGER NOT NULL,
                   general_info_id INTEGER NOT NULL,
+                  last_completed_stage INTEGER NOT NULL,
                   CONSTRAINT unique_reference_number UNIQUE(reference_number)
                 );
             ");
@@ -38,6 +39,7 @@ namespace Persistence.Migrations
         {
             Execute(@"
                 DROP TABLE users;
+                DROP TABLE candidates;
             ");
         }
     }
