@@ -63,6 +63,17 @@ namespace Persistence.Repositories
             return await _con.Db.QuerySingleOrDefaultAsync<Candidate>(sql, new { id });
         }
 
+        public async Task<string> PreviousCandidateReferenceNumber()
+        {
+            const string sql = @"
+                SELECT reference_number
+                FROM candidates 
+                ORDER BY id DESC 
+                LIMIT 1
+            ";
+            return await _con.Db.QuerySingleOrDefaultAsync<string>(sql);
+        }
+
         public async Task<User> FindByEmail(string email)
         {
             const string sql = @"
