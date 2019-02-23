@@ -7,7 +7,7 @@ namespace Domain.Entities
         public string ReferenceNumber { get; set; }
         public long ContactInfoId { get; set; }
         public long GeneralInfoId { get; set; }
-        public CandidateStage CandidateStage { get; set; }
+        public LastCompletedStage LastCompletedStage { get; set; }
     }
 
     public class NewCandidate
@@ -16,14 +16,17 @@ namespace Domain.Entities
         public string ReferenceNumber { get; set; }
         public long ContactInfoId { get; set; }
         public long GeneralInfoId { get; set; }
-        public CandidateStage CandidateStage = 0;
+        public LastCompletedStage CandidateStage = 0;
     }
     
-    public enum CandidateStage
+    public enum LastCompletedStage
     {
+        //For testing purposes only
+        Unregistered = -1,
+        
         Registered = 0,
         Paid = 1,
-        AwaitingCourse = 2,
+        AssignedCourse = 2,
         CourseJoiningInstructions = 3,
         GroundSchoolSyllabus = 4,
         GroundSchoolExam = 5,
