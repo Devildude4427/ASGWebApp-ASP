@@ -186,12 +186,9 @@
                         {
                             const response = JSON.parse(JSON.stringify(result));
                             console.log(response);
-                            if (response['success']) {
-                                window.location = '/dashboard';
-                            }
                         },
                         failure: function() {
-                            alert("Failed");
+                            alert("Failed to get user data");
                         }
                     });
                 </script>
