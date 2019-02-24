@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Domain;
 using Domain.AccountViewModels;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Web.Auth;
@@ -50,6 +51,20 @@ namespace Web.Api.v1
             Response.DeleteCredentials();
             return Json(new {Success = true});
         }
+        
+        // [HttpPost("register")]
+        // public async Task<IActionResult> Register([FromBody] Example newEntity)
+        // {
+        //     await _exampleService.Create(newEntity);
+        //     return Ok();
+        // }
+        
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> Update(long id, [FromBody] Example updatedEntity)
+        // {
+        //     await _exampleService.Update(id, updatedEntity);
+        //     return Ok();
+        // }
     }
 
     public class SessionData
