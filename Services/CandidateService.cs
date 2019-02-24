@@ -10,20 +10,13 @@ namespace Services
     {
         private readonly ICandidateRepository _candidateRepository;
 
-        private readonly IUserIdentity _user;
-
-        public CandidateService(ICandidateRepository candidateRepository, IUserIdentity user)
+        public CandidateService(ICandidateRepository candidateRepository)
         {
             _candidateRepository = candidateRepository;
-            _user = user;
         }
         
         public async Task<Candidate> FindByUserId(long id)
         {
-            //TODO Work out authorities here
-            // if (!_user.IsAuthorisedAtLevel(UserRole.Admin) && _user.Id != id)
-            //     throw new UnauthorizedAccessException();
-            
             return await _candidateRepository.FindByUserId(id);
         }
 
