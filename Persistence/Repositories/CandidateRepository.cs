@@ -73,15 +73,5 @@ namespace Persistence.Repositories
             ";
             return await _con.Db.QuerySingleOrDefaultAsync<string>(sql);
         }
-
-        public async Task<User> FindByEmail(string email)
-        {
-            const string sql = @"
-                SELECT *
-                FROM users u
-                WHERE u.email = :email;
-            ";
-            return await _con.Db.QuerySingleOrDefaultAsync<User>(sql, new { email });
-        }
     }
 }
