@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly IUserIdentity _user;
@@ -13,7 +14,7 @@ namespace Web.Controllers
             _user = user;
         }
         
-        [Authorize]
+        
         public IActionResult Index()
         {
             switch (_user.Role) {
@@ -23,6 +24,11 @@ namespace Web.Controllers
                 default:
                     return View("Candidate");
             }
+        }
+
+        public IActionResult Course()
+        {
+            return View();
         }
     }
 }
