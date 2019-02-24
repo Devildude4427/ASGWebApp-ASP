@@ -107,9 +107,4 @@
       <_ContentIncludedByDefault Remove="wwwroot\vendors\bootstrap-datepicker\dist\locales\bootstrap-datepicker.zh-TW.min.js" />
     </ItemGroup>
 
-
-    <ItemGroup>
-      <Folder Include="Views\Registration" />
-    </ItemGroup>
-
 </Project>
