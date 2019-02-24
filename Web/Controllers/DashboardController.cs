@@ -26,7 +26,7 @@ namespace Web.Controllers
             }
         }
 
-        public IActionResult Course()
+        public IActionResult CourseRegistration()
         {
             return View();
         }
