@@ -1,14 +1,15 @@
 ﻿@* Theme and the basis for this layout obtained from https://www.wrappixel.com/demos/free-admin-templates/matrix-admin/ *@
 
 <!DOCTYPE html>
-<html>
+<html dir="ltr">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"]</title>
+        <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicon.png">
     
         <environment include="Development">
-            <link href="~/vendors/flot/css/float-chart.css" rel="stylesheet">
+            @RenderSection("Style", required: false)
             <link href="~/css/style.min.css" rel="stylesheet">
         </environment>
         <environment exclude="Development">
@@ -28,21 +29,11 @@
             </div>
         </div>
         <div id="main-wrapper">
-            <div>
-                @RenderSection("Header", required: false)
-            </div>
-                
-            <div>
-                @RenderSection("Sidebar", required: false)
-            </div>
-        
-            <div>
-                <partial name="_CookieConsentPartial"/>
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                    @RenderSection("Footer", required: false)
-                </main>
-            </div>
+            @RenderSection("Header", required: false)
+            
+            @RenderSection("Sidebar", required: false)
+            
+            @RenderBody()
         </div>
     
         <environment include="Development">
@@ -56,6 +47,7 @@
             <script src="~/js/sidebarmenu.js"></script>
             <script src="~/js/siteTheme.min.js"></script>
             
+            @RenderSection("Scripts", required: false)
         </environment>
         <environment exclude="Development">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -71,7 +63,5 @@
                     integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
             </script>
         </environment>
-    
-        @RenderSection("Scripts", required: false)
     </body>
 </html>

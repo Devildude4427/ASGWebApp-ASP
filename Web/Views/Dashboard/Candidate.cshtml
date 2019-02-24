@@ -1,198 +1,72 @@
 @{
-    ViewData["Title"] = "ASG Admin Dashboard";
+    ViewData["Title"] = "ASG Dashboard";
 }
 
-<!DOCTYPE html>
-<html dir="ltr" lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        
-        <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicon.png">
-    </head>
-
-    <body>
-        <div id="main-wrapper">
-
-            @section Header {
-                @Html.Partial("_Header");
-            }
-        
-            @section Sidebar {
-                @Html.Partial("_Sidebar");
-            }
-           
-            <!-- ============================================================== -->
-            <!-- Page wrapper  -->
-            <!-- ============================================================== -->
-            <div class="page-wrapper">
-                <!-- ============================================================== -->
-                <!-- Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
-                <div class="page-breadcrumb">
-                    <div class="row">
-                        <div class="col-12 d-flex no-block align-items-center">
-                            <h4 class="page-title">Dashboard</h4>
-                            <div class="ml-auto text-right">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Library</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
+@section Header {
+    @Html.Partial("_Header")
+}
+                
+@section Sidebar {
+    @Html.Partial("_Sidebar")
+}
+                
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center">
+                <h4 class="page-title">Dashboard</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-controller="Dashboard" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                        </ol>
+                    </nav>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Container fluid  -->
-                <!-- ============================================================== -->
-                <div class="container-fluid">
-                    <!-- ============================================================== -->
-                    <!-- Sales Cards  -->
-                    <!-- ============================================================== -->
-                    <div class="row">
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-2 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="box bg-cyan text-center">
-                                    <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
-                                    <h6 class="text-white">Dashboard</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-4 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="box bg-success text-center">
-                                    <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
-                                    <h6 class="text-white">Charts</h6>
-                                </div>
-                            </div>
-                        </div>
-                         <!-- Column -->
-                        <div class="col-md-6 col-lg-2 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="box bg-warning text-center">
-                                    <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
-                                    <h6 class="text-white">Widgets</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-2 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="box bg-danger text-center">
-                                    <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
-                                    <h6 class="text-white">Tables</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-2 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="box bg-info text-center">
-                                    <h1 class="font-light text-white"><i class="mdi mdi-arrow-all"></i></h1>
-                                    <h6 class="text-white">Full Width</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-4 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="box bg-danger text-center">
-                                    <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
-                                    <h6 class="text-white">Forms</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-2 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="box bg-info text-center">
-                                    <h1 class="font-light text-white"><i class="mdi mdi-relative-scale"></i></h1>
-                                    <h6 class="text-white">Buttons</h6>
-                                </div>
-                            </div>
-                        </div>
-                         <!-- Column -->
-                        <div class="col-md-6 col-lg-2 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="box bg-cyan text-center">
-                                    <h1 class="font-light text-white"><i class="mdi mdi-pencil"></i></h1>
-                                    <h6 class="text-white">Elements</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-2 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="box bg-success text-center">
-                                    <h1 class="font-light text-white"><i class="mdi mdi-calendar-check"></i></h1>
-                                    <h6 class="text-white">Calnedar</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                        <div class="col-md-6 col-lg-2 col-xlg-3">
-                            <div class="card card-hover">
-                                <div class="box bg-warning text-center">
-                                    <h1 class="font-light text-white"><i class="mdi mdi-alert"></i></h1>
-                                    <h6 class="text-white">Errors</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Container fluid  -->
-                <!-- ============================================================== -->
-                @section Footer {
-                    <footer class="footer text-center">
-                        All Rights Reserved by Matrix-admin. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
-                    </footer>
-                }
             </div>
         </div>
-        
-        
+                    
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Column -->
+            <div class="col-md-6 col-lg-2" id="courseRegistrationCard">
+                <div class="card card-hover">
+                    <a asp-controller="Dashboard" asp-action="Course">
+                        <div class="box bg-cyan text-center">
+                            <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
+                            <h6 class="text-white">Course Registration</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_Footer")
+</div>
             
+@section Scripts {
+    <script src="~/vendors/flot/excanvas.js"></script>
+    <script src="~/vendors/flot/jquery.flot.js"></script>
+    <script src="~/vendors/flot/jquery.flot.pie.js"></script>
+    <script src="~/vendors/flot/jquery.flot.time.js"></script>
+    <script src="~/vendors/flot/jquery.flot.stack.js"></script>
+    <script src="~/vendors/flot/jquery.flot.crosshair.js"></script>
+    <script src="~/vendors/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="~/js/pages/chart/chart-page-init.js"></script>
             
-        @section Scripts {
-                <script src="~/vendors/flot/excanvas.js"></script>
-                <script src="~/vendors/flot/jquery.flot.js"></script>
-                <script src="~/vendors/flot/jquery.flot.pie.js"></script>
-                <script src="~/vendors/flot/jquery.flot.time.js"></script>
-                <script src="~/vendors/flot/jquery.flot.stack.js"></script>
-                <script src="~/vendors/flot/jquery.flot.crosshair.js"></script>
-                <script src="~/vendors/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-                <script src="~/js/pages/chart/chart-page-init.js"></script>
-                <script src="~/js/dashboardAPIConnection.js"></script>
-                
-                <script>
-                    $.ajax({
-                        type: "GET",
-                        url: "/api/v1/users/3",
-                        success: function(result)
-                        {
-                            const response = JSON.parse(JSON.stringify(result));
-                            console.log(response);
-                        },
-                        failure: function() {
-                            alert("Failed to get user data");
-                        }
-                    });
-                </script>
-                
-        }
-    </body>
-</html>
+    <script>
+        $.ajax({
+            type: "GET",
+            url: "/api/v1/user",
+            success: function(result)
+            {
+                const response = JSON.parse(JSON.stringify(result));
+                console.log(response);
+            },
+            failure: function() {
+                alert("Failed to get user data");
+            }
+        });
+    </script>
+}
