@@ -6,21 +6,23 @@
 {
     <link href="~/vendors/jquery-steps/jquery.steps.css" rel="stylesheet">
     <link href="~/vendors/jquery-steps/steps.css" rel="stylesheet">
+    <link href="~/vendors/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <style type="text/css">.required .email { }</style>
 }
 
 @section Header {
-    @Html.Partial("_Header");
+    @Html.Partial("_Header")
 }
 
 @section Sidebar {
-    @Html.Partial("_Sidebar");
+    @Html.Partial("_Sidebar")
 }
 
 <div class="page-wrapper">
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex align-items-center">
-                <h4 class="page-title">Form Wizard</h4>
+                <h4 class="page-title">Course Registration</h4>
                 <div class="ml-auto text-right">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -35,19 +37,57 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body wizard-content">
-                <h4 class="card-title">Basic Form Example</h4>
-                <h6 class="card-subtitle"></h6>
-                <form id="example-form" action="#" class="m-t-40">
+                @* <h4 class="card-title">Basic Form Example</h4> *@
+                @* <h6 class="card-subtitle"></h6> *@
+                <form id="example-form" action="#" class="m-t-40" style="margin-top: 0;">
                     <div>
-                        <h3>Account</h3>
+                        <h3>Current Address</h3>
                         <section>
-                            <label for="userName">User name *</label>
-                            <input id="userName" name="userName" type="text" class="required form-control">
-                            <label for="password">Password *</label>
-                            <input id="password" name="password" type="text" class="required form-control">
-                            <label for="confirm">Confirm Password *</label>
-                            <input id="confirm" name="confirm" type="text" class="required form-control">
-                            <p>(*) Mandatory</p>
+                            <div class="form-group">
+                                <label for="addressLine1">Line 1 *</label>
+                                <input type="text" id="addressLine1" class="required form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="addressLine2">Line 2</label>
+                                <input type="text" id="addressLine2" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" class="required form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="postCode">Post Code *</label>
+                                <input type="text" id="postCode" class="required form-control">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phoneNumber">Phone Number *</label>
+                                <input type="text" id="phoneNumber" class="required form-control">
+                            </div>
+                            
+                            
+                            <div class="form-group">
+                                <label for="englishLevel">English Speaking Level *</label>
+                                <input type="text" id="englishLevel" class="required form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="disability">Disabilities (If any are relevant)</label>
+                                <input type="text" id="disability" class="required form-control">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="placeOfBirth">Place Of Birth *</label>
+                                <input type="text" id="placeOfBirth" class="required form-control">
+                            </div>
+                            <label>Date of Birth</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="dateOfBirth" placeholder="mm/dd/yyyy">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            
+                            <p style="padding-top: 10px">(*) Mandatory</p>
                         </section>
                         <h3>Profile</h3>
                         <section>
@@ -56,7 +96,7 @@
                             <label for="surname">Last name *</label>
                             <input id="surname" name="surname" type="text" class="required form-control">
                             <label for="email">Email *</label>
-                            <input id="email" name="email" type="text" class="required email form-control">
+                            <input id="email" name="email" type="email" class="required email form-control">
                             <label for="address">Address</label>
                             <input id="address" name="address" type="text" class=" form-control">
                             <p>(*) Mandatory</p>
@@ -87,6 +127,7 @@
 {
     <script src="~/vendors/jquery-steps/build/jquery.steps.min.js"></script>
     <script src="~/vendors/jquery-validation/dist/jquery.validate.min.js"></script> 
+    <script src="~/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     
     <script>
         // Basic Example with form
@@ -114,6 +155,14 @@
             onFinished: function(event, currentIndex) {
                 alert("Submitted!");
             }
+        });
+        
+        jQuery('#dateOfBirth').datepicker({
+            autoclose: true,
+            format: "mm/dd/yyyy",
+            startDate: "01-01-1920",
+            endDate: '-18y',
+            maxViewMode: 3
         });
     </script>
 }
