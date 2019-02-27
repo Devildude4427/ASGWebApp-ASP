@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Domain;
-using Domain.AccountViewModels;
-using Domain.Entities;
+using Domain.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Web.Auth;
