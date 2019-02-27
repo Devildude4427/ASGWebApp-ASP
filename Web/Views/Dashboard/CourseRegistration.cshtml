@@ -41,76 +41,115 @@
                 @* <h6 class="card-subtitle"></h6> *@
                 <form id="example-form" action="#" class="m-t-40" style="margin-top: 0;">
                     <div>
-                        <h3>Current Address</h3>
+                        <h3>Contact Information</h3>
                         <section>
                             <div class="form-group">
-                                <label for="addressLine1">Line 1 *</label>
-                                <input type="text" id="addressLine1" class="required form-control">
+                                <label for="addressLine1">Address Line 1 *</label>
+                                @* Each input has a 'name' field only to make jquery validate work correctly *@
+                                <input type="text" id="addressLine1" name="addressLine1" class="required form-control">
                             </div>
                             <div class="form-group">
-                                <label for="addressLine2">Line 2</label>
-                                <input type="text" id="addressLine2" class="form-control">
+                                <label for="addressLine2">Address Line 2</label>
+                                <input type="text" id="addressLine2" name="addressLine2" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="city">City *</label>
-                                <input type="text" id="city" class="required form-control">
+                                <input type="text" id="city" name="city" class="required form-control">
                             </div>
                             <div class="form-group">
                                 <label for="postCode">Post Code *</label>
-                                <input type="text" id="postCode" class="required form-control">
+                                <input type="text" id="postCode" name="postCode" class="required form-control">
                             </div>
-                            
                             <div class="form-group">
                                 <label for="phoneNumber">Phone Number *</label>
-                                <input type="text" id="phoneNumber" class="required form-control">
+                                <input type="text" id="phoneNumber" name="phoneNumber" class="required form-control">
                             </div>
-                            
-                            
+                            <p style="padding-top: 10px">(*) Mandatory</p>
+                        </section>
+                        <h3>Personal Details</h3>
+                        <section>
                             <div class="form-group">
                                 <label for="englishLevel">English Speaking Level *</label>
-                                <input type="text" id="englishLevel" class="required form-control">
+                                <input type="text" id="englishLevel" name="englishLevel" class="required form-control">
+                                <a href="https://www.examenglish.com/CEFR/cefr.php" target="_blank">CEFR English Speaking Level Guide</a>
                             </div>
                             <div class="form-group">
-                                <label for="disability">Disabilities (If any are relevant)</label>
-                                <input type="text" id="disability" class="required form-control">
+                                <label for="disability">Disabilities (If applicable)</label>
+                                <input type="text" id="disability" name="disability" class="form-control">
+                            </div>
+                            
+                            <div class="form-group row">
+                                @* TODO The radio buttons look a bit off, style should be changed at some point *@
+                                <label class="col-md-3">Does your eyesight pass DVLA eye site standards? *<br/>
+                                    <a href="https://www.gov.uk/driving-eyesight-rules" target="_blank">DVLA Eye Sight Level Guide</a></label>
+                                <div class="col-md-9">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="eyeSightTrue" name="radio-stacked" required>
+                                        <label class="custom-control-label" for="eyeSightTrue">Yes</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="eyeSightFalse" name="radio-stacked" required>
+                                        <label class="custom-control-label" for="eyeSightFalse">No</label>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="placeOfBirth">Place Of Birth *</label>
-                                <input type="text" id="placeOfBirth" class="required form-control">
+                                <input type="text" id="placeOfBirth" name="placeOfBirth" class="required form-control">
                             </div>
-                            <label>Date of Birth</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="dateOfBirth" placeholder="mm/dd/yyyy">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            <div class="form-group">
+                                <label>Date of Birth *</label>
+                                <div class="input-group">
+                                    @* TODO If there's and error, currently it's placed next to the div, rather than the label *@
+                                    <input type="text" id="dateOfBirth" name="dateOfBirth" class="required form-control" placeholder="mm/dd/yyyy">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
                                 </div>
                             </div>
-                            
                             <p style="padding-top: 10px">(*) Mandatory</p>
                         </section>
-                        <h3>Profile</h3>
+                        <h3>Course Details</h3>
                         <section>
-                            <label for="name">First name *</label>
-                            <input id="name" name="name" type="text" class="required form-control">
-                            <label for="surname">Last name *</label>
-                            <input id="surname" name="surname" type="text" class="required form-control">
-                            <label for="email">Email *</label>
-                            <input id="email" name="email" type="email" class="required email form-control">
-                            <label for="address">Address</label>
-                            <input id="address" name="address" type="text" class=" form-control">
-                            <p>(*) Mandatory</p>
-                        </section>
-                        <h3>Hints</h3>
-                        <section>
-                            <ul>
-                                <li>Foo</li>
-                                <li>Bar</li>
-                                <li>Foobar</li>
-                            </ul>
+                            <div class="form-group">
+                                <label for="companyName">Company Name (If applicable)</label>
+                                <input type="text" id="companyName" name="companyName" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="flightExperience">Prior Flight Experience *</label>
+                                <input type="text" id="flightExperience" name="flightExperience" class="required form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="preferredLocation">Preferred Course Location *</label>
+                                <select class="required form-control custom-select" id="preferredLocation" style="width: 100%; height:36px;">
+                                    <option>Select</option>
+                                    <optgroup label="Locations">
+                                        <option value="Aberdeen">Aberdeen</option>
+                                        <option value="Cardiff">Cardiff</option>
+                                        <option value="Somerset">Somerset</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            
+                            @* TODO Select box based on data in DB *@
+                            <div class="form-group">
+                                <label for="droneMake">Drone Make *</label>
+                                <input type="text" id="droneMake" name="droneMake" class="required form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="droneModel">Drone Model *</label>
+                                <input type="text" id="droneModel" name="droneModel" class="required form-control">
+                            </div>
+                            <p style="padding-top: 10px">(*) Mandatory</p>
                         </section>
                         <h3>Finish</h3>
                         <section>
+                            @* TODO Mock up payment process using service? *@
+                            
+                            <input id="payment" name="payment" type="checkbox" class="required">
+                            <label for="payment">I commit to pay for the course.</label> </br>
+
                             <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
                             <label for="acceptTerms">I agree with the Terms and Conditions.</label>
                         </section>
