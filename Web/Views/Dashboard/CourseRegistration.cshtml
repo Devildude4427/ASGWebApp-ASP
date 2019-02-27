@@ -37,9 +37,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body wizard-content">
-                @* <h4 class="card-title">Basic Form Example</h4> *@
-                @* <h6 class="card-subtitle"></h6> *@
-                <form id="example-form" action="#" class="m-t-40" style="margin-top: 0;">
+                <form id="courseRegistrationForm" class="m-t-40" style="margin-top: 0;">
                     <div>
                         <h3>Contact Information</h3>
                         <section>
@@ -148,7 +146,7 @@
                             @* TODO Mock up payment process using service? *@
                             
                             <input id="payment" name="payment" type="checkbox" class="required">
-                            <label for="payment">I commit to pay for the course.</label> </br>
+                            <label for="payment">I commit to pay for the course.</label> <br/>
 
                             <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
                             <label for="acceptTerms">I agree with the Terms and Conditions.</label>
@@ -167,45 +165,5 @@
     <script src="~/vendors/jquery-steps/build/jquery.steps.min.js"></script>
     <script src="~/vendors/jquery-validation/dist/jquery.validate.min.js"></script> 
     <script src="~/vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    
-    <script>
-        // Basic Example with form
-        var form = $("#example-form");
-        form.validate({
-            errorPlacement: function(error, element) { element.before(error); },
-            rules: {
-                confirm: {
-                    equalTo: "#password"
-                }
-            }
-        });
-        form.children("div").steps({
-            headerTag: "h3",
-            bodyTag: "section",
-            transitionEffect: "slideLeft",
-            onStepChanging: function(event, currentIndex, newIndex) {
-                if (newIndex > currentIndex) {
-                    form.validate().settings.ignore = ":disabled,:hidden";
-                    return form.valid();
-                } else {
-                    return true;
-                }
-            },
-            onFinishing: function(event, currentIndex) {
-                form.validate().settings.ignore = ":disabled";
-                return form.valid();
-            },
-            onFinished: function(event, currentIndex) {
-                alert("Submitted!");
-            }
-        });
-        
-        jQuery('#dateOfBirth').datepicker({
-            autoclose: true,
-            format: "mm/dd/yyyy",
-            startDate: "01-01-1920",
-            endDate: '-18y',
-            maxViewMode: 3
-        });
-    </script>
+    <script src="~/js/CourseRegistration/CourseRegistration.js"></script>
 }
