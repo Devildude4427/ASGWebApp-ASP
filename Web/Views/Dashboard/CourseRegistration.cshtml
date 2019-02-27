@@ -133,7 +133,7 @@
         // Basic Example with form
         var form = $("#example-form");
         form.validate({
-            errorPlacement: function errorPlacement(error, element) { element.before(error); },
+            errorPlacement: function(error, element) { element.before(error); },
             rules: {
                 confirm: {
                     equalTo: "#password"
@@ -145,8 +145,12 @@
             bodyTag: "section",
             transitionEffect: "slideLeft",
             onStepChanging: function(event, currentIndex, newIndex) {
-                form.validate().settings.ignore = ":disabled,:hidden";
-                return form.valid();
+                if (newIndex > currentIndex) {
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();
+                } else {
+                    return true;
+                }
             },
             onFinishing: function(event, currentIndex) {
                 form.validate().settings.ignore = ":disabled";
