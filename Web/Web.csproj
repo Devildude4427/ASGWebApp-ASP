@@ -105,6 +105,7 @@
       <_ContentIncludedByDefault Remove="wwwroot\vendors\bootstrap-datepicker\dist\locales\bootstrap-datepicker.vi.min.js" />
       <_ContentIncludedByDefault Remove="wwwroot\vendors\bootstrap-datepicker\dist\locales\bootstrap-datepicker.zh-CN.min.js" />
       <_ContentIncludedByDefault Remove="wwwroot\vendors\bootstrap-datepicker\dist\locales\bootstrap-datepicker.zh-TW.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\Dashboard\Candidate.js" />
     </ItemGroup>
 
 </Project>

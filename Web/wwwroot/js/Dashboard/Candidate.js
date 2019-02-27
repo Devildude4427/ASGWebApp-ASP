@@ -2,7 +2,7 @@ new Vue({
     el: '#app',
     data () {
         return {
-            user: 0
+            user: null
         }
     },
     mounted () {
@@ -11,6 +11,3 @@ new Vue({
             .then(response => (this.user = response.data));
     }
 });
-
-
-
