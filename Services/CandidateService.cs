@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Domain;
 using Domain.Entities;
 using Domain.RepositoryInterfaces;
+using Domain.ViewModels;
 
 namespace Services
 {
@@ -38,6 +39,13 @@ namespace Services
             }
             
             return newReferenceNumber;
+        }
+
+        public async Task<bool> Register(CourseRegistration courseRegistration)
+        {
+            courseRegistration.ReferenceNumber = await GenerateReferenceNumber();
+            courseRegistration.UserId = _user.Id;
+            return await _candidateRepository.Register(courseRegistration);
         }
     }
 }
