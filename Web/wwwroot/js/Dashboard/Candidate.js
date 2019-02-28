@@ -2,7 +2,7 @@ new Vue({
     el: '#app',
     data () {
         return {
-            user: null
+            user: 0
         }
     },
     mounted () {
