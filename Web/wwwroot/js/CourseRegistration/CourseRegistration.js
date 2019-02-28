@@ -39,14 +39,40 @@ $("#dateOfBirth").datepicker({
 
 
 function courseRegister() {
-    axios.post('/api/v1/course/register')
-        .then(function (response) {
-            console.log(response);
-            if(response.data.success) {
-                window.location = '/Dashboard';
+    axios({
+        method: "post",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        url: "/api/v1/course/register",
+        data: JSON.stringify({
+            Address: {
+                Line1: $("#addressLine1").val(),
+                Line2: $("#addressLine2").val(),
+                City: $("#city").val(),
+                PostCode: $("#postCode").val()
+            },
+            PhoneNumber: $("#phoneNumber").val(),
+            EnglishSpeakingLevel: $("#englishSpeakingLevel").val(),
+            Disability: $("#disability").val(),
+            PlaceOfBirth: $("#placeOfBirth").val(),
+            DateOfBirth: $("#dateOfBirth").val(),
+            CompanyName: $("#companyName").val(),
+            FlightExperience: $("#flightExperience").val(),
+            PreferredCourseLocation: $("#preferredCourseLocation").val(),
+            Drone: {
+                Make: $("#droneMake").val(),
+                Model: $("#droneModel").val()
             }
         })
-        .catch(function (error) {
-            console.log(error);
-        });
+    }).then(function (response) {
+        
+        console.log(response);
+        if(response.statusText === "OK") {
+            window.location = '/Dashboard';
+        }
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
 }
