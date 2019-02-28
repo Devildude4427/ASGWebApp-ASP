@@ -1,9 +1,11 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using Domain;
 using Domain.Entities;
 using Domain.RepositoryInterfaces;
+using Domain.ViewModels;
 using Persistence.Configuration;
 
 namespace Persistence.Repositories
@@ -25,7 +27,7 @@ namespace Persistence.Repositories
                 SELECT *
                 FROM users u
                 WHERE u.name ILIKE :searchTerm
-                {0}
+                
                 OFFSET :offset
                 LIMIT :pageSize;
                 
@@ -72,6 +74,46 @@ namespace Persistence.Repositories
                 LIMIT 1
             ";
             return await _con.Db.QuerySingleOrDefaultAsync<string>(sql);
+        }
+        
+        public async Task<bool> Register(CourseRegistration courseRegistration)
+        {
+            var sql = @"
+                INSERT INTO address(line_1, line_2, city, post_code) VALUES (:Line1, :Line2, :City, :PostCode) RETURNING id;
+            ";
+            var addressId = _con.Db.Query<int>(sql, courseRegistration.Address).Single();
+            
+            sql = @"
+                INSERT INTO contact_information(address_id, phone_number) VALUES (:AddressId, :PhoneNumber) RETURNING id;
+            ";
+            var contactInformationId = _con.Db.Query<int>(sql, new { AddressId = addressId, courseRegistration.PhoneNumber}).Single();
+            
+            
+            sql = @"
+                INSERT INTO drones(make, model) VALUES (:Make, :Model) RETURNING id;
+            ";
+            var droneId = _con.Db.Query<int>(sql, courseRegistration.Drone).Single();
+            
+            sql = @"
+                INSERT INTO general_information(english_speaking_level, disability, place_of_birth, date_of_birth,
+                                                company_name, flight_experience, preferred_course_location, drone_id, paid)
+                                                 VALUES (:EnglishSpeakingLevel, :Disability, :PlaceOfBirth, :DateOfBirth,
+                                                         :CompanyName, :FlightExperience, :PreferredCourseLocation,
+                                                         :DroneId, true) RETURNING id;
+            ";
+            var generalInformationId = _con.Db.Query<int>(sql, new { courseRegistration.EnglishSpeakingLevel,
+                courseRegistration.Disability, courseRegistration.PlaceOfBirth, courseRegistration.DateOfBirth,
+                courseRegistration.CompanyName, courseRegistration.FlightExperience, courseRegistration.PreferredCourseLocation,
+                DroneId = droneId}).Single();
+            
+            sql = @"
+                INSERT INTO candidates(user_id, reference_number, contact_info_id, general_info_id, last_completed_stage)
+                 VALUES (:UserId, :ReferenceNumber, :ContactInfoId, :GeneralInfoId, 0) RETURNING id;
+            ";
+            var rowsAffected = await _con.Db.ExecuteAsync(sql, new {courseRegistration.UserId,
+                courseRegistration.ReferenceNumber, ContactInfoId = contactInformationId, GeneralInfoId = generalInformationId});
+            Console.WriteLine("Rows affected: " + rowsAffected);
+            return rowsAffected == 1;
         }
     }
 }

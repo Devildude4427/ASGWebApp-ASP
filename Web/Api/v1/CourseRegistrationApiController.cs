@@ -1,11 +1,13 @@
+using System;
 using System.Threading.Tasks;
 using Domain.Entities;
+using Domain.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
 namespace Web.Api.v1
 {
-    [Route("/api/v1/course/register")]
+    [Route("/api/v1/course")]
     public class CourseRegistrationApiController : RootApiController
     {
         private readonly ExampleService _exampleService;
@@ -18,10 +20,10 @@ namespace Web.Api.v1
             _candidateService = candidateService;
         }
 
-        [HttpPost("")]
-        public async Task<IActionResult> Create([FromBody] Example newEntity)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] CourseRegistration courseRegistration)
         {
-            await _exampleService.Create(newEntity);
+            await _candidateService.Register(courseRegistration);
             return Ok();
         }
 
