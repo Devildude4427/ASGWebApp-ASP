@@ -25,12 +25,53 @@ namespace Persistence.Migrations
             Execute(@"
                 CREATE TABLE candidates (
                   id SERIAL PRIMARY KEY,
-                  user_id INTEGER NOT NULL,
+                  user_id SERIAL NOT NULL,
                   reference_number TEXT NOT NULL,
-                  contact_info_id INTEGER NOT NULL,
-                  general_info_id INTEGER NOT NULL,
+                  contact_info_id SERIAL NOT NULL,
+                  general_info_id SERIAL NOT NULL,
                   last_completed_stage INTEGER NOT NULL,
                   CONSTRAINT unique_reference_number UNIQUE(reference_number)
+                );
+            ");
+            
+            Execute(@"
+                CREATE TABLE address (
+                  id SERIAL PRIMARY KEY,
+                  line_1 TEXT NOT NULL,
+                  line_2 TEXT NOT NULL,
+                  city TEXT NOT NULL,
+                  post_code TEXT NOT NULL
+                );
+            ");
+            
+            Execute(@"
+                CREATE TABLE contact_information (
+                  id SERIAL PRIMARY KEY,
+                  address_id Serial NOT NULL,
+                  phone_number TEXT NOT NULL
+                );
+            ");
+            
+            Execute(@"
+                CREATE TABLE drones (
+                  id SERIAL PRIMARY KEY,
+                  make TEXT NOT NULL,
+                  model TEXT NOT NULL
+                );
+            ");
+            
+            Execute(@"
+                CREATE TABLE general_information (
+                  id SERIAL PRIMARY KEY,
+                  english_speaking_level INTEGER NOT NULL,
+                  disabilities TEXT,
+                  place_of_birth TEXT NOT NULL,
+                  date_of_birth DATE NOT NULL,
+                  company_name TEXT,
+                  flight_experience TEXT,
+                  preferred_location TEXT NOT NULL,
+                  drone_id SERIAL NOT NULL,
+                  paid BOOLEAN NOT NULL
                 );
             ");
         }
