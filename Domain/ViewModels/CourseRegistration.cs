@@ -14,7 +14,7 @@ namespace Domain.ViewModels
         [Required]
         public int EnglishSpeakingLevel { get; set; }
         
-        public string Disabilities { get; set; }
+        public string Disability { get; set; }
         [Required]
         public string PlaceOfBirth { get; set; }
         [Required]
@@ -30,7 +30,11 @@ namespace Domain.ViewModels
         public Drone Drone { get; set; }
 
         //TODO set up option to pay later
-        public bool Paid = true;
+        // public bool Paid = true;
+        
+        
+        public string ReferenceNumber { get; set; }
+        public long UserId { get; set; }
     }
 
     public class Address
