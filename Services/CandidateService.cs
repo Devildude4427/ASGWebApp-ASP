@@ -10,14 +10,17 @@ namespace Services
     {
         private readonly ICandidateRepository _candidateRepository;
 
-        public CandidateService(ICandidateRepository candidateRepository)
+        private readonly IUserIdentity _user;
+
+        public CandidateService(ICandidateRepository candidateRepository, IUserIdentity user)
         {
             _candidateRepository = candidateRepository;
+            _user = user;
         }
         
-        public async Task<Candidate> FindByUserId(long id)
+        public async Task<Candidate> FindByUserId()
         {
-            return await _candidateRepository.FindByUserId(id);
+            return await _candidateRepository.FindByUserId(_user.Id);
         }
 
         public async Task<string> GenerateReferenceNumber()
