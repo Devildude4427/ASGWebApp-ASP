@@ -11,27 +11,21 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 
 ```
-.Net Core
+.Net Core 2.2
 PostgreSQL
 ```
 
-### Installing
+### Running
 
-A step by step series of examples that tell you how to get a development env running
+To run the web server on localhost, you will need a local PostgreSQL Database and .Net Core 2.2 installed. I have my PostgreSQL DB running on port 5432 using the credentials user: postgres password: admin, though these settings can be tweaked in ~/Persistence/Configuration/DatabaseConnectionHandler.cs.
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+With a DB running, just navigate to ~/Web and run
 
 ```
-until finished
+dotnet run
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Navigate in to https://localhost:5001/login in your browser of choice to begin using the system. There are 6 default accounts in the system, 2 admin, 4 candidate, and all use the password "pass". Login with admin@asg.com, admin2@asg.com, candidate@asg.com, ..., candidate4@asg.com
 
 ## Running the tests
 
@@ -73,9 +67,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **DevilDude4427** - *Entire Project* - [Devildude4427](https://github.com/Devildude4427)
 
 ## License
 
@@ -83,6 +75,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Thanks to Luke for setting up a template for me to learn and build from. Super grateful.
