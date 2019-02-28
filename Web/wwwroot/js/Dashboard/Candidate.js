@@ -8,6 +8,12 @@ new Vue({
     mounted () {
         axios
             .get('/api/v1/user')
-            .then(response => (this.user = response.data));
+            .then((response) => {
+                if (response.data != null) {
+                    this.user = response.data;
+                } else {
+                    this.user = { lastCompletedStage : -1};
+                }
+            });
     }
 });
