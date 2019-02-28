@@ -64,12 +64,12 @@ namespace Persistence.Migrations
                 CREATE TABLE general_information (
                   id SERIAL PRIMARY KEY,
                   english_speaking_level INTEGER NOT NULL,
-                  disabilities TEXT,
+                  disability TEXT,
                   place_of_birth TEXT NOT NULL,
                   date_of_birth DATE NOT NULL,
                   company_name TEXT,
                   flight_experience TEXT,
-                  preferred_location TEXT NOT NULL,
+                  preferred_course_location TEXT NOT NULL,
                   drone_id SERIAL NOT NULL,
                   paid BOOLEAN NOT NULL
                 );
@@ -81,6 +81,10 @@ namespace Persistence.Migrations
             Execute(@"
                 DROP TABLE users;
                 DROP TABLE candidates;
+                DROP TABLE address;
+                DROP TABLE contact_information;
+                DROP TABLE drones;
+                DROP TABLE general_information;
             ");
         }
     }
