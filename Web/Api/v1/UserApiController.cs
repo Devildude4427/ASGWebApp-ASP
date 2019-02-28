@@ -12,14 +12,11 @@ namespace Web.Api.v1
         private readonly UserService _userService;
 
         private readonly CandidateService _candidateService;
-        
-        private readonly IUserIdentity _user;
 
-        public UserApiController(UserService userService, CandidateService candidateService, IUserIdentity user)
+        public UserApiController(UserService userService, CandidateService candidateService)
         {
             _userService = userService;
             _candidateService = candidateService;
-            _user = user;
         }
 
         // [HttpGet]
@@ -30,17 +27,17 @@ namespace Web.Api.v1
         //     return Json(result);
         // }
         
-        [HttpGet("{id:long}")]
-        public async Task<IActionResult> FindCandidateByUserId(long id)
-        {
-            var result = await _candidateService.FindByUserId(id);
-            return Json(result);
-        }
+        // [HttpGet("{id:long}")]
+        // public async Task<IActionResult> FindCandidateByUserId(long id)
+        // {
+        //     var result = await _candidateService.FindByUserId(id);
+        //     return Json(result);
+        // }
         
         [HttpGet]
         public async Task<IActionResult> GetCurrentCandidate()
         {
-            var result = await _candidateService.FindByUserId(_user.Id);
+            var result = await _candidateService.FindByUserId();
             return Json(result);
         }
     }
