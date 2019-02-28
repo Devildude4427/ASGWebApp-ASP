@@ -16,7 +16,7 @@ namespace Tests.Integration
             {
                 var service = container.Resolve<ExampleService>();
                 var exampleEntity = await service.FindById(1);
-                exampleEntity.FirstName.Should().Be("Test Example");
+                exampleEntity.Name.Should().Be("Test Example");
             }
         }
     }
