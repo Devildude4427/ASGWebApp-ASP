@@ -85,7 +85,7 @@ namespace Persistence.Repositories
 
             var rowsAffected = await _con.Db.ExecuteAsync(sql, new
             {
-                updatedEntity.FirstName,
+                updatedEntity.Name,
                 id
             });
 
