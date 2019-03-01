@@ -8,26 +8,35 @@ namespace Domain.ViewModels
     {
         [Required]
         public Address Address { get; set; }
+        
         [Required]
         public string PhoneNumber { get; set; }
+        
         
         [Required]
         public int EnglishSpeakingLevel { get; set; }
         
         public string Disability { get; set; }
+        
         [Required]
         public string PlaceOfBirth { get; set; }
+        
         [Required]
         public DateTime DateOfBirth { get; set; }
         
+        
         [Required]
         public string CompanyName { get; set; }
+        
         [Required]
         public string FlightExperience { get; set; }
+        
         [Required]
         public string PreferredCourseLocation { get; set; }
+        
         [Required]
         public Drone Drone { get; set; }
+        
 
         //TODO set up option to pay later
         // public bool Paid = true;
