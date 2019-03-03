@@ -1,4 +1,4 @@
-# ASGWebApp-ASP ![Azure DevOps builds](https://img.shields.io/azure-devops/build/ryanchristian4427/41e401ef-1612-4af8-9903-694ad7fe606a/1.svg)
+# ASGWebApp-ASP ![Azure DevOps builds](![Azure DevOps builds](https://img.shields.io/azure-devops/build/ryanchristian4427/41e401ef-1612-4af8-9903-694ad7fe606a/1.svg?style=popout))
 
 This project is a rewrite of my ASGWebApp that was a client project from university. For that project, we met with a client who requested a web server and a relational database to replace his previous booking and progress system that was handled in Excel. That was written in Spring Boot using MySQL as the database system. This project however is a complete rewrite of that project. I am using ASP .Net Core as the framework, and this project utilizes a RESTful API so that I can later integrate an Android App. This rewrite is also using PostgreSQL instead.
 
