@@ -3,11 +3,11 @@
 }
 
 @section Header {
-    @Html.Partial("_Header")
+    @await Html.PartialAsync("_Header")
 }
                 
 @section Sidebar {
-    @Html.Partial("_Sidebar")
+    @await Html.PartialAsync("_Sidebar")
 }
                 
 <div class="page-wrapper">
@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-    @Html.Partial("_Footer")
+    @await Html.PartialAsync("_Footer")
 </div>
             
 @section Scripts {
