@@ -12,7 +12,7 @@ new Vue({
                 if (response.data != null) {
                     this.user = response.data;
                 } else {
-                    this.user = { lastCompletedStage : -1};
+                    this.user = { lastCompletedStage : -1 };
                 }
             });
     }

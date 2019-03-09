@@ -30,5 +30,10 @@ namespace Web.Controllers
         {
             return View();
         }
+
+        public IActionResult UpdateContactDetails()
+        {
+            return View();
+        }
     }
 }

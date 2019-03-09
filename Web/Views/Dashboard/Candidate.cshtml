@@ -39,6 +39,17 @@
                 </div>
             </div>
             
+            <div class="col-md-6 col-lg-2" id="updateContactInfoCard" v-if="user.lastCompletedStage > -1">
+                <div class="card card-hover">
+                    <a asp-controller="Dashboard" asp-action="UpdateContactDetails">
+                        <div class="box bg-danger text-center">
+                            <h1 class="font-light text-white"><i class="mdi mdi-receipt"></i></h1>
+                            <h6 class="text-white">Update Contact Information</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
             <div class="col-md-6 col-lg-2" id="writeReviewCard" v-if="user.lastCompletedStage == 12">
                 <div class="card card-hover">
                     <a asp-controller="Dashboard" asp-action="CourseRegistration">
