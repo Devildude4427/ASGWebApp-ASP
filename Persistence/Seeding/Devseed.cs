@@ -20,11 +20,6 @@ namespace Persistence.Seeding
                       ('Edmond Halley', 'candidate3@asg.com', '1001', '$2y$12$E9LNbS1h2VZ/lErbbWunVOpA67QJrPmPCqCBuGuLKuMY/r.QjEjea', true),
                       ('Enrico Fermi', 'candidate4@asg.com', '1001', '$2y$12$YGA1lrJ7MlhgKtNU0qy4UOtrvlYpswFlMjVrqDdaFQLTS54/MYhyy', true);
 
-                INSERT INTO candidates(id, user_id, reference_number, contact_info_id, general_info_id, last_completed_stage)
-                VALUES(2, 4, 'ASG-002-19-02', 2, 2, 4),
-                      (3, 5, 'ASG-003-19-02', 3, 3, 7),
-                      (4, 6, 'ASG-004-19-02', 4, 4, 12);
-
                 INSERT INTO address(id, line_1, line_2, city, post_code)
                 VALUES(2, 'Unit 14, 3 Edgar Buildings', 'George Street', 'Bath', 'BA1 2FJ'),
                       (3, 'Box 777, 91 Western Road', 'Brighton', 'East Sussex', 'BN1 2NW'),
@@ -69,6 +64,11 @@ namespace Persistence.Seeding
                 VALUES (2, 6, 'Somerset', '1990-10-21', 'Somerset', 5, true),
                        (3, 6, 'Aberdeenshire', '1990-12-31', 'Aberdeenshire', 10, true),
                        (4, 6, 'Cardiff', '1990-11-15', 'Cardiff', 1, true);
+
+                INSERT INTO candidates(id, user_id, reference_number, contact_info_id, general_info_id, last_completed_stage)
+                VALUES(2, 4, 'ASG-002-19-02', 2, 2, 4),
+                      (3, 5, 'ASG-003-19-02', 3, 3, 7),
+                      (4, 6, 'ASG-004-19-02', 4, 4, 12);
 
             ");
         }

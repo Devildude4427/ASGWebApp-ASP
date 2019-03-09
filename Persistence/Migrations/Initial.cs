@@ -23,18 +23,6 @@ namespace Persistence.Migrations
             ");
             
             Execute(@"
-                CREATE TABLE candidates (
-                  id SERIAL PRIMARY KEY,
-                  user_id SERIAL NOT NULL,
-                  reference_number TEXT NOT NULL,
-                  contact_info_id SERIAL NOT NULL,
-                  general_info_id SERIAL NOT NULL,
-                  last_completed_stage INTEGER NOT NULL,
-                  CONSTRAINT unique_reference_number UNIQUE(reference_number)
-                );
-            ");
-            
-            Execute(@"
                 CREATE TABLE address (
                   id SERIAL PRIMARY KEY,
                   line_1 TEXT NOT NULL,
@@ -47,7 +35,7 @@ namespace Persistence.Migrations
             Execute(@"
                 CREATE TABLE contact_information (
                   id SERIAL PRIMARY KEY,
-                  address_id Serial NOT NULL,
+                  address_id Serial NOT NULL REFERENCES addresses(id),
                   phone_number TEXT NOT NULL
                 );
             ");
@@ -70,8 +58,20 @@ namespace Persistence.Migrations
                   company_name TEXT,
                   flight_experience TEXT,
                   preferred_course_location TEXT NOT NULL,
-                  drone_id SERIAL NOT NULL,
+                  drone_id SERIAL NOT NULL REFERENCES drones(id),
                   paid BOOLEAN NOT NULL
+                );
+            ");
+            
+            Execute(@"
+                CREATE TABLE candidates (
+                  id SERIAL PRIMARY KEY,
+                  user_id SERIAL NOT NULL REFERENCES users(id),
+                  reference_number TEXT NOT NULL,
+                  contact_info_id SERIAL NOT NULL REFERENCES contact_information(id),
+                  general_info_id SERIAL NOT NULL REFERENCES general_information(id),
+                  last_completed_stage INTEGER NOT NULL,
+                  CONSTRAINT unique_reference_number UNIQUE(reference_number)
                 );
             ");
         }
