@@ -1,8 +1,6 @@
-const form = $("#courseRegistrationForm");
-form.validate({
-    errorPlacement: function(error, element) { element.before(error); }
-});
+const form = $("#updateContactDetailsForm");
 form.children("div").steps({
+    enableCancelButton: true,
     headerTag: "h3",
     bodyTag: "section",
     transitionEffect: "slideLeft",
@@ -19,21 +17,12 @@ form.children("div").steps({
         return form.valid();
     },
     onFinished: function() {
-        courseRegister();
+        updateContactDetails();
         alert("Submitted!");
     }
 });
 
-$("#dateOfBirth").datepicker({
-    autoclose: true,
-    format: "mm/dd/yyyy",
-    startDate: "01-01-1920",
-    endDate: '-18y',
-    maxViewMode: 3
-});
-
-
-function courseRegister() {
+function updateContactDetails() {
     axios({
         method: "post",
         headers: {
@@ -47,27 +36,16 @@ function courseRegister() {
                 City: $("#city").val(),
                 PostCode: $("#postCode").val()
             },
-            PhoneNumber: $("#phoneNumber").val(),
-            EnglishSpeakingLevel: $("#englishSpeakingLevel").val(),
-            Disability: $("#disability").val(),
-            PlaceOfBirth: $("#placeOfBirth").val(),
-            DateOfBirth: $("#dateOfBirth").val(),
-            CompanyName: $("#companyName").val(),
-            FlightExperience: $("#flightExperience").val(),
-            PreferredCourseLocation: $("#preferredCourseLocation").val(),
-            Drone: {
-                Make: $("#droneMake").val(),
-                Model: $("#droneModel").val()
-            }
+            CompanyName: $("#companyName").val()
         })
     }).then(function (response) {
-        
+
         console.log(response);
         if(response.statusText === "OK") {
             window.location = '/Dashboard';
         }
     })
-    .catch(function (error) {
-        console.log(error);
-    });
+        .catch(function (error) {
+            console.log(error);
+        });
 }
