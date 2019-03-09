@@ -23,7 +23,7 @@ namespace Persistence.Migrations
             ");
             
             Execute(@"
-                CREATE TABLE address (
+                CREATE TABLE addresses (
                   id SERIAL PRIMARY KEY,
                   line_1 TEXT NOT NULL,
                   line_2 TEXT NOT NULL,
@@ -81,7 +81,7 @@ namespace Persistence.Migrations
             Execute(@"
                 DROP TABLE users;
                 DROP TABLE candidates;
-                DROP TABLE address;
+                DROP TABLE addresses;
                 DROP TABLE contact_information;
                 DROP TABLE drones;
                 DROP TABLE general_information;

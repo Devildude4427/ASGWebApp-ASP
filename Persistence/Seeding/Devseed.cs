@@ -20,7 +20,7 @@ namespace Persistence.Seeding
                       ('Edmond Halley', 'candidate3@asg.com', '1001', '$2y$12$E9LNbS1h2VZ/lErbbWunVOpA67QJrPmPCqCBuGuLKuMY/r.QjEjea', true),
                       ('Enrico Fermi', 'candidate4@asg.com', '1001', '$2y$12$YGA1lrJ7MlhgKtNU0qy4UOtrvlYpswFlMjVrqDdaFQLTS54/MYhyy', true);
 
-                INSERT INTO address(id, line_1, line_2, city, post_code)
+                INSERT INTO addresses(id, line_1, line_2, city, post_code)
                 VALUES(2, 'Unit 14, 3 Edgar Buildings', 'George Street', 'Bath', 'BA1 2FJ'),
                       (3, 'Box 777, 91 Western Road', 'Brighton', 'East Sussex', 'BN1 2NW'),
                       (4, 'Room 67, 14 Tottenham Court Road', '', 'London', 'W1T 1JY');

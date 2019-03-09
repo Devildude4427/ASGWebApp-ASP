@@ -79,7 +79,7 @@ namespace Persistence.Repositories
         public async Task<bool> Register(CourseRegistration courseRegistration)
         {
             var sql = @"
-                INSERT INTO address(line_1, line_2, city, post_code) VALUES (:Line1, :Line2, :City, :PostCode) RETURNING id;
+                INSERT INTO addresses(line_1, line_2, city, post_code) VALUES (:Line1, :Line2, :City, :PostCode) RETURNING id;
             ";
             var addressId = _con.Db.Query<int>(sql, courseRegistration.Address).Single();
             
