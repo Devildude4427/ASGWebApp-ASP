@@ -25,10 +25,10 @@ namespace Web.Api.v1
             return Ok();
         }
         
-        [HttpPost("updateContact")]
-        public async Task<IActionResult> UpdateContact([FromBody] UpdateContactDetails updateContactDetails)
+        [HttpPost("updateDetails")]
+        public async Task<IActionResult> UpdateDetails([FromBody] UpdateContactDetails updateContactDetails)
         {
-            // await _candidateService.Register(courseRegistration);
+            // await _candidateService.UpdateDetails(courseRegistration);
             Console.WriteLine(updateContactDetails.CompanyName);
             return Ok();
         }

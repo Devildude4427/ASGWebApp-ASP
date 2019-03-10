@@ -35,7 +35,7 @@ function updateContactDetails() {
         headers: {
             'Content-Type': 'application/json',
         },
-        url: "/api/v1/candidate/updateContact",
+        url: "/api/v1/candidate/updateDetails",
         data: JSON.stringify({
             Address: {
                 Line1: $("#addressLine1").val(),
