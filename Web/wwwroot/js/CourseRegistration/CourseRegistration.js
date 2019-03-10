@@ -39,7 +39,7 @@ function courseRegister() {
         headers: {
             'Content-Type': 'application/json',
         },
-        url: "/api/v1/course/register",
+        url: "/api/v1/candidate/register",
         data: JSON.stringify({
             Address: {
                 Line1: $("#addressLine1").val(),

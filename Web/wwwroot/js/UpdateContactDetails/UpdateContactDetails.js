@@ -1,4 +1,7 @@
 const form = $("#updateContactDetailsForm");
+form.validate({
+    errorPlacement: function(error, element) { element.before(error); }
+});
 form.children("div").steps({
     enableCancelButton: true,
     headerTag: "h3",
@@ -18,9 +21,13 @@ form.children("div").steps({
     },
     onFinished: function() {
         updateContactDetails();
-        alert("Submitted!");
     }
 });
+
+$("a[href$='previous']").hide();
+$("#updateContactDetailsForm > .wizard .actions > ul").css("width", "100%");
+$("#updateContactDetailsForm > .wizard .actions > ul > li:eq(2)").css("float", "right");
+$("#updateContactDetailsForm > .wizard .actions > ul > li:eq(3)").css("float", "left");
 
 function updateContactDetails() {
     axios({
@@ -28,7 +35,7 @@ function updateContactDetails() {
         headers: {
             'Content-Type': 'application/json',
         },
-        url: "/api/v1/course/register",
+        url: "/api/v1/candidate/updateContact",
         data: JSON.stringify({
             Address: {
                 Line1: $("#addressLine1").val(),
@@ -39,13 +46,11 @@ function updateContactDetails() {
             CompanyName: $("#companyName").val()
         })
     }).then(function (response) {
-
         console.log(response);
         if(response.statusText === "OK") {
             window.location = '/Dashboard';
         }
-    })
-        .catch(function (error) {
+    }).catch(function (error) {
             console.log(error);
         });
 }
