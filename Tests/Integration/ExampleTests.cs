@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Autofac;
 using FluentAssertions;
@@ -9,14 +10,25 @@ namespace Tests.Integration
 {
     public class ExampleTests : IntegrationTest
     {
+        // [Fact]
+        // public async Task CanFindById()
+        // {
+        //     using (var container = GetContainer())
+        //     {
+        //         var service = container.Resolve<ExampleService>();
+        //         var exampleEntity = await service.FindById(1);
+        //         exampleEntity.Name.Should().Be("Test Example");
+        //     }
+        // }
+        
         [Fact]
-        public async Task CanFindById()
+        public async Task CanGenerateReferenceNumber()
         {
             using (var container = GetContainer())
             {
-                var service = container.Resolve<ExampleService>();
-                var exampleEntity = await service.FindById(1);
-                exampleEntity.Name.Should().Be("Test Example");
+                var service = container.Resolve<CandidateService>();
+                var referenceNumber = await service.GenerateReferenceNumber();
+               referenceNumber.Should().Be("ASG-001-" + DateTime.Now.ToString("yy-MM"));
             }
         }
     }

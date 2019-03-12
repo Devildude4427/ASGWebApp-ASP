@@ -19,12 +19,18 @@ namespace Services
             _user = user;
         }
         
+        //TODO Tests can't give a user identity, so figure out whether identities should be gathered here, or elsewhere
+        public CandidateService(ICandidateRepository candidateRepository)
+        {
+            _candidateRepository = candidateRepository;
+        }
+        
         public async Task<Candidate> FindByUserId()
         {
             return await _candidateRepository.FindByUserId(_user.Id);
         }
 
-        private async Task<string> GenerateReferenceNumber()
+        public async Task<string> GenerateReferenceNumber()
         {
             var previousReferenceNumber = await _candidateRepository.PreviousCandidateReferenceNumber();
             var referenceNumberParts = previousReferenceNumber.Split('-');
