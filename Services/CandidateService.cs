@@ -24,7 +24,7 @@ namespace Services
             return await _candidateRepository.FindByUserId(_user.Id);
         }
 
-        public async Task<string> GenerateReferenceNumber()
+        private async Task<string> GenerateReferenceNumber()
         {
             var previousReferenceNumber = await _candidateRepository.PreviousCandidateReferenceNumber();
             var referenceNumberParts = previousReferenceNumber.Split('-');
@@ -46,6 +46,12 @@ namespace Services
             courseRegistration.ReferenceNumber = await GenerateReferenceNumber();
             courseRegistration.UserId = _user.Id;
             return await _candidateRepository.Register(courseRegistration);
+        }
+        
+        public async Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails)
+        {
+            updateContactDetails.UserId = _user.Id;
+            return await _candidateRepository.UpdateDetails(updateContactDetails);
         }
     }
 }

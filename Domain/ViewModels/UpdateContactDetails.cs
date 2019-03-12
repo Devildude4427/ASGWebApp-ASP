@@ -8,5 +8,7 @@ namespace Domain.ViewModels
         public Address Address { get; set; }
         
         public string CompanyName { get; set; }
+        
+        public long UserId { get; set; }
     }
 }
