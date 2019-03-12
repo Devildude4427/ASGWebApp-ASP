@@ -12,5 +12,6 @@ namespace Domain.RepositoryInterfaces
         Task<Candidate> FindByUserId(long id);
         Task<string> PreviousCandidateReferenceNumber();
         Task<bool> Register(CourseRegistration courseRegistration);
+        Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails);
     }
 }

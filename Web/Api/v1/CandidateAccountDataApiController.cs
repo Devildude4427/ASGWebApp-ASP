@@ -28,7 +28,7 @@ namespace Web.Api.v1
         [HttpPost("updateDetails")]
         public async Task<IActionResult> UpdateDetails([FromBody] UpdateContactDetails updateContactDetails)
         {
-            // await _candidateService.UpdateDetails(courseRegistration);
+            await _candidateService.UpdateDetails(updateContactDetails);
             Console.WriteLine(updateContactDetails.CompanyName);
             return Ok();
         }

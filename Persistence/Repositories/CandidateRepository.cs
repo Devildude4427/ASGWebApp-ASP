@@ -115,5 +115,21 @@ namespace Persistence.Repositories
             Console.WriteLine("Rows affected: " + rowsAffected);
             return rowsAffected == 1;
         }
+        
+        public async Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails)
+        {
+            //TODO Figure out how to handle the potentially blank fields and complex update
+            // const string sql = @"
+            //     UPDATE addresses
+            //     SET line_1 = :Line1, line_2 = :Line2, city = :City, post_code = :PostCode
+            //     FROM contact_information AS c
+            //     WHERE v.shipment_id = s.id 
+            // ";
+            // var rowsAffected = await _con.Db.ExecuteAsync(sql, new {courseRegistration.UserId,
+            //     courseRegistration.ReferenceNumber, ContactInfoId = contactInformationId, GeneralInfoId = generalInformationId});
+            // Console.WriteLine("Rows affected: " + rowsAffected);
+            // return rowsAffected == 1;
+            return true;
+        }
     }
 }
