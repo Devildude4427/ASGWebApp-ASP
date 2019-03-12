@@ -10,7 +10,7 @@ namespace Tests.Integration.Config
         private readonly TestDatabaseInitializer _db;
         private static IContainer Container { get; set; }
 
-        public IntegrationTest()
+        protected IntegrationTest()
         {
             InitialiseContainer();
             Console.WriteLine("Setting up database");
@@ -25,7 +25,7 @@ namespace Tests.Integration.Config
             Container = b.Build();
         }
 
-        protected ILifetimeScope GetContainer()
+        protected static ILifetimeScope GetContainer()
         {
             return Container.BeginLifetimeScope(MatchingScopeLifetimeTags.RequestLifetimeScopeTag);
         }
