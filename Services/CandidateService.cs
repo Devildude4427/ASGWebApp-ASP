@@ -40,18 +40,24 @@ namespace Services
             {
                 var newUniqueNum = $"{(int.Parse(referenceNumberParts[1]) + 1):000}";
                 newReferenceNumber = "ASG-" + newUniqueNum + "-" + DateTime.Now.ToString("yy-MM");
-            } else {
+            } else
                 newReferenceNumber = "ASG-" + "001" + "-" + DateTime.Now.ToString("yy-MM");
-            }
             
             return newReferenceNumber;
         }
 
-        public async Task<bool> Register(CourseRegistration courseRegistration)
+        public async Task<CandidateResponse> Register(CourseRegistration courseRegistration)
         {
+            var user = await FindByUserId();
+            if(user != null)
+                return new CandidateResponse(CandidateRegistrationResponse.AlreadyCourseRegistered);
+            
             courseRegistration.ReferenceNumber = await GenerateReferenceNumber();
             courseRegistration.UserId = _user.Id;
-            return await _candidateRepository.Register(courseRegistration);
+            
+            var registered = await _candidateRepository.Register(courseRegistration);
+            return registered ? new CandidateResponse(CandidateRegistrationResponse.Successful)
+                : new CandidateResponse(CandidateRegistrationResponse.UnknownError);
         }
         
         public async Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails)
@@ -59,5 +65,22 @@ namespace Services
             updateContactDetails.UserId = _user.Id;
             return await _candidateRepository.UpdateDetails(updateContactDetails);
         }
+    }
+    
+    public class CandidateResponse
+    {
+        public CandidateRegistrationResponse CandidateRegistrationResponse { get; }
+        
+        public CandidateResponse(CandidateRegistrationResponse candidateRegistrationResponse)
+        {
+            CandidateRegistrationResponse = candidateRegistrationResponse;
+        }
+    }
+
+    public enum CandidateRegistrationResponse
+    {
+        AlreadyCourseRegistered,
+        Successful,
+        UnknownError
     }
 }
