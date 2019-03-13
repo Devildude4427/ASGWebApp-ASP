@@ -41,13 +41,13 @@ namespace Services
         {
             var user = await _userRepository.FindByEmail(registrationRequest.Email);
             if (user != null)
-                return new UserResponse(RegistrationResponse.UserAlreadyExists);
+                return new UserResponse(UserRegistrationResponse.UserAlreadyExists);
 
             registrationRequest.Password = Hashing.HashPassword(registrationRequest.Password);
             
-            var returnVariable = await _userRepository.Register(registrationRequest);
-            return returnVariable ? new UserResponse(RegistrationResponse.Successful)
-                : new UserResponse(RegistrationResponse.UnknownError);
+            var registered = await _userRepository.Register(registrationRequest);
+            return registered ? new UserResponse(UserRegistrationResponse.Successful)
+                : new UserResponse(UserRegistrationResponse.UnknownError);
         }
     }
     
@@ -55,7 +55,7 @@ namespace Services
     {
         public User User { get; }
         public LoginResponse LoginResponse { get; }
-        public RegistrationResponse RegistrationResponse { get; }
+        public UserRegistrationResponse UserRegistrationResponse { get; }
 
         public UserResponse(User user, LoginResponse loginResponse)
         {
@@ -68,9 +68,9 @@ namespace Services
             LoginResponse = loginResponse;
         }
         
-        public UserResponse(RegistrationResponse registrationResponse)
+        public UserResponse(UserRegistrationResponse userRegistrationResponse)
         {
-            RegistrationResponse = registrationResponse;
+            UserRegistrationResponse = userRegistrationResponse;
         }
     }
 
@@ -85,7 +85,7 @@ namespace Services
         UnknownError
     }
     
-    public enum RegistrationResponse
+    public enum UserRegistrationResponse
     {
         UserAlreadyExists,
         Successful,

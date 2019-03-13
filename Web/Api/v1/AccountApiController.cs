@@ -56,7 +56,7 @@ namespace Web.Api.v1
         public async Task<IActionResult> Register([FromBody] RegistrationRequest registrationRequest)
         {
             var result = await _accountService.Register(registrationRequest);
-            return result.LoginResponse != LoginResponse.Successful ? Json(new {Success = false, Response = result.RegistrationResponse})
+            return result.LoginResponse != LoginResponse.Successful ? Json(new {Success = false, Response = result.UserRegistrationResponse})
                 : Json(new {Success = true});
         }
         
