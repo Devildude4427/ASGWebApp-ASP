@@ -3,7 +3,7 @@ function logout() {
         .then(function (response) {
             console.log(response);
             if(response.data.success) {
-                window.location = '/Login';
+                window.location = '/authentication/login';
             }
         })
         .catch(function (error) {
