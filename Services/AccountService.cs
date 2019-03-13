@@ -1,6 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using Domain.Entities;
 using Domain.RepositoryInterfaces;
+using Domain.ViewModels;
 
 namespace Services
 {
@@ -31,12 +33,29 @@ namespace Services
             return !user.Enabled ? new UserResponse(user, LoginResponse.UserDisabled) :
                 new UserResponse(user, LoginResponse.Successful);
         }
+
+        public async Task<UserResponse> Register(RegistrationRequest registrationRequest) =>
+            await RegisterUserIfValid(registrationRequest);
+        
+        private async Task<UserResponse> RegisterUserIfValid(RegistrationRequest registrationRequest)
+        {
+            var user = await _userRepository.FindByEmail(registrationRequest.Email);
+            if (user != null)
+                return new UserResponse(RegistrationResponse.UserAlreadyExists);
+
+            registrationRequest.Password = Hashing.HashPassword(registrationRequest.Password);
+            
+            var returnVariable = await _userRepository.Register(registrationRequest);
+            return returnVariable ? new UserResponse(RegistrationResponse.Successful)
+                : new UserResponse(RegistrationResponse.UnknownError);
+        }
     }
     
     public class UserResponse
     {
         public User User { get; }
         public LoginResponse LoginResponse { get; }
+        public RegistrationResponse RegistrationResponse { get; }
 
         public UserResponse(User user, LoginResponse loginResponse)
         {
@@ -48,6 +67,11 @@ namespace Services
         {
             LoginResponse = loginResponse;
         }
+        
+        public UserResponse(RegistrationResponse registrationResponse)
+        {
+            RegistrationResponse = registrationResponse;
+        }
     }
 
     public enum LoginResponse
@@ -58,6 +82,13 @@ namespace Services
         UserNonExistent,
         IncorrectPassword,
         UserDisabled,
+        UnknownError
+    }
+    
+    public enum RegistrationResponse
+    {
+        UserAlreadyExists,
+        Successful,
         UnknownError
     }
 }

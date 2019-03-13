@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Domain;
 using Domain.ViewModels;
@@ -51,12 +52,13 @@ namespace Web.Api.v1
             return Json(new {Success = true});
         }
         
-        // [HttpPost("register")]
-        // public async Task<IActionResult> Register([FromBody] Example newEntity)
-        // {
-        //     await _exampleService.Create(newEntity);
-        //     return Ok();
-        // }
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegistrationRequest registrationRequest)
+        {
+            var result = await _accountService.Register(registrationRequest);
+            return result.LoginResponse != LoginResponse.Successful ? Json(new {Success = false, Response = result.RegistrationResponse})
+                : Json(new {Success = true});
+        }
         
         // [HttpPut("{id}")]
         // public async Task<IActionResult> Update(long id, [FromBody] Example updatedEntity)
