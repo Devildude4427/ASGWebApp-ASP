@@ -71,6 +71,7 @@ namespace Persistence.Migrations
                   contact_info_id SERIAL NOT NULL REFERENCES contact_information(id),
                   general_info_id SERIAL NOT NULL REFERENCES general_information(id),
                   last_completed_stage INTEGER NOT NULL,
+                  registration_date DATE NOT NULL,
                   CONSTRAINT unique_reference_number UNIQUE(reference_number)
                 );
             ");
