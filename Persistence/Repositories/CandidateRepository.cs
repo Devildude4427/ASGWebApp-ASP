@@ -116,11 +116,11 @@ namespace Persistence.Repositories
                 DroneId = droneId}).Single();
             
             sql = @"
-                INSERT INTO candidates(user_id, reference_number, contact_info_id, general_info_id, last_completed_stage)
-                 VALUES (:UserId, :ReferenceNumber, :ContactInfoId, :GeneralInfoId, 0) RETURNING id;
+                INSERT INTO candidates(user_id, reference_number, contact_info_id, general_info_id, last_completed_stage, registration_date)
+                 VALUES (:UserId, :ReferenceNumber, :ContactInfoId, :GeneralInfoId, 0, :CurrentDate) RETURNING id;
             ";
             var rowsAffected = await _con.Db.ExecuteAsync(sql, new {courseRegistration.UserId,
-                courseRegistration.ReferenceNumber, ContactInfoId = contactInformationId, GeneralInfoId = generalInformationId});
+                courseRegistration.ReferenceNumber, ContactInfoId = contactInformationId, GeneralInfoId = generalInformationId, CurrentDate = DateTime.Now});
             Console.WriteLine("Rows affected: " + rowsAffected);
             return rowsAffected == 1;
         }
