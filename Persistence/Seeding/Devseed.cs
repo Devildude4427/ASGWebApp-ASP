@@ -31,8 +31,7 @@ namespace Persistence.Seeding
                        (4, 4, '7911564856');
 
                 INSERT INTO drones (make, model)
-                VALUES
-                       ('DJI', 'Matrice'),
+                VALUES ('DJI', 'Matrice'),
                        ('DJI', 'Mavic'),
                        ('DJI', 'Mavic 2'),
                        ('DJI', 'Mavic Air'),
@@ -65,10 +64,10 @@ namespace Persistence.Seeding
                        (3, 6, 'Aberdeenshire', '1990-12-31', 'Aberdeenshire', 10, true),
                        (4, 6, 'Cardiff', '1990-11-15', 'Cardiff', 1, true);
 
-                INSERT INTO candidates(id, user_id, reference_number, contact_info_id, general_info_id, last_completed_stage)
-                VALUES(2, 4, 'ASG-002-19-02', 2, 2, 4),
-                      (3, 5, 'ASG-003-19-02', 3, 3, 7),
-                      (4, 6, 'ASG-004-19-02', 4, 4, 12);
+                INSERT INTO candidates(id, user_id, reference_number, contact_info_id, general_info_id, last_completed_stage, registration_date)
+                VALUES(2, 4, 'ASG-002-19-02', 2, 2, 4, '2018-03-03'),
+                      (3, 5, 'ASG-003-19-02', 3, 3, 7, '2019-03-19'),
+                      (4, 6, 'ASG-004-19-02', 4, 4, 12, '2019-03-16');
 
             ");
         }
