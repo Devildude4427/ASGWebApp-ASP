@@ -10,6 +10,7 @@ namespace Domain.RepositoryInterfaces
         
         Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest);
         Task<Candidate> FindByUserId(long id);
+        Task<int> GetCurrentCandidateCount();
         Task<string> PreviousCandidateReferenceNumber();
         Task<bool> Register(CourseRegistration courseRegistration);
         Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails);

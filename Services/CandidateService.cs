@@ -30,6 +30,11 @@ namespace Services
             return await _candidateRepository.FindByUserId(_user.Id);
         }
 
+        public async Task<int> GetCurrentCandidateCount()
+        {
+            return await _candidateRepository.GetCurrentCandidateCount();
+        }
+
         public async Task<string> GenerateReferenceNumber()
         {
             var previousReferenceNumber = await _candidateRepository.PreviousCandidateReferenceNumber();
