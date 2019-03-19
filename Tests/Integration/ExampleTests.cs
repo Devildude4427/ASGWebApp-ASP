@@ -28,7 +28,7 @@ namespace Tests.Integration
             {
                 var service = container.Resolve<CandidateService>();
                 var referenceNumber = await service.GenerateReferenceNumber();
-               referenceNumber.Should().Be("ASG-001-" + DateTime.Now.ToString("yy-MM"));
+                referenceNumber.Should().Be("ASG-001-" + DateTime.Now.ToString("yy-MM"));
             }
         }
     }

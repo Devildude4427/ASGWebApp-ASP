@@ -37,8 +37,8 @@ namespace Persistence.Seeding
                        (6, 'Cardiff', '1990-11-15', 'Cardiff', 5, true);
 
                 INSERT INTO candidates(user_id, reference_number, contact_info_id, general_info_id, last_completed_stage, registration_date)
-                VALUES (2, 'ASG-003-19-02', 1, 1, 7, '2019-03-19'),
-                       (3, 'ASG-004-19-02', 2, 2, 12, '2019-03-16');
+                VALUES (1, 'ASG-003-19-02', 1, 1, 7, '2019-03-19'),
+                       (2, 'ASG-004-19-02', 2, 2, 12, '2019-03-16');
             ");
         }
     }
