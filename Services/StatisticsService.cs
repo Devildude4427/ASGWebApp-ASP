@@ -7,9 +7,9 @@ namespace Services
     {
         private readonly IStatisticsRepository _statisticsRepository;
         
-        public StatisticsService(IStatisticsRepository statsticsRepository)
+        public StatisticsService(IStatisticsRepository statisticsRepository)
         {
-            _statisticsRepository = statsticsRepository;
+            _statisticsRepository = statisticsRepository;
         }
         
         public async Task<int> GetCurrentCandidateCount()
