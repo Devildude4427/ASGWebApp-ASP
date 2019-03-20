@@ -22,5 +22,15 @@ namespace Persistence.Repositories
             ";
             return await _con.Db.QuerySingleOrDefaultAsync<int>(sql);
         }
+        
+        public async Task<int> GetNewCandidateCount()
+        {
+            const string sql = @"
+                SELECT COUNT(*)
+                FROM candidates
+                WHERE registration_date > current_date - interval '7 days';
+            ";
+            return await _con.Db.QuerySingleOrDefaultAsync<int>(sql);
+        }
     }
 }

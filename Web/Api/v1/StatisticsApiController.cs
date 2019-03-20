@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -19,6 +18,13 @@ namespace Web.Api.v1
         public async Task<IActionResult> GetCurrentCandidateCount()
         {
             var result = await _statisticsService.GetCurrentCandidateCount();
+            return Json(result);
+        }
+        
+        [HttpGet("newCandidateCount")]
+        public async Task<IActionResult> GetNewCandidateCount()
+        {
+            var result = await _statisticsService.GetNewCandidateCount();
             return Json(result);
         }
     }
