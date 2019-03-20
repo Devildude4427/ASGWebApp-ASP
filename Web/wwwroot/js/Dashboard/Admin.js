@@ -2,7 +2,8 @@ new Vue({
     el: '#adminDashboard',
     data () {
         return {
-            candidateCount: 0
+            candidateCount: 0,
+            newCandidateCount: 0
         }
     },
     mounted () {
@@ -11,8 +12,13 @@ new Vue({
             .then((response) => {
                 if (response.data != null) {
                     this.candidateCount = response.data;
-                } else {
-                    this.candidateCount = 0;
+                }
+            });
+        axios
+            .get('/api/v1/statistics/newCandidateCount')
+            .then((response) => {
+                if (response.data != null) {
+                    this.newCandidateCount = response.data;
                 }
             });
     }
