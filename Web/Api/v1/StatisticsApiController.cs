@@ -8,18 +8,17 @@ namespace Web.Api.v1
     [Route("/api/v1/statistics")]
     public class StatisticsApiController : RootApiController
     {
-        private readonly CandidateService _candidateService;
+        private readonly StatisticsService _statisticsService;
 
-        public StatisticsApiController(CandidateService candidateService)
+        public StatisticsApiController(StatisticsService statisticsService)
         {
-            _candidateService = candidateService;
+            _statisticsService = statisticsService;
         }
         
         [HttpGet("candidateCount")]
         public async Task<IActionResult> GetCurrentCandidateCount()
         {
-            var result = await _candidateService.GetCurrentCandidateCount();
-            Console.WriteLine(result);
+            var result = await _statisticsService.GetCurrentCandidateCount();
             return Json(result);
         }
     }
