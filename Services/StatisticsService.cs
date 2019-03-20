@@ -16,5 +16,10 @@ namespace Services
         {
             return await _statisticsRepository.GetCurrentCandidateCount();
         }
+        
+        public async Task<int> GetNewCandidateCount()
+        {
+            return await _statisticsRepository.GetNewCandidateCount();
+        }
     }
 }
