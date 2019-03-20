@@ -65,15 +65,6 @@ namespace Persistence.Repositories
             return await _con.Db.QuerySingleOrDefaultAsync<Candidate>(sql, new { id });
         }
 
-        public async Task<int> GetCurrentCandidateCount()
-        {
-            const string sql = @"
-                SELECT COUNT(*)
-                FROM  candidates;
-            ";
-            return await _con.Db.QuerySingleOrDefaultAsync<int>(sql);
-        }
-
         public async Task<string> PreviousCandidateReferenceNumber()
         {
             const string sql = @"
