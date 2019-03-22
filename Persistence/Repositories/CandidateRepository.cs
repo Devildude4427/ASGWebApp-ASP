@@ -111,15 +111,33 @@ namespace Persistence.Repositories
                  VALUES (:UserId, :ReferenceNumber, :ContactInfoId, :GeneralInfoId, 0, :CurrentDate) RETURNING id;
             ";
             var rowsAffected = await _con.Db.ExecuteAsync(sql, new {courseRegistration.UserId,
-                courseRegistration.ReferenceNumber, ContactInfoId = contactInformationId, GeneralInfoId = generalInformationId, CurrentDate = DateTime.Now});
+                courseRegistration.ReferenceNumber, contactInformationId, generalInformationId, DateTime.Now});
             Console.WriteLine("Rows affected: " + rowsAffected);
             return rowsAffected == 1;
         }
         
         public async Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails)
         {
-            //TODO Figure out how to handle the potentially blank fields and complex update
-            // const string sql = @"
+            var sql = @"
+                    SELECT contact_info_id
+                    FROM candidates u
+                    WHERE u.user_id = :id;
+            ";
+             var contactInfoId = _con.Db.QuerySingleOrDefaultAsync<Candidate>(sql, new { updateContactDetails.UserId });
+
+            //  if (updateContactDetails.Address != null)
+            //  {
+            //      sql = @"
+            //         UPDATE addresses AS a
+            //         SET line_1 = :Line1, line_2 = :Line2, city = :City, post_code = :PostCode
+            //         FROM contact_information AS c
+            //         JOIN candidates c2 on c.id = c2.contact_info_id
+            //         JOIN a on c.address_id = a.id
+            //         WHERE c2.user_id = :id;
+            //     ";
+            //  }
+            //
+            // sql = @"
             //     UPDATE addresses
             //     SET line_1 = :Line1, line_2 = :Line2, city = :City, post_code = :PostCode
             //     FROM contact_information AS c
