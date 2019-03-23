@@ -26,8 +26,9 @@ namespace Web.Api.v1
         [HttpPost("updateDetails")]
         public async Task<IActionResult> UpdateDetails([FromBody] UpdateContactDetails updateContactDetails)
         {
-            await _candidateService.UpdateDetails(updateContactDetails);
-            return Ok();
+            var result = await _candidateService.UpdateDetails(updateContactDetails);
+            return result ? Json(new {Success = false, Response = "Unknown Server Error"})
+                : Json(new {Success = true});
         }
 
         // [HttpGet("Find")]
