@@ -112,42 +112,53 @@ namespace Persistence.Repositories
             ";
             var rowsAffected = await _con.Db.ExecuteAsync(sql, new {courseRegistration.UserId,
                 courseRegistration.ReferenceNumber, contactInformationId, generalInformationId, DateTime.Now});
-            Console.WriteLine("Rows affected: " + rowsAffected);
             return rowsAffected == 1;
         }
         
         public async Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails)
         {
-            var sql = @"
-                    SELECT contact_info_id
-                    FROM candidates u
-                    WHERE u.user_id = :id;
-            ";
-             var contactInfoId = _con.Db.QuerySingleOrDefaultAsync<Candidate>(sql, new { updateContactDetails.UserId });
+             string sql;
+             var rowsAffected = 0;
 
-            //  if (updateContactDetails.Address != null)
-            //  {
-            //      sql = @"
-            //         UPDATE addresses AS a
-            //         SET line_1 = :Line1, line_2 = :Line2, city = :City, post_code = :PostCode
-            //         FROM contact_information AS c
-            //         JOIN candidates c2 on c.id = c2.contact_info_id
-            //         JOIN a on c.address_id = a.id
-            //         WHERE c2.user_id = :id;
-            //     ";
-            //  }
-            //
-            // sql = @"
-            //     UPDATE addresses
-            //     SET line_1 = :Line1, line_2 = :Line2, city = :City, post_code = :PostCode
-            //     FROM contact_information AS c
-            //     WHERE v.shipment_id = s.id 
-            // ";
-            // var rowsAffected = await _con.Db.ExecuteAsync(sql, new {courseRegistration.UserId,
-            //     courseRegistration.ReferenceNumber, ContactInfoId = contactInformationId, GeneralInfoId = generalInformationId});
-            // Console.WriteLine("Rows affected: " + rowsAffected);
-            // return rowsAffected == 1;
-            return true;
+             if (updateContactDetails.Address != null)
+             {
+                 sql = @"
+                    UPDATE addresses AS a
+                    SET line_1 = :Line1, line_2 = :Line2, city = :City, post_code = :PostCode
+                    FROM candidates AS c, contact_information AS ci
+                    WHERE c.user_id = :UserId
+                    AND c.contact_info_id = ci.id
+                    AND ci.address_id = a.id;
+                ";
+                 rowsAffected += await _con.Db.ExecuteAsync(sql, new {
+                     updateContactDetails.Address.Line1, updateContactDetails.Address.Line2, updateContactDetails.Address.City, 
+                     updateContactDetails.Address.PostCode, updateContactDetails.UserId });
+             }
+
+             if (updateContactDetails.PhoneNumber != null)
+             {
+                 sql = @"
+                    UPDATE contact_information AS ci
+                    SET phone_number = :PhoneNumber
+                    FROM candidates AS c
+                    WHERE c.user_id = :UserId
+                    AND c.contact_info_id = ci.id;
+                ";
+                 rowsAffected += await _con.Db.ExecuteAsync(sql, new {
+                     updateContactDetails.PhoneNumber, updateContactDetails.UserId });
+             }
+
+             if (updateContactDetails.Email == null) return rowsAffected > 1;
+             sql = @"
+                    UPDATE users AS u
+                    SET email = :Email
+                    FROM candidates AS c
+                    WHERE u.id = :UserId
+                ";
+             rowsAffected += await _con.Db.ExecuteAsync(sql, new {
+                 updateContactDetails.Email, updateContactDetails.UserId });
+
+             return rowsAffected > 1;
         }
     }
 }
