@@ -11,6 +11,7 @@
         <environment include="Development">
             @RenderSection("Style", required: false)
             <link href="~/css/style.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="~/css/main.bundle.min.css"/>
         </environment>
         <environment exclude="Development">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
@@ -18,6 +19,7 @@
                   asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
                   crossorigin="anonymous"
                   integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
+            <link rel="stylesheet" href="~/css/main.bundle.min.css" asp-append-version="true" />
         </environment>
     </head>
     
@@ -51,6 +53,9 @@
             <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
             @RenderSection("Scripts", required: false)
+            
+            <script src="~/js/vendor.bundle.min.js"></script>
+            <script src="~/js/main.bundle.min.js"></script>
         </environment>
         <environment exclude="Development">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -65,6 +70,8 @@
                     crossorigin="anonymous"
                     integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
             </script>
+            <script src="~/js/vendor.bundle.min.js" asp-append-version="true"></script>
+            <script src="~/js/main.bundle.min.js" asp-append-version="true"></script>
             <script src="https://cdn.jsdelivr.net/npm/vue"></script>
         </environment>
     </body>
