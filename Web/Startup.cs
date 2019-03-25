@@ -28,9 +28,9 @@ namespace Web
             _env = env;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
         private AppConfig AppConfig { get; }
-        public static IContainer ApplicationContainer { get; private set; }
+        private static IContainer ApplicationContainer { get; set; }
         private readonly IHostingEnvironment _env;
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -94,6 +94,19 @@ namespace Web
                 options.Cookie.SameSite = _env.IsDevelopment() ? SameSiteMode.None : SameSiteMode.Strict;
             });
             
+            services.AddCors(options =>
+            {
+                options.AddPolicy("VueCorsPolicy", policy =>
+                {
+                    policy
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                        .WithOrigins("http://localhost:80");
+                });
+            });
+
+            
             var builder = new ContainerBuilder();
             builder.Populate(services);
             DIConfig.Configure(AppConfig, builder);
@@ -121,6 +134,7 @@ namespace Web
             app.UseCookiePolicy();
             app.UseSession();
             app.UseAuthentication();
+            app.UseCors("VueCorsPolicy");
             
             app.UseDefaultFiles();
             app.UseStaticFiles();
