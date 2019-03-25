@@ -1,4 +1,5 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
@@ -19,6 +20,7 @@
         "src/*"
       ]
     },
+    "outDir": "wwwroot/js",
     "lib": [
       "esnext",
       "dom",
@@ -34,6 +36,7 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "wwwroot"
   ]
 }

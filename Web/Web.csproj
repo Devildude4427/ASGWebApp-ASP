@@ -5,6 +5,10 @@
         <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
         <NoWarn>NU1701</NoWarn>
     </PropertyGroup>
+    
+    <PropertyGroup>
+        <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
+    </PropertyGroup>
 
 
     <ItemGroup>
