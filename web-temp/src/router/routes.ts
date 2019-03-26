@@ -3,6 +3,7 @@ import Router from 'vue-router';
 
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
+import DashboardLayout from '@/components/layouts/_DashboardLayout.vue';
 
 Vue.use(Router);
 
@@ -17,6 +18,11 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: Login,
+    },
+    {
+      path: '/client-dashboard',
+      name: 'client-dashboard',
+      component: DashboardLayout,
     },
     {
       path: '/about',
