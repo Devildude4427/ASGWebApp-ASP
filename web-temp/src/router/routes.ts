@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
-import DashboardLayout from '@/components/layouts/_DashboardLayout.vue';
+import ClientDashboard from '@/views/ClientDashboard.vue';
 
 Vue.use(Router);
 
@@ -22,7 +22,8 @@ const router = new Router({
     {
       path: '/client-dashboard',
       name: 'client-dashboard',
-      component: DashboardLayout,
+      meta: { layout: 'dashboard' },
+      component: ClientDashboard,
     },
     {
       path: '/about',
