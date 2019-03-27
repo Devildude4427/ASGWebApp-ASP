@@ -274,8 +274,8 @@ export default {
       'mdi-backburger',
       'mdi-backspace',
       'mdi-backup-restore',
-      'mdi-badminton'
-    ]
-  })
-}
+      'mdi-badminton',
+    ],
+  }),
+};
 </script>
