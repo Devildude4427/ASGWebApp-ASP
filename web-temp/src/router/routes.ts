@@ -1,54 +1,75 @@
 import Vue from 'vue';
+import VueAnalytics from 'vue-analytics';
 import Router from 'vue-router';
+import Meta from 'vue-meta';
 
-import Home from '../views/Home.vue';
-import Login from '../views/Login.vue';
-import ClientDashboard from '@/views/ClientDashboard.vue';
+import Dashboard from '@/views/Dashboard.vue';
+import UserProfile from '@/views/UserProfile.vue';
+import TableList from '@/views/TableList.vue';
+import Typography from '@/views/Typography.vue';
+import Icons from '@/views/Icons.vue';
+import Maps from '@/views/Maps.vue';
+import Notifications from '@/views/Notifications.vue';
+import Upgrade from '@/views/Upgrade.vue';
+
 
 Vue.use(Router);
 
 const router = new Router({
+  mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home,
+      path: '/dashboard',
+      // Relative to /src/views
+      component: Dashboard,
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login,
+      path: '/user-profile',
+      name: 'User Profile',
+      component: UserProfile,
     },
     {
-      path: '/client-dashboard',
-      name: 'client-dashboard',
-      meta: { layout: 'dashboard' },
-      component: ClientDashboard,
+      path: '/table-list',
+      name: 'Table List',
+      component: TableList,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+      path: '/typography',
+      component: Typography,
     },
     {
-      path: '/404',
-      name: '404',
-      component: require('../views/_404').default,
-      // Allows props to be passed to the 404 page through route
-      // params, such as `resource` to define what wasn't found.
-      props: true,
+      path: '/icons',
+      component: Icons,
     },
-    // Redirect any unmatched routes to the 404 page. This may
-    // require some server configuration to work in production:
-    // https://router.vuejs.org/en/essentials/history-mode.html#example-server-configurations
     {
-      path: '*',
-      redirect: '404',
+      path: '/maps',
+      component: Maps,
+    },
+    {
+      path: '/notifications',
+      component: Notifications,
+    },
+    {
+      path: '/upgrade',
+      name: 'Upgrade to PRO',
+      component: Upgrade,
     },
   ],
 });
+
+Vue.use(Meta);
+
+// Bootstrap Analytics
+// Set in .env
+// https://github.com/MatteoGabriele/vue-analytics
+if (process.env.GOOGLE_ANALYTICS) {
+  Vue.use(VueAnalytics, {
+    id: process.env.GOOGLE_ANALYTICS,
+    router,
+    autoTracking: {
+      page: process.env.NODE_ENV !== 'development',
+    },
+  });
+}
 
 export default router;
