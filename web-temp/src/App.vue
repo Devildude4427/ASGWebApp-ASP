@@ -1,12 +1,12 @@
 <template>
     <v-app>
-        <core-filter />
+        <core-filter></core-filter>
 
-        <core-toolbar />
+        <core-toolbar></core-toolbar>
 
-        <core-drawer />
+        <core-drawer></core-drawer>
 
-        <core-view />
+        <core-view></core-view>
     </v-app>
 </template>
 
