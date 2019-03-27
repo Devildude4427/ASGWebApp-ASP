@@ -2,8 +2,8 @@
   @include shadow-big();
 
   .v-list {
-    background: $sidebar-bg;
-    padding: 0;
+    background: $sidebar-bg !important;
+    padding: 0 !important;
 
     .v-list-item {
       &:not(:nth-child(3)){
@@ -69,9 +69,9 @@
     }
 
     .v-divider {
-      border-color: $black-opacity-3;
-      margin: $divider-margins auto $divider-margins + 25;
-      width: $divider-width;
+      border-color: $black-opacity-3 !important;
+      margin: $divider-margins auto $divider-margins + 25 !important;
+      width: $divider-width !important;
 
     }
 
