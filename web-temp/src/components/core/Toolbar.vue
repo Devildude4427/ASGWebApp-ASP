@@ -34,9 +34,21 @@
             </v-list>
           </v-card>
         </v-menu>
-        <router-link v-ripple class="toolbar-items" to="/user-profile">
+        <!-- <router-link v-ripple class="toolbar-items" to="/user-profile">
           <v-icon color="tertiary">mdi-account</v-icon>
-        </router-link>
+        </router-link> -->
+        <v-menu bottom left content-class="dropdown-menu" offset-y transition="slide-y-transition">
+           <router-link v-ripple slot="activator" class="toolbar-items" to="#">
+            <v-icon color="tertiary">mdi-account</v-icon>
+          </router-link>
+          <v-card>
+            <v-list dense>
+              <v-list-tile v-for="userOption in userOptions" :key="userOption" @click="onClick">
+                <v-list-tile-title v-text="userOption"/>
+              </v-list-tile>
+            </v-list>
+          </v-card>
+        </v-menu>
       </v-flex>
     </v-toolbar-items>
   </v-toolbar>
@@ -56,6 +68,11 @@ export default {
       'You\'re now a friend with Andrew',
       'Another Notification',
       'Another One',
+    ],
+    userOptions: [
+      'Logout',
+      'Option Two',
+      'Option Three',
     ],
     title: null,
     responsive: false,
