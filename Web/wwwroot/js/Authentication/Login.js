@@ -14,24 +14,24 @@ $('#to-login').click(function(){
 });
 
 $("#loginForm").submit(function(e) {
-    const loginRequest = { Email : $("#email").val(), Password : $("#password").val() };
-    $.ajax({
-        type: "POST",
-        contentType:"application/json",
+    axios({
+        method: "post",
+        headers: {'Content-Type': 'application/json'},
         url: "/api/v1/account/login",
-        data: JSON.stringify(loginRequest),
-        success: function(result)
-        {
-            const response = JSON.parse(JSON.stringify(result));
-            if (response['success']) {
-                window.location = '/dashboard';
-            } else {
-                document.getElementById("loginError").style.display = "block";
-            }
-        },
-        failure: function() {
-            document.getElementById("loginError").innerHTML = "Can't connect to server";
+        data: JSON.stringify({
+            Email: $("#emailAddress").val(),
+            Password: $("#password").val()
+        })
+    }).then(function (response) {
+        //TODO Check response in case of failure, and alert users if they're just not authenticated 
+        if(response.statusText === "OK") {
+            window.location = '/dashboard';
         }
+        else {
+            document.getElementById("loginError").style.display = "block"; 
+        }
+    }).catch(function (error) {
+        console.log(error);
     });
     e.preventDefault();
 });

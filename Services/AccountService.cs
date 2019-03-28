@@ -1,6 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using Domain.Entities;
 using Domain.RepositoryInterfaces;
+using Domain.ViewModels;
 
 namespace Services
 {
@@ -31,12 +33,29 @@ namespace Services
             return !user.Enabled ? new UserResponse(user, LoginResponse.UserDisabled) :
                 new UserResponse(user, LoginResponse.Successful);
         }
+
+        public async Task<UserResponse> Register(RegistrationRequest registrationRequest) =>
+            await RegisterUserIfValid(registrationRequest);
+        
+        private async Task<UserResponse> RegisterUserIfValid(RegistrationRequest registrationRequest)
+        {
+            var user = await _userRepository.FindByEmail(registrationRequest.Email);
+            if (user != null)
+                return new UserResponse(UserRegistrationResponse.UserAlreadyExists);
+
+            registrationRequest.Password = Hashing.HashPassword(registrationRequest.Password);
+            
+            var registered = await _userRepository.Register(registrationRequest);
+            return registered ? new UserResponse(UserRegistrationResponse.Successful)
+                : new UserResponse(UserRegistrationResponse.UnknownError);
+        }
     }
     
     public class UserResponse
     {
         public User User { get; }
         public LoginResponse LoginResponse { get; }
+        public UserRegistrationResponse UserRegistrationResponse { get; }
 
         public UserResponse(User user, LoginResponse loginResponse)
         {
@@ -48,6 +67,11 @@ namespace Services
         {
             LoginResponse = loginResponse;
         }
+        
+        public UserResponse(UserRegistrationResponse userRegistrationResponse)
+        {
+            UserRegistrationResponse = userRegistrationResponse;
+        }
     }
 
     public enum LoginResponse
@@ -58,6 +82,13 @@ namespace Services
         UserNonExistent,
         IncorrectPassword,
         UserDisabled,
+        UnknownError
+    }
+    
+    public enum UserRegistrationResponse
+    {
+        UserAlreadyExists,
+        Successful,
         UnknownError
     }
 }

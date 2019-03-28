@@ -43,7 +43,8 @@ function updateContactDetails() {
                 City: $("#city").val(),
                 PostCode: $("#postCode").val()
             },
-            CompanyName: $("#companyName").val()
+            PhoneNumber: $("#phoneNumber").val(),
+            Email: $("#emailAddress").val()
         })
     }).then(function (response) {
         console.log(response);
