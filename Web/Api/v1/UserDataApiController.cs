@@ -1,6 +1,4 @@
 using System.Threading.Tasks;
-using Domain;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -37,6 +35,7 @@ namespace Web.Api.v1
         [HttpGet]
         public async Task<IActionResult> GetCurrentCandidate()
         {
+            //TODO this return the entire row from candidate, FIX!!!!
             var result = await _candidateService.FindByUserId();
             return Json(result);
         }

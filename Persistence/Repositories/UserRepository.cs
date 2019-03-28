@@ -4,6 +4,7 @@ using Dapper;
 using Domain;
 using Domain.Entities;
 using Domain.RepositoryInterfaces;
+using Domain.ViewModels;
 using Persistence.Configuration;
 
 namespace Persistence.Repositories
@@ -65,12 +66,23 @@ namespace Persistence.Repositories
 
         public async Task<User> FindByEmail(string email)
         {
-            var sql = @"
+            const string sql = @"
                 SELECT *
                 FROM users u
                 WHERE u.email = :email;
             ";
             return await _con.Db.QuerySingleOrDefaultAsync<User>(sql, new { email });
+        }
+
+        public async Task<bool> Register(RegistrationRequest registrationRequest)
+        {
+            const string sql = @"
+                INSERT INTO users(name, email, password, role, activated, enabled, authentication_token, expiry_datetime)
+                 VALUES (:Name, :EmailAddress, :Password, 1001, FALSE, TRUE, NULL, NULL) RETURNING id;
+            ";
+            var rowsAffected = await _con.Db.ExecuteAsync(sql, new {registrationRequest.Name,
+                registrationRequest.Email, registrationRequest.Password});
+            return rowsAffected == 1;
         }
 
         //Other

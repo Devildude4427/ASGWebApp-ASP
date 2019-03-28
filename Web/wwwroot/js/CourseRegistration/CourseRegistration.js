@@ -1,7 +1,5 @@
 const form = $("#courseRegistrationForm");
-form.validate({
-    errorPlacement: function(error, element) { element.before(error); }
-});
+form.validate({errorPlacement: function(error, element) { element.before(error); }});
 form.children("div").steps({
     headerTag: "h3",
     bodyTag: "section",
@@ -20,7 +18,6 @@ form.children("div").steps({
     },
     onFinished: function() {
         courseRegister();
-        alert("Submitted!");
     }
 });
 
@@ -32,13 +29,10 @@ $("#dateOfBirth").datepicker({
     maxViewMode: 3
 });
 
-
 function courseRegister() {
     axios({
         method: "post",
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: {'Content-Type': 'application/json'},
         url: "/api/v1/candidate/register",
         data: JSON.stringify({
             Address: {
@@ -61,13 +55,10 @@ function courseRegister() {
             }
         })
     }).then(function (response) {
-        
-        console.log(response);
         if(response.statusText === "OK") {
-            window.location = '/Dashboard';
+            window.location = '/dashboard';
         }
-    })
-    .catch(function (error) {
+    }).catch(function (error) {
         console.log(error);
     });
 }

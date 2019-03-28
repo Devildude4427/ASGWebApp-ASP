@@ -10,7 +10,7 @@ namespace Web.Controllers
             {
                 case(401):
                 case(403):
-                    return Redirect("/login");
+                    return Redirect("/authentication/login");
                 case(404):
                     return View("404");
                 default:
