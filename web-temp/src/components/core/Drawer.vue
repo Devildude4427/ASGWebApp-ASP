@@ -7,7 +7,7 @@
             <v-img :src="logo" height="34" contain/>
           </v-list-tile-avatar>
           <v-list-tile-title class="title">
-            Vuetify MD
+            ASG
           </v-list-tile-title>
         </v-list-tile>
         <v-divider/>
