@@ -13,7 +13,7 @@
                   <v-text-field label="Password" class="blue-input"></v-text-field>
                 </v-flex>
                 <v-flex xs12 text-xs-right>
-                  <v-btn class="mx-0 font-weight-light" color="blue">Login</v-btn>
+                  <v-btn class="mx-0 font-weight-light" color="blue" @click="onClick">Login</v-btn>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -23,3 +23,34 @@
     </v-layout>
   </v-container>
 </template>
+
+<script lang="ts">
+import axios from 'axios';
+
+export default {
+  methods: {
+    onClick() {
+      const self = this;
+      axios({
+          method: 'post',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          url: '/api/v1/account/login',
+          data: JSON.stringify({
+              Email: 'admin@asg.com',
+              Password: 'pass',
+          }),
+      }).then(function(response) {
+          console.log(response);
+          if(response.statusText === 'OK') {
+              self.$router.push('/dashboard');
+          }
+      }).catch(function(error) {
+          console.log(error);
+      });
+    },
+  },
+};
+</script>
+
