@@ -1,10 +1,10 @@
 <template>
     <v-app>
-        <core-filter></core-filter>
+        <core-filter v-if="hideLayout"></core-filter>
 
-        <core-toolbar></core-toolbar>
+        <core-toolbar v-if="hideLayout"></core-toolbar>
 
-        <core-drawer></core-drawer>
+        <core-drawer v-if="hideLayout"></core-drawer>
 
         <core-view></core-view>
     </v-app>
@@ -18,3 +18,18 @@
         vertical-align: unset;
     }
 </style>
+
+<script>
+    export default {
+        data() {
+            return {
+                hideLayout: false,
+            };
+        },
+        beforeMount() {
+            if (this.$route.name !== 'Login') {
+                this.hideLayout = true;
+            }
+        },
+    };
+</script>
