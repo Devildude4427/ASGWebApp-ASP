@@ -1,37 +1,51 @@
+import Dashboard from '@/views/Dashboard.vue';
+import UserProfile from '@/views/UserProfile.vue';
+import TableList from '@/views/TableList.vue';
+import Typography from '@/views/Typography.vue';
+import Icons from '@/views/Icons.vue';
+import Maps from '@/views/Maps.vue';
+import Notifications from '@/views/Notifications.vue';
+import Login from '@/views/Login.vue';
+
 export default [
     {
         path: '/dashboard',
-        // Relative to /src/views
-        view: 'Dashboard',
+        name: 'Dashboard',
+        component: Dashboard,
     },
     {
         path: '/user-profile',
         name: 'User Profile',
-        view: 'UserProfile',
+        component: UserProfile,
     },
     {
         path: '/table-list',
         name: 'Table List',
-        view: 'TableList',
+        component: TableList,
     },
     {
         path: '/typography',
-        view: 'Typography',
+        name: 'Typography',
+        component: Typography,
     },
     {
         path: '/icons',
-        view: 'Icons',
+        name: 'Icons',
+        component: Icons,
     },
     {
         path: '/maps',
-        view: 'Maps',
+        name: 'Maps',
+        component: Maps,
     },
     {
         path: '/notifications',
-        view: 'Notifications',
+        name: 'Notifications',
+        component: Notifications,
     },
     {
         path: '/login',
-        view: 'Login',
+        name: 'Login',
+        component: Login,
     },
 ];
