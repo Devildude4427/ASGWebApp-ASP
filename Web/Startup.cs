@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
@@ -18,7 +17,6 @@ using Persistence.Configuration;
 using Persistence.Seeding;
 using Services;
 using Services.Helpers;
-using Web.Auth;
 using Web.Config;
 
 namespace Web
@@ -43,42 +41,11 @@ namespace Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //
+            
             // services.Configure<CookiePolicyOptions>(options =>
             // {
             //     options.CheckConsentNeeded = context => true;
             //     options.MinimumSameSitePolicy = _env.IsDevelopment() ? SameSiteMode.None : SameSiteMode.Strict;
-            // });
-            
-            // services.AddAuthentication(o =>
-            //     {
-            //         o.DefaultScheme = AuthHandler.AuthName;
-            //     })
-            //     .AddAuth(o => { });
-            //
-            // services.AddAuthorization(o =>
-            // {
-            //     o.AddPolicy("Admin", p => p.RequireAssertion(c =>
-            //     {
-            //         var claim = c.User.FindFirst(ClaimTypes.Role);
-            //         if (claim == null) return false;
-            //
-            //         if (Enum.TryParse(claim.Value, out UserRole userRole))
-            //             return userRole >= UserRole.Admin;
-            //
-            //         return false;
-            //     }));
-            //     
-            //     o.AddPolicy("Standard", p => p.RequireAssertion(c =>
-            //     {
-            //         var claim = c.User.FindFirst(ClaimTypes.Role);
-            //         if (claim == null) return false;
-            //
-            //         if (Enum.TryParse(claim.Value, out UserRole userRole))
-            //             return userRole >= UserRole.Standard;
-            //
-            //         return false;
-            //     }));
             // });
            
             services.AddScoped(c =>
@@ -87,16 +54,6 @@ namespace Web
                 var user = ctx.Items["User"] as IUserIdentity;
                 return user ?? UserIdentity.NoUser;
             });
-            //
-            // services.AddSession(options =>
-            // {
-            //     options.IdleTimeout = TimeSpan.FromMinutes(30);
-            //     options.Cookie.Name = "Auth";
-            //     options.Cookie.HttpOnly = true;
-            //     options.Cookie.SecurePolicy =
-            //         _env.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.Always;
-            //     options.Cookie.SameSite = _env.IsDevelopment() ? SameSiteMode.None : SameSiteMode.Strict;
-            // });
             
             services.AddCors(options =>
             {
@@ -118,25 +75,22 @@ namespace Web
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(x =>
-                {
-                    x.RequireHttpsMetadata = false;
-                    x.SaveToken = true;
-                    x.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(key),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-                });
-
-            // configure DI for application services
-            // services.AddScoped<UserService>();
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
             
             var builder = new ContainerBuilder();
@@ -152,12 +106,9 @@ namespace Web
             DefaultTypeMap.MatchNamesWithUnderscores = true;
             InitialiseDatabase(AppConfig.SeedSettings, env).Wait();
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
 
             // app.UseCookiePolicy();
-            // app.UseSession();
             app.UseAuthentication();
             app.UseCors("VueCorsPolicy");
             
