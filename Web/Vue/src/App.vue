@@ -7,6 +7,8 @@
         <core-drawer v-if="hideLayout"></core-drawer>
 
         <core-view></core-view>
+
+        <div v-if="alert.message" :class="`alert ${alert.type}`">{{alert.message}}</div>
     </v-app>
 </template>
 
@@ -21,6 +23,18 @@
 
 <script>
     export default {
+        name: 'app',
+        computed: {
+            alert() {
+                return this.$store.state.alert;
+            },
+        },
+        watch: {
+            $route(to, from) {
+                // clear alert on location change
+                this.$store.dispatch('alert/clear');
+            },
+        },
         data() {
             return {
                 hideLayout: false,

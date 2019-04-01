@@ -9,7 +9,7 @@ import Login from '@/views/Login.vue';
 
 export default [
     {
-        path: '/dashboard',
+        path: '/',
         name: 'Dashboard',
         component: Dashboard,
     },
@@ -47,5 +47,9 @@ export default [
         path: '/login',
         name: 'Login',
         component: Login,
+    },
+    {
+        path: '*',
+        redirect: '/',
     },
 ];
