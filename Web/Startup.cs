@@ -1,20 +1,22 @@
 ﻿using System;
-using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Dapper;
 using Domain;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Persistence.Configuration;
 using Persistence.Seeding;
 using Services;
-using Web.Auth;
+using Services.Helpers;
 using Web.Config;
 
 namespace Web
@@ -28,9 +30,9 @@ namespace Web
             _env = env;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
         private AppConfig AppConfig { get; }
-        public static IContainer ApplicationContainer { get; private set; }
+        private static IContainer ApplicationContainer { get; set; }
         private readonly IHostingEnvironment _env;
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -39,43 +41,12 @@ namespace Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = _env.IsDevelopment() ? SameSiteMode.None : SameSiteMode.Strict;
-            });
             
-            services.AddAuthentication(o =>
-                {
-                    o.DefaultScheme = AuthHandler.AuthName;
-                })
-                .AddAuth(o => { });
-            
-            services.AddAuthorization(o =>
-            {
-                o.AddPolicy("Admin", p => p.RequireAssertion(c =>
-                {
-                    var claim = c.User.FindFirst(ClaimTypes.Role);
-                    if (claim == null) return false;
-
-                    if (Enum.TryParse(claim.Value, out UserRole userRole))
-                        return userRole >= UserRole.Admin;
-
-                    return false;
-                }));
-                
-                o.AddPolicy("Standard", p => p.RequireAssertion(c =>
-                {
-                    var claim = c.User.FindFirst(ClaimTypes.Role);
-                    if (claim == null) return false;
-
-                    if (Enum.TryParse(claim.Value, out UserRole userRole))
-                        return userRole >= UserRole.Standard;
-
-                    return false;
-                }));
-            });
+            // services.Configure<CookiePolicyOptions>(options =>
+            // {
+            //     options.CheckConsentNeeded = context => true;
+            //     options.MinimumSameSitePolicy = _env.IsDevelopment() ? SameSiteMode.None : SameSiteMode.Strict;
+            // });
            
             services.AddScoped(c =>
             {
@@ -84,15 +55,43 @@ namespace Web
                 return user ?? UserIdentity.NoUser;
             });
             
-            services.AddSession(options =>
+            services.AddCors(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
-                options.Cookie.Name = "Auth";
-                options.Cookie.HttpOnly = true;
-                options.Cookie.SecurePolicy =
-                    _env.IsDevelopment() ? CookieSecurePolicy.None : CookieSecurePolicy.Always;
-                options.Cookie.SameSite = _env.IsDevelopment() ? SameSiteMode.None : SameSiteMode.Strict;
+                options.AddPolicy("VueCorsPolicy", policy =>
+                {
+                    policy
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                        .WithOrigins("https://localhost:8080");
+                });
             });
+            
+            // configure strongly typed settings objects
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AppSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
             
             var builder = new ContainerBuilder();
             builder.Populate(services);
@@ -107,24 +106,13 @@ namespace Web
             DefaultTypeMap.MatchNamesWithUnderscores = true;
             InitialiseDatabase(AppConfig.SeedSettings, env).Wait();
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/error");
-                app.UseHttpsRedirection();
-            }
-            
-            app.UseStatusCodePagesWithRedirects("/error/index/{0}");
 
-            app.UseCookiePolicy();
-            app.UseSession();
+            // app.UseCookiePolicy();
             app.UseAuthentication();
+            app.UseCors("VueCorsPolicy");
             
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc();
         }
         
         private static async Task InitialiseDatabase(SeedSettings seedSettings, IHostingEnvironment env)
