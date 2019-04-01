@@ -32,4 +32,10 @@
       <Folder Include="Vue" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\js\Dashboard\Admin.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\UpdateContactDetails\UpdateContactDetails.js" />
+    </ItemGroup>
+
 </Project>

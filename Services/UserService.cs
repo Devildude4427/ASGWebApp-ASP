@@ -18,7 +18,6 @@ namespace Services
             _user = user;
         }
 
-
         public async Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest)
         {
             if (!_user.IsAuthorisedAtLevel(UserRole.Admin))
