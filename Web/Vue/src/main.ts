@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import App from '@/App.vue';
-import router from '@/router/router';
-// @ts-ignore
-import store from '@/store';
+import { router } from '@/router/router';
+import { store } from '@/store';
 
 import '@/components';
 import '@/plugins';
