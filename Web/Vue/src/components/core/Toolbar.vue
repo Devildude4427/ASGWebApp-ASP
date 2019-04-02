@@ -93,12 +93,12 @@
             onClick() {
                 axios.post('https://localhost:5000/api/v1/auth/logout')
                     .then((response) => {
-                        console.log(response);
+                        // console.log(response);
                         if (response.statusText === 'OK') {
                             window.location.href = `/dashboard`;
                         }
                     }).catch((error) => {
-                        console.log(error);
+                        // console.log(error);
                     });
             },
             onResponsiveInverted() {

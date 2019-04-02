@@ -40,7 +40,8 @@ function getAll() {
     return fetch(`https://localhost:5000/users`, requestOptions).then(handleResponse);
 }
 
-function handleResponse(response: { text: () => { then: (arg0: (text: any) => any) => void; }; ok: any; status: number; statusText: any; }) {
+function handleResponse(response: { text: () => { then: (arg0: (text: any) => any)
+            => void; }; ok: any; status: number; statusText: any; }) {
     return response.text().then((text) => {
         const data = text && JSON.parse(text);
         if (!response.ok) {
