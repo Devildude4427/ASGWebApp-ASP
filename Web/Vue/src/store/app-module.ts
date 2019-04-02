@@ -1,6 +1,7 @@
 import {set, toggle} from '@/utils/vuex';
 
 export const app = {
+    namespaced: true,
     state: {
         drawer: null,
         color: 'success',

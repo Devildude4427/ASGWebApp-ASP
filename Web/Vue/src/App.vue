@@ -43,7 +43,6 @@
         beforeMount() {
             if (this.$route.name === 'Login') {
                 this.showLayout = false;
-                console.log("Hide layout: " + this.showLayout);
             }
         },
     };
