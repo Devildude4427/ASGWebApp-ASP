@@ -7,25 +7,22 @@ export const userService = {
     // getAll,
 };
 
-function login(email: string, password: string) {
+async function login(email: string, password: string) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ Email: email, Password: password }),
     };
 
-    return fetch(`https://localhost:5000/api/v1/auth/login`, requestOptions)
-        .then(handleResponse)
-        .then((user) => {
-            // login successful if there's a jwt token in the response
-            // @ts-ignore
-            if (user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-            }
-
-            return user;
-        });
+    const response = await fetch(`https://localhost:5000/api/v1/auth/login`, requestOptions);
+    const user = await handleResponse(response);
+    // login successful if there's a jwt token in the response
+    // @ts-ignore
+    if (user.token) {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('user', JSON.stringify(user));
+    }
+    return user;
 }
 
 function logout() {
@@ -43,7 +40,8 @@ function getAll() {
     return fetch(`https://localhost:5000/users`, requestOptions).then(handleResponse);
 }
 
-function handleResponse(response: { text: () => { then: (arg0: (text: any) => any) => void; }; ok: any; status: number; statusText: any; }) {
+function handleResponse(response: { text: () => { then: (arg0: (text: any) => any)
+            => void; }; ok: any; status: number; statusText: any; }) {
     return response.text().then((text) => {
         const data = text && JSON.parse(text);
         if (!response.ok) {

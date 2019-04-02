@@ -1,5 +1,6 @@
 import Dashboard from '@/views/Dashboard.vue';
 import UserProfile from '@/views/UserProfile.vue';
+import UpdateContact from '@/views/UpdateContactDetails.vue';
 import TableList from '@/views/TableList.vue';
 import Typography from '@/views/Typography.vue';
 import Icons from '@/views/Icons.vue';
@@ -17,6 +18,11 @@ export default [
         path: '/user-profile',
         name: 'User Profile',
         component: UserProfile,
+    },
+    {
+        path: '/update-contact',
+        name: 'Update Contact Details',
+        component: UpdateContact,
     },
     {
         path: '/table-list',
