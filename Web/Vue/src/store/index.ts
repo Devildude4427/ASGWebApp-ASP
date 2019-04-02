@@ -4,10 +4,7 @@ import Vuex from 'vuex';
 import { alert } from '@/store/alert-module';
 import { authentication } from '@/store/authentication-module';
 import { users } from '@/store/users-module';
-
-// TODO decide whether or not I need this
-// @ts-ignore
-import { modules } from '@/store/modules';
+import { app } from '@/store/app-module';
 
 Vue.use(Vuex);
 
@@ -16,6 +13,6 @@ export const store = new Vuex.Store({
         alert,
         authentication,
         users,
-        modules,
+        app,
     },
 });

@@ -1,10 +1,10 @@
 <template>
     <v-app>
-        <core-filter v-if="hideLayout"></core-filter>
+        <core-filter v-if="showLayout"></core-filter>
 
-        <core-toolbar v-if="hideLayout"></core-toolbar>
+        <core-toolbar v-if="showLayout"></core-toolbar>
 
-        <core-drawer v-if="hideLayout"></core-drawer>
+        <core-drawer v-if="showLayout"></core-drawer>
 
         <core-view></core-view>
 
@@ -37,12 +37,12 @@
         },
         data() {
             return {
-                hideLayout: false,
+                showLayout: true,
             };
         },
         beforeMount() {
-            if (this.$route.name !== 'Login') {
-                this.hideLayout = true;
+            if (this.$route.name === 'Login') {
+                this.showLayout = false;
             }
         },
     };

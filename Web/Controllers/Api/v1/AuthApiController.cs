@@ -44,7 +44,7 @@ namespace Web.Controllers.Api.v1
                 return Json(new {Success = false, Response = result.LoginResponse, result.User?.Email});
             
             // Response.WithCredentials(result.User);
-            return Json(new {Success = true, result});
+            return Ok(result.User);
         }
 
         [HttpPost("logout")]
