@@ -3,7 +3,7 @@
 const requireModule = require.context('.', true, /\.js$/);
 export const modules = {};
 
-requireModule.keys().forEach(fileName => {
+requireModule.keys().forEach((fileName) => {
   if (fileName === './index.ts') return;
 
   // Replace ./ and .js
@@ -13,7 +13,7 @@ requireModule.keys().forEach(fileName => {
   if (!modules[moduleName]) {
     modules[moduleName] = {
       namespaced: true,
-    }
+    };
   }
 
   modules[moduleName][imported] = requireModule(fileName).default;
