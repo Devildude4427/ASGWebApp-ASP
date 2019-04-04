@@ -1,39 +1,19 @@
 <template>
-  <v-container
-    fill-height
-    fluid
-    style="flex-wrap: wrap;"
-  >
+  <v-container fill-height fluid style="flex-wrap: wrap;">
     <material-card color="green">
-      <div
-        slot="header"
-      >
+      <div slot="header">
         <div class="title font-weight-light mb-2">Material Design Icons</div>
         <div class="category font-weight-thin">
           See all available
-          <a
-            class="white--text"
-            href="https://materialdesignicons.com/"
-            target="_blank"
-          >
+          <a class="white--text" href="https://materialdesignicons.com/" target="_blank">
             Icons
           </a>
         </div>
       </div>
 
-      <v-layout
-        align-center
-        justify-center
-        wrap
-      >
-        <v-flex
-          v-for="icon in icons"
-          :key="icon"
-          ma-2
-        >
-          <v-tooltip
-            top
-            content-class="top">
+      <v-layout align-center justify-center wrap>
+        <v-flex v-for="icon in icons" :key="icon" ma-2>
+          <v-tooltip top content-class="top">
             <v-icon slot="activator">
               {{ icon }}
             </v-icon>
@@ -44,14 +24,8 @@
     </material-card>
 
     <div class="mx-auto">
-      <v-btn
-        large
-        class="mx-0 font-weight-light"
-        color="success"
-        href="https://materialdesignicons.com/"
-        target="_blank"
-        round
-      >
+      <v-btn large class="mx-0 font-weight-light" color="success"
+             href="https://materialdesignicons.com/" target="_blank" round>
         <v-icon left>mdi-material-design</v-icon>
         <span>See all icons</span>
       </v-btn>

@@ -5,7 +5,7 @@
                 <v-btn v-if="responsive" class="default v-btn--simple" dark icon @click.stop="onClickBtn">
                     <v-icon>mdi-view-list</v-icon>
                 </v-btn>
-                {{ title }}
+                {{ this.$route.name }}
             </v-toolbar-title>
         </div>
 
@@ -75,11 +75,9 @@
             responsive: false,
             responsiveInput: false,
         }),
-
         mounted() {
             this.onResponsiveInverted();
             window.addEventListener('resize', this.onResponsiveInverted);
-            this.title = this.$route.name;
         },
         beforeDestroy() {
             window.removeEventListener('resize', this.onResponsiveInverted);
