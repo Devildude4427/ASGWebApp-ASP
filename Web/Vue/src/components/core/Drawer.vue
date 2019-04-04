@@ -14,7 +14,7 @@
                 <v-list-tile v-if="responsive">
                     <v-text-field class="purple-input search-input" label="Search..." color="purple"></v-text-field>
                 </v-list-tile>
-                
+
                 <div v-for="(link, i) in links" :key="i">
                     <v-list-tile v-if="!link.subLinks" :to="link.to" :active-class="color" avatar class="v-list-item">
                         <v-list-tile-action>
