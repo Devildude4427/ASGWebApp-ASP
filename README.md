@@ -21,55 +21,24 @@ PostgreSQL
 
 To run the web server on localhost, you will need a local PostgreSQL Database and .Net Core 2.2 installed. I have my PostgreSQL DB running on port 5432 using the credentials user: postgres password: admin, though these settings can be tweaked in ~/Persistence/Configuration/DatabaseConnectionHandler.cs.
 
-With a DB running, just navigate to ~/Web and run
+With a DB running, navigate to ~/Web and run
 
 ```
 dotnet run
 ```
 
-Navigate in to https://localhost:5001/login in your browser of choice to begin using the system. There are 6 default accounts in the system, 2 admin, 4 candidate, and all use the password "pass". Login with admin@asg.com, admin2@asg.com, candidate@asg.com, ..., candidate4@asg.com
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+and then to ~/Web/Vue 
 
 ```
-Give an example
+npm install
+npm run serve
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Navigate to https://localhost:8080/login in your browser of choice to begin using the system. As of now, the content is quite limited as I continue to learn how to really use APIs, SPAs, different tools like Webpack and Axios, and lite languages like SASS and Typescript.
 
 ## Authors
 
-* **DevilDude4427** - *Entire Project* - [Devildude4427](https://github.com/Devildude4427)
+* **Ryan Christian** - *Entire Project* - [Ryan Christian](https://github.com/RyanChristian4427)
 
 ## License
 
