@@ -1,6 +1,8 @@
 # ASGWebApp-ASP ![Azure DevOps builds](https://img.shields.io/azure-devops/build/ryanchristian4427/41e401ef-1612-4af8-9903-694ad7fe606a/1.svg?style=popout)
 
-This project is a rewrite of my ASGWebApp that was a client project from university. For that project, we met with a client who requested a web server and a relational database to replace his previous booking and progress system that was handled in Excel. That was written in Spring Boot using MySQL as the database system. This project however is a complete rewrite. I am using ASP .Net Core as the framework, and PostgreSQL as the database. In addition, this project is being written with a RESTful API (somehting I've never done before) so that it can be integrated with a mobile app (undecided as to whether it should be plain Android or Xamarin) as well as Vue for the front end for the web.
+This project is a rewrite of my ASGWebApp that was a client project from university. For that project, we met with a client who requested a web server and a relational database to replace his previous booking and progress system that was handled in Excel. The project we built was written in Spring Boot using MySQL as the database system. However, I had wanted to try out other technologies, and redoing a project was the simplest solution.
+
+Here I am using ASP.NET Core as the framework, and PostgreSQL as the database. In addition, this project is being written with as a RESTful API (somehting I've never done before) so that it can be integrated with a mobile app (undecided as to whether it should be plain Android or Xamarin) and consumed with a Vue.js SPA. 
 
 ## Getting Started
 
