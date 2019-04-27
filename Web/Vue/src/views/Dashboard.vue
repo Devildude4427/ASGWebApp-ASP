@@ -58,8 +58,8 @@
                 </material-stats-card>
             </v-flex>
             <v-flex sm6 xs12 md6 lg3>
-                <material-stats-card  color="info" icon="mdi-twitter" title="Followers" value="+245"
-                                      sub-icon="mdi-update" sub-text="Just Updated">
+                <material-stats-card color="info" icon="mdi-twitter" title="Followers" value="+245"
+                                     sub-icon="mdi-update" sub-text="Just Updated">
                 </material-stats-card>
             </v-flex>
             <v-flex md12 lg6>

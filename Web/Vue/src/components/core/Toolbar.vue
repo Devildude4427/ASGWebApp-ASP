@@ -51,8 +51,6 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
     import {
         mapMutations,
     } from 'vuex';
@@ -89,15 +87,9 @@
                 this.setDrawer(!this.$store.state.app.drawer);
             },
             onClick() {
-                axios.post('https://localhost:5000/api/v1/auth/logout')
-                    .then((response) => {
-                        // console.log(response);
-                        if (response.statusText === 'OK') {
-                            window.location.href = `/dashboard`;
-                        }
-                    }).catch((error) => {
-                        // console.log(error);
-                    });
+                this.$store.dispatch('authentication/logout');
+                this.$router.push({name: 'Dashboard'});
+                location.reload();
             },
             onResponsiveInverted() {
                 if (window.innerWidth < 991) {

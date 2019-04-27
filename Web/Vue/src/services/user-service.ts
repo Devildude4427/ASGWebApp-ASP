@@ -14,7 +14,7 @@ async function login(email: string, password: string) {
         body: JSON.stringify({ Email: email, Password: password }),
     };
 
-    const response = await fetch(`https://localhost:5000/api/v1/auth/login`, requestOptions);
+    const response = await fetch(`https://localhost:5000/api/v1/auth/authenticate`, requestOptions);
     const user = await handleResponse(response);
     // login successful if there's a jwt token in the response
     // @ts-ignore
