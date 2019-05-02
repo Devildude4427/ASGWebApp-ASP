@@ -32,8 +32,8 @@ namespace Web.Controllers.Api.v1
         }
 
         [AllowAnonymous]
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+        [HttpPost("authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody] LoginRequest loginRequest)
         {
             if (_user.IsAuthenticated)
                 return Json(new { Success = false, Response = LoginResponse.AlreadyLoggedIn});
@@ -44,14 +44,7 @@ namespace Web.Controllers.Api.v1
                 return Json(new {Success = false, Response = result.LoginResponse, result.User?.Email});
             
             // Response.WithCredentials(result.User);
-            return Json(new {Success = true, result});
-        }
-
-        [HttpPost("logout")]
-        public IActionResult Logout()
-        {
-            Response.DeleteCredentials();
-            return Json(new {Success = true});
+            return Ok(result.User);
         }
         
         [AllowAnonymous]
