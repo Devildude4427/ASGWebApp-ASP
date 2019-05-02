@@ -18,10 +18,10 @@
                 </material-chart-card>
             </v-flex>
             <v-flex md12 sm12 lg4>
-                <material-chart-card :data="emailsSubscriptionChart.data" :options="emailsSubscriptionChart.options"
-                                     :responsive-options="emailsSubscriptionChart.responsiveOptions" color="red" type="Bar">
-                    <h4 class="title font-weight-light">Email Subscription</h4>
-                    <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>
+                <material-chart-card :data="candidatesActiveChart.data" :options="candidatesActiveChart.options"
+                                     :responsive-options="candidatesActiveChart.responsiveOptions" color="red" type="Bar">
+                    <h4 class="title font-weight-light">Candidates Active</h4>
+<!--                    <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>-->
 
                     <template slot="actions">
                         <v-icon class="mr-2" small>mdi-clock-outline</v-icon>
@@ -71,9 +71,8 @@
                         <template slot="items" slot-scope="{ index, item }">
                             <td>{{ index + 1 }}</td>
                             <td>{{ item.name }}</td>
-                            <td class="text-xs-right">{{ item.salary }}</td>
-                            <td class="text-xs-right">{{ item.country }}</td>
-                            <td class="text-xs-right">{{ item.city }}</td>
+                            <td>{{ item.course }}</td>
+                            <td>{{ item.city }}</td>
                         </template>
                     </v-data-table>
                 </material-card>
@@ -211,30 +210,7 @@
                         },
                     },
                 },
-
-                dataCompletedTasksChart: {
-                    data: {
-                        labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-                        series: [
-                            [230, 750, 450, 300, 280, 240, 200, 190],
-                        ],
-                    },
-                    options: {
-                        lineSmooth: this.$chartist.Interpolation.cardinal({
-                            tension: 0,
-                        }),
-                        low: 0,
-                        high: 1000, // creative tim: we recommend you to set the high sa the biggest value
-                        // + something for a better look
-                        chartPadding: {
-                            top: 0,
-                            right: 0,
-                            bottom: 0,
-                            left: 0,
-                        },
-                    },
-                },
-                emailsSubscriptionChart: {
+                candidatesActiveChart: {
                     data: {
                         labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
                         series: [
@@ -263,6 +239,28 @@
                         }],
                     ],
                 },
+                dataCompletedTasksChart: {
+                    data: {
+                        labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
+                        series: [
+                            [230, 750, 450, 300, 280, 240, 200, 190],
+                        ],
+                    },
+                    options: {
+                        lineSmooth: this.$chartist.Interpolation.cardinal({
+                            tension: 0,
+                        }),
+                        low: 0,
+                        high: 1000, // creative tim: we recommend you to set the high sa the biggest value
+                        // + something for a better look
+                        chartPadding: {
+                            top: 0,
+                            right: 0,
+                            bottom: 0,
+                            left: 0,
+                        },
+                    },
+                },
                 headers: [
                     {
                         sortable: false,
@@ -276,50 +274,37 @@
                     },
                     {
                         sortable: false,
-                        text: 'Salary',
-                        value: 'salary',
-                        align: 'right',
-                    },
-                    {
-                        sortable: false,
-                        text: 'Country',
-                        value: 'country',
-                        align: 'right',
+                        text: 'Course',
+                        value: 'course',
                     },
                     {
                         sortable: false,
                         text: 'City',
                         value: 'city',
-                        align: 'right',
                     },
                 ],
                 items: [
                     {
                         name: 'Dakota Rice',
-                        country: 'Niger',
-                        city: 'Oud-Tunrhout',
-                        salary: '$35,738',
+                        city: 'Cardiff',
+                        course: 'Flight School',
                     },
                     {
                         name: 'Minerva Hooper',
-                        country: 'Curaçao',
-                        city: 'Sinaai-Waas',
-                        salary: '$23,738',
+                        city: 'Somerset',
+                        course: 'Ground School',
                     }, {
                         name: 'Sage Rodriguez',
-                        country: 'Netherlands',
-                        city: 'Overland Park',
-                        salary: '$56,142',
+                        city: 'Dorset',
+                        course: 'Flight Assessment',
                     }, {
                         name: 'Philip Chanley',
-                        country: 'Korea, South',
-                        city: 'Gloucester',
-                        salary: '$38,735',
+                        city: 'Aberdeen',
+                        course: 'Ground School',
                     }, {
                         name: 'Doris Greene',
-                        country: 'Malawi',
-                        city: 'Feldkirchen in Kārnten',
-                        salary: '$63,542',
+                        city: 'Cardiff',
+                        course: 'Operators Manual',
                     },
                 ],
                 tabs: 0,
