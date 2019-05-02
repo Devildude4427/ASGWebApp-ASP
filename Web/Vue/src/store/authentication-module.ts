@@ -19,6 +19,7 @@ export const authentication = {
                         // console.log('Login success');
                         commit('loginSuccess', user);
                         router.push({name: 'Dashboard'});
+                        location.reload();
                     },
                     (error) => {
                         commit('loginFailure', error);

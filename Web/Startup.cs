@@ -63,7 +63,7 @@ namespace Web
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials()
-                        .WithOrigins("https://localhost:8080");
+                        .WithOrigins("http://localhost:8080");
                 });
             });
             

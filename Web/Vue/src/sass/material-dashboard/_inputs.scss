@@ -9,7 +9,7 @@
 .v-text-field__slot {
   input {
     @include material-placeholder{
-      color: $input-color;
+      color: $brand-primary !important;
     };
   }
 
@@ -20,15 +20,17 @@
   }
 }
 
+//TODO find out how to fix icon color in password field
+
 .theme--light.v-input:not(.v-input--is-disabled) input,
 .theme--light.v-input:not(.v-input--is-disabled) textarea {
   color: $black-color;
   font-size: $font-size-default;
 }
 
-@include inputs-color($brand-primary, 'purple');
+@include inputs-color($brand-primary, 'blue');
 @include inputs-color($brand-warning, 'orange');
 @include inputs-color($brand-info, 'info');
 @include inputs-color($brand-danger, 'danger');
-@include inputs-color($brand-success, 'success');
-@include inputs-color($brand-success, 'primary');
+//@include inputs-color($brand-success, 'success');
+//@include inputs-color($brand-success, 'primary');

@@ -5,7 +5,7 @@
                 <v-btn v-if="responsive" class="default v-btn--simple" dark icon @click.stop="onClickBtn">
                     <v-icon>mdi-view-list</v-icon>
                 </v-btn>
-                {{ title }}
+                {{ this.$route.name }}
             </v-toolbar-title>
         </div>
 
@@ -51,8 +51,6 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
     import {
         mapMutations,
     } from 'vuex';
@@ -75,11 +73,9 @@
             responsive: false,
             responsiveInput: false,
         }),
-
         mounted() {
             this.onResponsiveInverted();
             window.addEventListener('resize', this.onResponsiveInverted);
-            this.title = this.$route.name;
         },
         beforeDestroy() {
             window.removeEventListener('resize', this.onResponsiveInverted);
@@ -91,15 +87,9 @@
                 this.setDrawer(!this.$store.state.app.drawer);
             },
             onClick() {
-                axios.post('https://localhost:5000/api/v1/auth/logout')
-                    .then((response) => {
-                        console.log(response);
-                        if (response.statusText === 'OK') {
-                            window.location.href = `/dashboard`;
-                        }
-                    }).catch((error) => {
-                        console.log(error);
-                    });
+                this.$store.dispatch('authentication/logout');
+                this.$router.push({name: 'Dashboard'});
+                location.reload();
             },
             onResponsiveInverted() {
                 if (window.innerWidth < 991) {
