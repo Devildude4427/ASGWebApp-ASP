@@ -6,7 +6,7 @@ module.exports = {
             "Access-Control-Allow-Origin": "*",
         },
         host: "localhost",
-        https: true,
+        // https: true,
         port: 8080,
     },
 };
