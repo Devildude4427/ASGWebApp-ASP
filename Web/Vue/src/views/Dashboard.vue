@@ -2,12 +2,12 @@
     <v-container fill-height fluid grid-list-xl>
         <v-layout wrap>
             <v-flex md12 sm12 lg4>
-                <material-chart-card :data="dailySalesChart.data" :options="dailySalesChart.options" color="info" type="Line">
-                    <h1>Hi {{user.Name}}!</h1>
-                    <h4 class="title font-weight-light">Daily Sales</h4>
+                <material-chart-card :data="dailyCourseRegistration.data" :options="dailyCourseRegistration.options" color="info" type="Line">
+                    <h1>Hi {{user.name}}!</h1>
+                    <h4 class="title font-weight-light">Daily Course Registration</h4>
                     <p class="category d-inline-flex font-weight-light">
                         <v-icon color="green" small>mdi-arrow-up</v-icon>
-                        <span class="green--text">55%</span>&nbsp;
+                        <span class="green--text"> {{dailyCourseRegistrationPercentIncrease()}}%</span>&nbsp;
                         increase in today's sales
                     </p>
 
@@ -185,10 +185,11 @@
             user() {
                 return this.$store.state.authentication.user;
             },
+
         },
         data() {
             return {
-                dailySalesChart: {
+                dailyCourseRegistration: {
                     data: {
                         labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
                         series: [
@@ -210,6 +211,7 @@
                         },
                     },
                 },
+
                 dataCompletedTasksChart: {
                     data: {
                         labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
@@ -331,6 +333,9 @@
         methods: {
             complete(index) {
                 this.list[index] = !this.list[index];
+            },
+            dailyCourseRegistrationPercentIncrease() {
+                return Math.round(100.00 - (this.dailyCourseRegistration.data.series[0][5] / this.dailyCourseRegistration.data.series[0][6]) * 100.00)
             },
         },
     };
