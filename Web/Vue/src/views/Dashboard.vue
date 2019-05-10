@@ -63,7 +63,7 @@
                 </material-stats-card>
             </v-flex>
             <v-flex md12 lg6>
-                <material-card color="orange" title="Employee Stats" text="New employees on 15th September, 2016">
+                <material-card color="teal" title="Instructor Assignments" text="Instructor Assignments. Last Updated">
                     <v-data-table :headers="headers" :items="items" hide-actions>
                         <template slot="headerCell" slot-scope="{ header }">
                             <span class="font-weight-light text-warning text--darken-3" v-text="header.text"></span>
@@ -263,22 +263,22 @@
                 },
                 headers: [
                     {
-                        sortable: false,
+                        sortable: true,
                         text: 'ID',
                         value: 'id',
                     },
                     {
-                        sortable: false,
+                        sortable: true,
                         text: 'Name',
                         value: 'name',
                     },
                     {
-                        sortable: false,
+                        sortable: true,
                         text: 'Course',
                         value: 'course',
                     },
                     {
-                        sortable: false,
+                        sortable: true,
                         text: 'City',
                         value: 'city',
                     },
@@ -320,7 +320,8 @@
                 this.list[index] = !this.list[index];
             },
             dailyCourseRegistrationPercentIncrease() {
-                return Math.round(100.00 - (this.dailyCourseRegistration.data.series[0][5] / this.dailyCourseRegistration.data.series[0][6]) * 100.00)
+                return Math.round(100.00 - (this.dailyCourseRegistration.data.series[0][5]
+                    / this.dailyCourseRegistration.data.series[0][6]) * 100.00);
             },
         },
     };

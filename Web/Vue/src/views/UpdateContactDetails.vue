@@ -40,7 +40,7 @@
 </template>
 
 <script>
-  const test = "test";
+const test = 'test';
 export default {
   methods: {
     handleSubmit(e) {
