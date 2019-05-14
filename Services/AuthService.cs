@@ -31,22 +31,22 @@ namespace Services
             if (user == null)
                 return new UserResponse(LoginResponse.UserNonExistent);
             
-            CreateAuthToken(user);
+            var jwtToken = CreateAuthToken(user);
 
             if (!user.Activated)
-                return new UserResponse(user, LoginResponse.UserNotActivated);
+                return new UserResponse(LoginResponse.UserNotActivated);
 
             var hashedPassword = await _userRepository.GetHashedPassword(email);
             if (!Hashing.PasswordsMatch(password, hashedPassword))
-                return new UserResponse(user, LoginResponse.IncorrectPassword);
+                return new UserResponse(LoginResponse.IncorrectPassword);
 
-            return !user.Enabled ? new UserResponse(user, LoginResponse.UserDisabled) :
-                new UserResponse(user, LoginResponse.Successful);
+            return !user.Enabled ? new UserResponse(LoginResponse.UserDisabled) :
+                new UserResponse(jwtToken, LoginResponse.Successful);
         }
         
         private async Task<User> GetUserIfValid(string email) => await _userRepository.FindByEmail(email);
 
-        private void CreateAuthToken(User user)
+        private string CreateAuthToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -54,13 +54,15 @@ namespace Services
             {
                 Subject = new ClaimsIdentity(new[] 
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Role, user.Role.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(0.5),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
+            return tokenHandler.WriteToken(token);
         }
 
         public async Task<UserResponse> Register(RegistrationRequest registrationRequest) =>
@@ -82,13 +84,13 @@ namespace Services
     
     public class UserResponse
     {
-        public User User { get; }
+        public string JwtToken { get; }
         public LoginResponse LoginResponse { get; }
         public UserRegistrationResponse UserRegistrationResponse { get; }
 
-        public UserResponse(User user, LoginResponse loginResponse)
+        public UserResponse(string jwtToken, LoginResponse loginResponse)
         {
-            User = user;
+            JwtToken = jwtToken;
             LoginResponse = loginResponse;
         }
 
