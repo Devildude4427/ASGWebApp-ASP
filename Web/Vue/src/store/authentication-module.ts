@@ -1,10 +1,10 @@
 import { userService } from '@/services';
 import { router } from '@/router/router';
 
-const user = JSON.parse(localStorage.getItem('user') || '{}');
-const initialState = user
-    ? { status: { loggedIn: true }, user }
-    : { status: {}, user: null };
+const token = localStorage.getItem('jwtToken');
+const initialState = token
+    ? { status: { loggedIn: true }, token }
+    : { status: {}, token: null };
 
 export const authentication = {
     namespaced: true,
@@ -15,9 +15,8 @@ export const authentication = {
 
             userService.login(email, password)
                 .then(
-                    (user) => {
-                        // console.log('Login success');
-                        commit('loginSuccess', user);
+                    (response) => {
+                        commit('loginSuccess', response.jwtToken);
                         router.push({name: 'Dashboard'});
                         location.reload();
                     },
@@ -33,21 +32,21 @@ export const authentication = {
         },
     },
     mutations: {
-        loginRequest(state: { status: { loggingIn: boolean; }; user: any; }, user: any) {
+        loginRequest(state: { status: { loggingIn: boolean; }; token: any; }, jwtToken: string) {
             state.status = { loggingIn: true };
-            state.user = user;
+            state.token = jwtToken;
         },
-        loginSuccess(state: { status: { loggedIn: boolean; }; user: any; }, user: any) {
+        loginSuccess(state: { status: { loggedIn: boolean; }; token: string; }, jwtToken: string) {
             state.status = { loggedIn: true };
-            state.user = user;
+            state.token = jwtToken;
         },
-        loginFailure(state: { status: {}; user: null; }) {
+        loginFailure(state: { status: {}; token: null; }) {
             state.status = {};
-            state.user = null;
+            state.token = null;
         },
-        logout(state: { status: {}; user: null; }) {
+        logout(state: { status: {}; token: null; }) {
             state.status = {};
-            state.user = null;
+            state.token = null;
         },
     },
 };

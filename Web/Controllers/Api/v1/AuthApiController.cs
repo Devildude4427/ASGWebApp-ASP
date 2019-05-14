@@ -40,11 +40,11 @@ namespace Web.Controllers.Api.v1
 
             var result = await _authService.Login(loginRequest.Email, loginRequest.Password);
 
-            if (result.LoginResponse != LoginResponse.Successful)
-                return Json(new {Success = false, Response = result.LoginResponse, result.User?.Email});
+            return result.LoginResponse != LoginResponse.Successful
+                ? Json(new {Success = false, Response = result.LoginResponse})
+                : Json(new {Success = true, result.JwtToken});
             
             // Response.WithCredentials(result.User);
-            return Ok(result.User);
         }
         
         [AllowAnonymous]
