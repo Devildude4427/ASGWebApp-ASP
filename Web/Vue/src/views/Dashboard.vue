@@ -3,7 +3,7 @@
         <v-layout wrap>
             <v-flex md12 sm12 lg4>
                 <material-chart-card :data="dailyCourseRegistration.data" :options="dailyCourseRegistration.options" color="info" type="Line">
-                    <h1>Hi {{user.name}}!</h1>
+                    <h1>Hi {{user.unique_name}}!</h1>
                     <h4 class="title font-weight-light">Daily Course Registration</h4>
                     <p class="category d-inline-flex font-weight-light">
                         <v-icon color="green" small>mdi-arrow-up</v-icon>
@@ -182,7 +182,7 @@
     export default {
         computed: {
             user() {
-                return this.$store.state.authentication.user;
+                return this.$jwt.decode(this.$store.state.authentication.token);
             },
 
         },
