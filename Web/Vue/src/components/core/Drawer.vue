@@ -117,6 +117,11 @@
                 return this.$t('Layout.View.items');
             },
         },
+        beforeMount() {
+            if (this.$route.name === 'Login') {
+                this.showLayout = false;
+            }
+        },
         mounted() {
             this.onResponsiveInverted();
             window.addEventListener('resize', this.onResponsiveInverted);
