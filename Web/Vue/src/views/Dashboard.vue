@@ -179,6 +179,7 @@
 </template>
 
 <script>
+    import { FETCH_USERS } from '../store/actions-type';
     export default {
         computed: {
             user() {
@@ -320,16 +321,10 @@
                 this.list[index] = !this.list[index];
             },
             dailyCourseRegistrationPercentIncrease() {
-                this.test();
+                console.log(this.$store.dispatch(FETCH_USERS));
                 return Math.round(100.00 - (this.dailyCourseRegistration.data.series[0][5]
                     / this.dailyCourseRegistration.data.series[0][6]) * 100.00);
             },
-           test() {
-                this.axios.get('/user').
-                then(({ data }) => {
-                   console.log(data)
-               })
-           }
         },
     };
 </script>
