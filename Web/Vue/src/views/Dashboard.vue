@@ -320,9 +320,16 @@
                 this.list[index] = !this.list[index];
             },
             dailyCourseRegistrationPercentIncrease() {
+                this.test();
                 return Math.round(100.00 - (this.dailyCourseRegistration.data.series[0][5]
                     / this.dailyCourseRegistration.data.series[0][6]) * 100.00);
             },
+           test() {
+                this.axios.get('/user').
+                then(({ data }) => {
+                   console.log(data)
+               })
+           }
         },
     };
 </script>
