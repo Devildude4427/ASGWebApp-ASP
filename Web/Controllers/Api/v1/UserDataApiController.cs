@@ -17,13 +17,13 @@ namespace Web.Controllers.Api.v1
             _candidateService = candidateService;
         }
 
-        // [HttpGet]
-        // public async Task<IActionResult> Find()
-        // {
-        //     var filteredPageRequest = Request.FilteredPageRequest("id", true);
-        //     var result = await _userService.Find(filteredPageRequest);
-        //     return Json(result);
-        // }
+        [HttpGet]
+        public async Task<IActionResult> Find()
+        {
+            var filteredPageRequest = Request.FilteredPageRequest("id", true);
+            var result = await _userService.Find(filteredPageRequest);
+            return Json(result);
+        }
         
         // [HttpGet("{id:long}")]
         // public async Task<IActionResult> FindCandidateByUserId(long id)
@@ -32,12 +32,12 @@ namespace Web.Controllers.Api.v1
         //     return Json(result);
         // }
         
-        [HttpGet]
-        public async Task<IActionResult> GetCurrentCandidate()
-        {
-            //TODO this return the entire row from candidate, FIX!!!!
-            var result = await _candidateService.FindByUserId();
-            return Json(result);
-        }
+        // [HttpGet]
+        // public async Task<IActionResult> GetCurrentCandidate()
+        // {
+        //     //TODO this return the entire row from candidate, FIX!!!!
+        //     var result = await _candidateService.FindByUserId();
+        //     return Json(result);
+        // }
     }
 }
