@@ -11,10 +11,10 @@
                         increase in today's sales
                     </p>
 
-                    <template slot="actions">
-                        <v-icon class="mr-2" small>mdi-clock-outline</v-icon>
-                        <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
-                    </template>
+<!--                    <template slot="actions">-->
+<!--                        <v-icon class="mr-2" small>mdi-clock-outline</v-icon>-->
+<!--                        <span class="caption grey&#45;&#45;text font-weight-light">updated 4 minutes ago</span>-->
+<!--                    </template>-->
                 </material-chart-card>
             </v-flex>
             <v-flex md12 sm12 lg4>
@@ -23,10 +23,10 @@
                     <h4 class="title font-weight-light">Candidates Active</h4>
 <!--                    <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>-->
 
-                    <template slot="actions">
-                        <v-icon class="mr-2" small>mdi-clock-outline</v-icon>
-                        <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
-                    </template>
+<!--                    <template slot="actions">-->
+<!--                        <v-icon class="mr-2" small>mdi-clock-outline</v-icon>-->
+<!--                        <span class="caption grey&#45;&#45;text font-weight-light">updated 10 minutes ago</span>-->
+<!--                    </template>-->
                 </material-chart-card>
             </v-flex>
             <v-flex md12 sm12 lg4>
@@ -35,10 +35,10 @@
                     <h3 class="title font-weight-light">Completed Tasks</h3>
                     <p class="category d-inline-flex font-weight-light">Last Last Campaign Performance</p>
 
-                    <template slot="actions">
-                        <v-icon class="mr-2" small>mdi-clock-outline</v-icon>
-                        <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span>
-                    </template>
+<!--                    <template slot="actions">-->
+<!--                        <v-icon class="mr-2" small>mdi-clock-outline</v-icon>-->
+<!--                        <span class="caption grey&#45;&#45;text font-weight-light">campaign sent 26 minutes ago</span>-->
+<!--                    </template>-->
                 </material-chart-card>
             </v-flex>
             <v-flex sm6 xs12 md6 lg3>
@@ -212,7 +212,7 @@
                 },
                 candidatesActiveChart: {
                     data: {
-                        labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                         series: [
                             [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
                         ],
