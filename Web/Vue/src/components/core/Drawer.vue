@@ -53,13 +53,36 @@
         data: () => ({
             logo: './img/vuetifylogo.png',
             links: [
+            ],
+            adminLinks: [
                 {
                     to: '/',
                     icon: 'mdi-view-dashboard',
                     text: 'Dashboard',
                 },
                 {
-                    // to: '/user-profile',
+                    to: '/current-candidates',
+                    icon: 'mdi-clipboard-outline',
+                    text: 'Current Candidates',
+                },
+                {
+                    to: '/process-candidates',
+                    icon: 'mdi-file-account',
+                    text: 'Process Candidates',
+                },
+                {
+                    to: '/manage-user-accounts',
+                    icon: 'mdi-account',
+                    text: 'Manage User Accounts',
+                },
+            ],
+            candidateLinks: [
+                {
+                    to: '/',
+                    icon: 'mdi-view-dashboard',
+                    text: 'Dashboard',
+                },
+                {
                     icon: 'mdi-account',
                     text: 'User Profile',
                     subLinks: [
@@ -74,31 +97,6 @@
                             text: 'Update Contact Details',
                         },
                     ],
-                },
-                {
-                    to: '/table-list',
-                    icon: 'mdi-clipboard-outline',
-                    text: 'Table List',
-                },
-                {
-                    to: '/typography',
-                    icon: 'mdi-format-font',
-                    text: 'Typography',
-                },
-                {
-                    to: '/icons',
-                    icon: 'mdi-chart-bubble',
-                    text: 'Icons',
-                },
-                {
-                    to: '/maps',
-                    icon: 'mdi-map-marker',
-                    text: 'Maps',
-                },
-                {
-                    to: '/notifications',
-                    icon: 'mdi-bell',
-                    text: 'Notifications',
                 },
             ],
             responsive: false,
@@ -116,6 +114,14 @@
             items() {
                 return this.$t('Layout.View.items');
             },
+        },
+        beforeMount() {
+            const user = JSON.parse(atob(this.$store.state.authentication.token.split('.')[1]));
+            if (user.role === "Admin") {
+                this.links = this.adminLinks;
+            } else {
+                this.links = this.candidateLinks;
+            }
         },
         mounted() {
             this.onResponsiveInverted();
