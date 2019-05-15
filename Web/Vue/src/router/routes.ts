@@ -14,6 +14,20 @@ export default [
         name: 'Update Contact Details',
         component: () => import('@/views/UpdateContactDetails.vue'),
     },
+    {
+        path: '/current-candidates',
+        name: 'Current Candidates',
+        component: () => import('@/views/CurrentCandidates.vue'),
+    },
+    {
+        path: '/process-candidates',
+        name: 'Process Candidates',
+        component: () => import('@/views/ProcessCandidates.vue'),
+    },
+    {
+        path: '/manage-user-accounts',
+        name: 'Manage User Accounts',
+        component: () => import('@/views/ManageUserAccounts.vue'),
     },
 
 
