@@ -4,4 +4,3 @@ declare module '*.vue' {
 }
 
 declare module 'vue-analytics';
-declare module 'vuejs-jwt';

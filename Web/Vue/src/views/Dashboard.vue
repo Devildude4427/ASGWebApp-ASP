@@ -182,7 +182,7 @@
     export default {
         computed: {
             user() {
-                return this.$jwt.decode(this.$store.state.authentication.token);
+                return JSON.parse(atob(this.$store.state.authentication.token.split('.')[1]));
             },
 
         },
