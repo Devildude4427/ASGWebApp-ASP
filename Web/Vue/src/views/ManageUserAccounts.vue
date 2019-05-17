@@ -1,11 +1,11 @@
 <template>
-    
+
 </template>
 
 <script>
     export default {
-        name: "ManageUserAccounts"
-    }
+        name: 'ManageUserAccounts',
+    };
 </script>
 
 <style scoped>

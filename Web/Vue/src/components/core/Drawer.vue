@@ -47,6 +47,7 @@
     import {
         mapMutations,
         mapState,
+        mapGetters,
     } from 'vuex';
 
     export default {
@@ -103,6 +104,12 @@
         }),
         computed: {
             ...mapState('app', ['image', 'color']),
+            ...mapGetters('authentication', [
+                'currentUser',
+            ]),
+            user() {
+                return this.currentUser;
+            },
             inputValue: {
                 get() {
                     return this.$store.state.app.drawer;
@@ -116,8 +123,9 @@
             },
         },
         beforeMount() {
-            const user = JSON.parse(atob(this.$store.state.authentication.token.split('.')[1]));
-            if (user.role === "Admin") {
+            // TODO this should work, but might need to be re-looked at when the drawer nonsense is fixed.
+            // console.log(this.user.role);
+            if (this.user.role === 'Admin') {
                 this.links = this.adminLinks;
             } else {
                 this.links = this.candidateLinks;

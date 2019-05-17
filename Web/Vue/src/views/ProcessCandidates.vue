@@ -1,11 +1,11 @@
 <template>
-    
+
 </template>
 
 <script>
     export default {
-        name: "ProcessCandidates"
-    }
+        name: 'ProcessCandidates',
+    };
 </script>
 
 <style scoped>

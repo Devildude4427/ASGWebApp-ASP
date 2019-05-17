@@ -1,12 +1,10 @@
 import ApiService from '@/plugins/api.axios';
-import { FETCH_USERS } from './actions-type';
-
 
 const state = {
     all: {},
 };
 const actions = {
-    [FETCH_USERS]() {
+    fetchUsers() {
         return ApiService.get('user')
             .then(({ data }) => {
                 // context.commit(SET_PROFILE, data.profile);
