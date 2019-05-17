@@ -46,12 +46,12 @@
             handleSubmit(e) {
                 this.$http.post('test/test', test)
                     .then((response) => {
-                        console.log(response);
+                        // console.log(response);
                         // if (response.statusText === 'OK') {
                         //   window.location.href = `/dashboard`;
                         // }
                     }).catch((error) => {
-                    console.log(error);
+                    // console.log(error);
                 });
             },
         },

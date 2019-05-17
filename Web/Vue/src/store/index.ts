@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { alert } from '@/store/alert-module';
-import { authentication } from '@/store/authentication-module';
-import users from '@/store/users-module';
-import { app } from '@/store/app-module';
+import alert from '@/store/modules/alert';
+import authentication from '@/store/modules/authentication';
+import users from '@/store/modules/users';
+import app from '@/store/modules/material-app';
 
 Vue.use(Vuex);
 

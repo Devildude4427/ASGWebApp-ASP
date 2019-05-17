@@ -1,11 +1,11 @@
 <template>
-    
+
 </template>
 
 <script>
     export default {
-        name: "CurrentCandidates"
-    }
+        name: 'CurrentCandidates',
+    };
 </script>
 
 <style scoped>

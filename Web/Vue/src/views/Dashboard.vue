@@ -3,7 +3,7 @@
         <v-layout wrap>
             <v-flex md12 sm12 lg4>
                 <material-chart-card :data="dailyCourseRegistration.data" :options="dailyCourseRegistration.options" color="info" type="Line">
-                    <h1>Hi {{user.unique_name}}!</h1>
+                    <h1>Hi {{user.name}}!</h1>
                     <h4 class="title font-weight-light">Daily Course Registration</h4>
                     <p class="category d-inline-flex font-weight-light">
                         <v-icon color="green" small>mdi-arrow-up</v-icon>
@@ -179,13 +179,15 @@
 </template>
 
 <script>
-    import { FETCH_USERS } from '../store/actions-type';
+    import { mapGetters } from 'vuex';
     export default {
         computed: {
+            ...mapGetters('authentication', [
+                'currentUser',
+                ]),
             user() {
-                return JSON.parse(atob(this.$store.state.authentication.token.split('.')[1]));
+                return this.currentUser;
             },
-
         },
         data() {
             return {
@@ -321,7 +323,6 @@
                 this.list[index] = !this.list[index];
             },
             dailyCourseRegistrationPercentIncrease() {
-                console.log(this.$store.dispatch(FETCH_USERS));
                 return Math.round(100.00 - (this.dailyCourseRegistration.data.series[0][5]
                     / this.dailyCourseRegistration.data.series[0][6]) * 100.00);
             },
