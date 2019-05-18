@@ -46,15 +46,17 @@
         },
         created() {
             // reset login status
-            this.$store.dispatch('authentication/logout');
+            return this.$store.dispatch('authentication/logout');
         },
         methods: {
-            handleSubmit(e) {
+            async handleSubmit(e) {
                 this.submitted = true;
                 const { email, password } = this;
-                const { dispatch } = this.$store;
                 if (email && password) {
-                    dispatch('authentication/login', { email, password });
+                    await this.$store.dispatch('authentication/login', { email, password });
+                    // TODO this causes an error, but eventually resolves
+                    this.$router.push({ name: 'Dashboard' })
+                        .then(() => location.reload());
                 }
             },
         },
