@@ -11,22 +11,22 @@
                         increase in today's sales
                     </p>
 
-                    <template slot="actions">
-                        <v-icon class="mr-2" small>mdi-clock-outline</v-icon>
-                        <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
-                    </template>
+<!--                    <template slot="actions">-->
+<!--                        <v-icon class="mr-2" small>mdi-clock-outline</v-icon>-->
+<!--                        <span class="caption grey&#45;&#45;text font-weight-light">updated 4 minutes ago</span>-->
+<!--                    </template>-->
                 </material-chart-card>
             </v-flex>
             <v-flex md12 sm12 lg4>
-                <material-chart-card :data="emailsSubscriptionChart.data" :options="emailsSubscriptionChart.options"
-                                     :responsive-options="emailsSubscriptionChart.responsiveOptions" color="red" type="Bar">
-                    <h4 class="title font-weight-light">Email Subscription</h4>
-                    <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>
+                <material-chart-card :data="candidatesActiveChart.data" :options="candidatesActiveChart.options"
+                                     :responsive-options="candidatesActiveChart.responsiveOptions" color="red" type="Bar">
+                    <h4 class="title font-weight-light">Candidates Active</h4>
+<!--                    <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>-->
 
-                    <template slot="actions">
-                        <v-icon class="mr-2" small>mdi-clock-outline</v-icon>
-                        <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
-                    </template>
+<!--                    <template slot="actions">-->
+<!--                        <v-icon class="mr-2" small>mdi-clock-outline</v-icon>-->
+<!--                        <span class="caption grey&#45;&#45;text font-weight-light">updated 10 minutes ago</span>-->
+<!--                    </template>-->
                 </material-chart-card>
             </v-flex>
             <v-flex md12 sm12 lg4>
@@ -35,10 +35,10 @@
                     <h3 class="title font-weight-light">Completed Tasks</h3>
                     <p class="category d-inline-flex font-weight-light">Last Last Campaign Performance</p>
 
-                    <template slot="actions">
-                        <v-icon class="mr-2" small>mdi-clock-outline</v-icon>
-                        <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span>
-                    </template>
+<!--                    <template slot="actions">-->
+<!--                        <v-icon class="mr-2" small>mdi-clock-outline</v-icon>-->
+<!--                        <span class="caption grey&#45;&#45;text font-weight-light">campaign sent 26 minutes ago</span>-->
+<!--                    </template>-->
                 </material-chart-card>
             </v-flex>
             <v-flex sm6 xs12 md6 lg3>
@@ -63,7 +63,7 @@
                 </material-stats-card>
             </v-flex>
             <v-flex md12 lg6>
-                <material-card color="orange" title="Employee Stats" text="New employees on 15th September, 2016">
+                <material-card color="teal" title="Instructor Assignments" text="Instructor Assignments. Last Updated">
                     <v-data-table :headers="headers" :items="items" hide-actions>
                         <template slot="headerCell" slot-scope="{ header }">
                             <span class="font-weight-light text-warning text--darken-3" v-text="header.text"></span>
@@ -71,9 +71,8 @@
                         <template slot="items" slot-scope="{ index, item }">
                             <td>{{ index + 1 }}</td>
                             <td>{{ item.name }}</td>
-                            <td class="text-xs-right">{{ item.salary }}</td>
-                            <td class="text-xs-right">{{ item.country }}</td>
-                            <td class="text-xs-right">{{ item.city }}</td>
+                            <td>{{ item.course }}</td>
+                            <td>{{ item.city }}</td>
                         </template>
                     </v-data-table>
                 </material-card>
@@ -180,12 +179,15 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
     export default {
         computed: {
+            ...mapGetters('authentication', [
+                'currentUser',
+                ]),
             user() {
-                return this.$store.state.authentication.user;
+                return this.currentUser;
             },
-
         },
         data() {
             return {
@@ -211,32 +213,9 @@
                         },
                     },
                 },
-
-                dataCompletedTasksChart: {
+                candidatesActiveChart: {
                     data: {
-                        labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-                        series: [
-                            [230, 750, 450, 300, 280, 240, 200, 190],
-                        ],
-                    },
-                    options: {
-                        lineSmooth: this.$chartist.Interpolation.cardinal({
-                            tension: 0,
-                        }),
-                        low: 0,
-                        high: 1000, // creative tim: we recommend you to set the high sa the biggest value
-                        // + something for a better look
-                        chartPadding: {
-                            top: 0,
-                            right: 0,
-                            bottom: 0,
-                            left: 0,
-                        },
-                    },
-                },
-                emailsSubscriptionChart: {
-                    data: {
-                        labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                         series: [
                             [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
                         ],
@@ -263,63 +242,72 @@
                         }],
                     ],
                 },
+                dataCompletedTasksChart: {
+                    data: {
+                        labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
+                        series: [
+                            [230, 750, 450, 300, 280, 240, 200, 190],
+                        ],
+                    },
+                    options: {
+                        lineSmooth: this.$chartist.Interpolation.cardinal({
+                            tension: 0,
+                        }),
+                        low: 0,
+                        high: 1000, // creative tim: we recommend you to set the high sa the biggest value
+                        // + something for a better look
+                        chartPadding: {
+                            top: 0,
+                            right: 0,
+                            bottom: 0,
+                            left: 0,
+                        },
+                    },
+                },
                 headers: [
                     {
-                        sortable: false,
+                        sortable: true,
                         text: 'ID',
                         value: 'id',
                     },
                     {
-                        sortable: false,
+                        sortable: true,
                         text: 'Name',
                         value: 'name',
                     },
                     {
-                        sortable: false,
-                        text: 'Salary',
-                        value: 'salary',
-                        align: 'right',
+                        sortable: true,
+                        text: 'Course',
+                        value: 'course',
                     },
                     {
-                        sortable: false,
-                        text: 'Country',
-                        value: 'country',
-                        align: 'right',
-                    },
-                    {
-                        sortable: false,
+                        sortable: true,
                         text: 'City',
                         value: 'city',
-                        align: 'right',
                     },
                 ],
                 items: [
                     {
                         name: 'Dakota Rice',
-                        country: 'Niger',
-                        city: 'Oud-Tunrhout',
-                        salary: '$35,738',
+                        city: 'Cardiff',
+                        course: 'Flight School',
                     },
                     {
                         name: 'Minerva Hooper',
-                        country: 'Curaçao',
-                        city: 'Sinaai-Waas',
-                        salary: '$23,738',
+                        city: 'Somerset',
+                        course: 'Ground School',
                     }, {
                         name: 'Sage Rodriguez',
-                        country: 'Netherlands',
-                        city: 'Overland Park',
-                        salary: '$56,142',
+                        city: 'Dorset',
+                        course: 'Flight Assessment',
                     }, {
                         name: 'Philip Chanley',
-                        country: 'Korea, South',
-                        city: 'Gloucester',
-                        salary: '$38,735',
+                        city: 'Aberdeen',
+                        course: 'Ground School',
                     }, {
                         name: 'Doris Greene',
-                        country: 'Malawi',
-                        city: 'Feldkirchen in Kārnten',
-                        salary: '$63,542',
+                        city: 'Cardiff',
+                        course: 'Operators Manual',
                     },
                 ],
                 tabs: 0,
@@ -335,7 +323,8 @@
                 this.list[index] = !this.list[index];
             },
             dailyCourseRegistrationPercentIncrease() {
-                return Math.round(100.00 - (this.dailyCourseRegistration.data.series[0][5] / this.dailyCourseRegistration.data.series[0][6]) * 100.00)
+                return Math.round(100.00 - (this.dailyCourseRegistration.data.series[0][5]
+                    / this.dailyCourseRegistration.data.series[0][6]) * 100.00);
             },
         },
     };
