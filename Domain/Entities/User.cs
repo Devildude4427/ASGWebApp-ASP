@@ -8,7 +8,6 @@ namespace Domain.Entities
         public UserRole Role { get; set; }
         public bool Activated { get; set; }
         public bool Enabled { get; set; }
-        public string Token { get; set; }
     }
 
     public class NewUser

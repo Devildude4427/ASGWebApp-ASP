@@ -47,19 +47,43 @@
     import {
         mapMutations,
         mapState,
+        mapGetters,
     } from 'vuex';
 
     export default {
         data: () => ({
             logo: './img/vuetifylogo.png',
             links: [
+            ],
+            adminLinks: [
                 {
                     to: '/',
                     icon: 'mdi-view-dashboard',
                     text: 'Dashboard',
                 },
                 {
-                    // to: '/user-profile',
+                    to: '/current-candidates',
+                    icon: 'mdi-clipboard-outline',
+                    text: 'Current Candidates',
+                },
+                {
+                    to: '/process-candidates',
+                    icon: 'mdi-file-account',
+                    text: 'Process Candidates',
+                },
+                {
+                    to: '/manage-user-accounts',
+                    icon: 'mdi-account',
+                    text: 'Manage User Accounts',
+                },
+            ],
+            candidateLinks: [
+                {
+                    to: '/',
+                    icon: 'mdi-view-dashboard',
+                    text: 'Dashboard',
+                },
+                {
                     icon: 'mdi-account',
                     text: 'User Profile',
                     subLinks: [
@@ -75,36 +99,17 @@
                         },
                     ],
                 },
-                {
-                    to: '/table-list',
-                    icon: 'mdi-clipboard-outline',
-                    text: 'Table List',
-                },
-                {
-                    to: '/typography',
-                    icon: 'mdi-format-font',
-                    text: 'Typography',
-                },
-                {
-                    to: '/icons',
-                    icon: 'mdi-chart-bubble',
-                    text: 'Icons',
-                },
-                {
-                    to: '/maps',
-                    icon: 'mdi-map-marker',
-                    text: 'Maps',
-                },
-                {
-                    to: '/notifications',
-                    icon: 'mdi-bell',
-                    text: 'Notifications',
-                },
             ],
             responsive: false,
         }),
         computed: {
             ...mapState('app', ['image', 'color']),
+            ...mapGetters('authentication', [
+                'currentUser',
+            ]),
+            user() {
+                return this.currentUser;
+            },
             inputValue: {
                 get() {
                     return this.$store.state.app.drawer;
@@ -116,6 +121,15 @@
             items() {
                 return this.$t('Layout.View.items');
             },
+        },
+        beforeMount() {
+            // TODO this should work, but might need to be re-looked at when the drawer nonsense is fixed.
+            // console.log(this.user.role);
+            if (this.user.role === 'Admin') {
+                this.links = this.adminLinks;
+            } else {
+                this.links = this.candidateLinks;
+            }
         },
         mounted() {
             this.onResponsiveInverted();
