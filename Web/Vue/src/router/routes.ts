@@ -1,58 +1,68 @@
-import Dashboard from '@/views/Dashboard.vue';
-import UserProfile from '@/views/UserProfile.vue';
-import UpdateContact from '@/views/UpdateContactDetails.vue';
-import TableList from '@/views/TableList.vue';
-import Typography from '@/views/Typography.vue';
-import Icons from '@/views/Icons.vue';
-import Maps from '@/views/Maps.vue';
-import Notifications from '@/views/Notifications.vue';
-import Login from '@/views/Login.vue';
-
 export default [
     {
         path: '/',
         name: 'Dashboard',
-        component: Dashboard,
+        component: () => import('@/views/Dashboard.vue'),
     },
     {
         path: '/user-profile',
         name: 'User Profile',
-        component: UserProfile,
+        component: () => import('@/views/UserProfile.vue'),
     },
     {
         path: '/update-contact',
         name: 'Update Contact Details',
-        component: UpdateContact,
+        component: () => import('@/views/UpdateContactDetails.vue'),
     },
+    {
+        path: '/current-candidates',
+        name: 'Current Candidates',
+        component: () => import('@/views/CurrentCandidates.vue'),
+    },
+    {
+        path: '/process-candidates',
+        name: 'Process Candidates',
+        component: () => import('@/views/ProcessCandidates.vue'),
+    },
+    {
+        path: '/manage-user-accounts',
+        name: 'Manage User Accounts',
+        component: () => import('@/views/ManageUserAccounts.vue'),
+    },
+
+
+
     {
         path: '/table-list',
         name: 'Table List',
-        component: TableList,
+        component: () => import('@/views/TableList.vue'),
     },
     {
         path: '/typography',
         name: 'Typography',
-        component: Typography,
+        component: () => import('@/views/Typography.vue'),
     },
     {
         path: '/icons',
         name: 'Icons',
-        component: Icons,
+        component: () => import('@/views/Icons.vue'),
     },
     {
         path: '/maps',
         name: 'Maps',
-        component: Maps,
+        component: () => import('@/views/Maps.vue'),
     },
     {
         path: '/notifications',
         name: 'Notifications',
-        component: Notifications,
+        component: () => import('@/views/Notifications.vue'),
     },
+
+
     {
         path: '/login',
         name: 'Login',
-        component: Login,
+        component: () => import('@/views/Login.vue'),
     },
     {
         path: '*',

@@ -21,8 +21,6 @@ export default {
   data: () => ({
     links: [
       { name: 'Home', Link: '/' },
-      // { name: 'Creative Tim', Link: 'https://www.creative-tim.com' },
-      // { name: 'About Us', Link: 'https://creative-tim.com/presentation' },
       { name: 'GitHub', Link: 'https://github.com/devildude4427' },
     ],
   }),
