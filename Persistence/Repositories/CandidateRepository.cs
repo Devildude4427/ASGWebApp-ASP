@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
@@ -53,6 +54,18 @@ namespace Persistence.Repositories
             var count = await result.ReadSingleAsync<long>();
             
             return new PaginatedList<User>(users.ToList(), count, filteredPageRequest);
+        }
+
+        public async Task<IEnumerable<Candidate>> GetAll()
+        {
+            const string sql = @"
+                SELECT u.name, c.reference_number, gi.preferred_course_location, c.last_completed_stage
+                FROM candidates c
+                INNER JOIN users u on c.user_id = u.id
+                INNER JOIN general_information gi on c.general_info_id = gi.id
+                ";
+            var result = await _con.Db.QueryMultipleAsync(sql);
+            return await result.ReadAsync<Candidate>();
         }
 
         public async Task<Candidate> FindByUserId(long id)

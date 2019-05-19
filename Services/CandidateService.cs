@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain;
 using Domain.Entities;
@@ -24,7 +25,12 @@ namespace Services
         {
             _candidateRepository = candidateRepository;
         }
-        
+
+        public async Task<IEnumerable<Candidate>> GetAll()
+        {
+            return await _candidateRepository.GetAll();
+        }
+
         public async Task<Candidate> FindByUserId()
         {
             return await _candidateRepository.FindByUserId(_user.Id);
