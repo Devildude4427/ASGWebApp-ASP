@@ -1,14 +1,13 @@
-using System;
 using System.Threading.Tasks;
 using Autofac;
 using FluentAssertions;
 using Services;
-using Tests.Integration.Config;
+using Tests.Config;
 using Xunit;
 
 namespace Tests.Integration
 {
-    public class ExampleTests : IntegrationTest
+    public class UserTests : Test
     {
         // [Fact]
         // public async Task CanFindById()

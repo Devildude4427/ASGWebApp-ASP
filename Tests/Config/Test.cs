@@ -1,17 +1,16 @@
 using System;
 using Autofac;
 using Autofac.Core.Lifetime;
-using Tests.Integration.Config;
 using Web;
 
-namespace Tests.Unit.Config
+namespace Tests.Config
 {
-    public class UnitTest : IDisposable
+    public class Test : IDisposable
     {
         private readonly TestDatabaseInitializer _db;
         private static IContainer Container { get; set; }
 
-        protected UnitTest()
+        protected Test()
         {
             InitialiseContainer();
             Console.WriteLine("Setting up database");
