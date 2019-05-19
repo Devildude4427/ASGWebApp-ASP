@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Entities;
 using Domain.ViewModels;
@@ -9,6 +10,7 @@ namespace Domain.RepositoryInterfaces
         //CRUD
         
         Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest);
+        Task<IEnumerable<Candidate>> GetAll();
         Task<Candidate> FindByUserId(long id);
         Task<string> PreviousCandidateReferenceNumber();
         Task<bool> Register(CourseRegistration courseRegistration);

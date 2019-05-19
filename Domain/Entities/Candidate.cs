@@ -2,11 +2,9 @@ namespace Domain.Entities
 {
     public class Candidate
     {
-        public long Id { get; set; }
-        public long UserId { get; set; }
+        public string Name { get; set; }
         public string ReferenceNumber { get; set; }
-        public long ContactInfoId { get; set; }
-        public long GeneralInfoId { get; set; }
+        public string PreferredCourseLocation { get; set; }
         public LastCompletedStage LastCompletedStage { get; set; }
     }
 

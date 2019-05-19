@@ -25,6 +25,13 @@ namespace Web.Controllers.Api.v1
             return Json(result);
         }
         
+        [HttpGet("getAllCandidates")]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _candidateService.GetAll();
+            return Json(result);
+        }
+        
         // [HttpGet("{id:long}")]
         // public async Task<IActionResult> FindCandidateByUserId(long id)
         // {
