@@ -21,15 +21,5 @@ namespace Tests.Integration
         //     }
         // }
         
-        [Fact]
-        public async Task CanGenerateReferenceNumber()
-        {
-            using (var container = GetContainer())
-            {
-                var service = container.Resolve<CandidateService>();
-                var referenceNumber = await service.GenerateReferenceNumber();
-                referenceNumber.Should().Be("ASG-001-" + DateTime.Now.ToString("yy-MM"));
-            }
-        }
     }
 }

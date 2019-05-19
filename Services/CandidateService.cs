@@ -45,9 +45,9 @@ namespace Services
             if(DateTime.Now.ToString("MM").Equals(referenceNumberParts[3]))
             {
                 var newUniqueNum = $"{(int.Parse(referenceNumberParts[1]) + 1):000}";
-                newReferenceNumber = "ASG-" + newUniqueNum + "-" + DateTime.Now.ToString("yy-MM");
+                newReferenceNumber = "ASG-" + DateTime.Now.ToString("yy-MM") + "-" + newUniqueNum;
             } else
-                newReferenceNumber = "ASG-" + "001" + "-" + DateTime.Now.ToString("yy-MM");
+                newReferenceNumber = "ASG-" + DateTime.Now.ToString("yy-MM")  + "-" + "001";
             
             return newReferenceNumber;
         }
