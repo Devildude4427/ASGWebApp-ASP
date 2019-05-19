@@ -25,6 +25,7 @@ namespace Web.Controllers.Api.v1
             return Json(result);
         }
         
+        //TODO clean up API routes and files
         [HttpGet("getAllCandidates")]
         public async Task<IActionResult> GetAll()
         {
