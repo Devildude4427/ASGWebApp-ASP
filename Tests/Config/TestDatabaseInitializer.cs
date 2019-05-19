@@ -4,7 +4,7 @@ using Autofac;
 using Persistence.Configuration;
 using Persistence.Seeding;
 
-namespace Tests.Integration.Config
+namespace Tests.Config
 {
     public class TestDatabaseInitializer : IDisposable
     {

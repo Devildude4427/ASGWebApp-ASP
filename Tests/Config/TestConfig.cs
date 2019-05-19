@@ -1,6 +1,6 @@
 using Web.Config;
 
-namespace Tests.Integration.Config
+namespace Tests.Config
 {
     public class TestConfig : IAppConfig
     {

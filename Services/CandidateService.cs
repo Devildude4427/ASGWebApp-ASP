@@ -31,9 +31,9 @@ namespace Services
             return await _candidateRepository.GetAll();
         }
 
-        public async Task<Candidate> FindByUserId()
+        public async Task<Candidate> FindByUserId(long userId)
         {
-            return await _candidateRepository.FindByUserId(_user.Id);
+            return await _candidateRepository.FindByUserId(userId);
         }
 
         public async Task<string> GenerateReferenceNumber()
@@ -54,7 +54,7 @@ namespace Services
 
         public async Task<CandidateResponse> Register(CourseRegistration courseRegistration)
         {
-            var user = await FindByUserId();
+            var user = await FindByUserId(_user.Id);
             if(user != null)
                 return new CandidateResponse(CandidateRegistrationResponse.AlreadyCourseRegistered);
             

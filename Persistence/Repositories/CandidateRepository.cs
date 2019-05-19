@@ -72,8 +72,8 @@ namespace Persistence.Repositories
         {
             const string sql = @"
                 SELECT *
-                FROM candidates u
-                WHERE u.user_id = :id;
+                FROM candidates c
+                WHERE c.user_id = :id;
             ";
             return await _con.Db.QuerySingleOrDefaultAsync<Candidate>(sql, new { id });
         }
