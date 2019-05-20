@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+        <NoWarn>NU1701</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Autofac" Version="4.9.2" />
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
+        <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+        <PackageReference Include="Dapper" Version="1.60.6" />
+        <PackageReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+        <PackageReference Include="Npgsql" Version="4.0.6" />
+        <PackageReference Include="Simple.Migrations" Version="0.9.19" />
+        <PackageReference Include="TinyLog-Mvc" Version="1.3.0-rc" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Domain\QueryInterfaces" />
+      <Folder Include="Persistence\Queries" />
+    </ItemGroup>
+
+</Project>
