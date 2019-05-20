@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using Core.Domain;
-using Domain;
 
 namespace Core.Persistence
 {
