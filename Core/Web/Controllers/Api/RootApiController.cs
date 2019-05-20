@@ -1,5 +1,4 @@
 using Core.Domain;
-using Domain;
 using Microsoft.AspNetCore.Http;
 using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
