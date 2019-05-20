@@ -4,7 +4,7 @@ This project is a rewrite of my ASGWebApp that was a client project from univers
 
 Here I am using ASP.NET Core as the framework, and PostgreSQL as the database. In addition, this project is being written with as a RESTful API so that it can be integrated with a mobile app (undecided as to whether it should be plain Android or Xamarin) and consumed with a Vue.js SPA.
 
-This API will be updated in conjuction while the Vue front end is being built, and only after will the app be tackled. 
+This API will be updated in conjuction while the Vue front end is being built, and only after will the app be tackled. Much of it still needs to be refactored away, due to rather rapid and extreme changes in project direction. 
 
 ## Getting Started
 
