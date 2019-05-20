@@ -1,0 +1,21 @@
+language: csharp
+solution: AviationSystemsGroup.sln
+mono: none
+sudo: required
+dist: xenial
+dotnet: 2.2
+
+services:
+  - postgresql
+  
+env:
+  - DB_CONNECTION='Server=127.0.0.1;Port=5432;Database=ci_test;User Id=postgres;'
+  
+before_script:
+  - dotnet restore
+  - psql -c 'create database ci_test;' -U postgres
+
+script:
+  - 'dotnet build ./Core'
+  - 'dotnet test ./Testing'
+
