@@ -15,10 +15,7 @@ before_script:
   - dotnet restore
   - psql -c 'create database ci_test;' -U postgres
 
-jobs:
-  include:
-    - stage: Build
-      script: dotnet build ./Core
-    - stage: Test
-      script: dotnet test ./Testing
+script:
+  - 'dotnet build ./Core'
+  - 'dotnet test ./Testing'
 
