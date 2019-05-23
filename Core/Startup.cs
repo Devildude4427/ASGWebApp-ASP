@@ -41,13 +41,7 @@ namespace Core
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            
-            // services.Configure<CookiePolicyOptions>(options =>
-            // {
-            //     options.CheckConsentNeeded = context => true;
-            //     options.MinimumSameSitePolicy = _env.IsDevelopment() ? SameSiteMode.None : SameSiteMode.Strict;
-            // });
-           
+
             services.AddScoped(c =>
             {
                 var ctx = c.GetRequiredService<IHttpContextAccessor>().HttpContext;
