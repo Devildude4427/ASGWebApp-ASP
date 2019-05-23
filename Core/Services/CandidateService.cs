@@ -8,7 +8,14 @@ using Core.Domain.ViewModels;
 
 namespace Core.Services
 {
-    public class CandidateService
+    public interface ICandidateService
+    {
+        Task<IEnumerable<Candidate>> GetAll();
+        Task<CandidateResponse> Register(CourseRegistration courseRegistration);
+        Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails);
+    }
+    
+    public class CandidateService : ICandidateService
     {
         private readonly ICandidateRepository _candidateRepository;
 
@@ -31,7 +38,7 @@ namespace Core.Services
             return await _candidateRepository.GetAll();
         }
 
-        public async Task<Candidate> FindByUserId(long userId)
+        private async Task<Candidate> FindByUserId(long userId)
         {
             return await _candidateRepository.FindByUserId(userId);
         }

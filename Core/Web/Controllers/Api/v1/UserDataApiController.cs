@@ -9,9 +9,9 @@ namespace Core.Web.Controllers.Api.v1
     {
         private readonly UserService _userService;
 
-        private readonly CandidateService _candidateService;
+        private readonly ICandidateService _candidateService;
 
-        public UserApiController(UserService userService, CandidateService candidateService)
+        public UserApiController(UserService userService, ICandidateService candidateService)
         {
             _userService = userService;
             _candidateService = candidateService;
