@@ -1,20 +1,22 @@
 using System.Threading.Tasks;
 using Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.Controllers.Api.v1
 {
+    [Authorize]
     [Route("/api/v1/user")]
-    public class UserApiController : RootApiController
+    public class UserDataApiController : RootApiController
     {
         private readonly UserService _userService;
 
-        private readonly ICandidateService _candidateService;
+        // private readonly ICandidateService _candidateService;
 
-        public UserApiController(UserService userService, ICandidateService candidateService)
+        public UserDataApiController(UserService userService)
         {
             _userService = userService;
-            _candidateService = candidateService;
+            // _candidateService = candidateService;
         }
 
         [HttpGet]
@@ -25,13 +27,13 @@ namespace Core.Web.Controllers.Api.v1
             return Json(result);
         }
         
-        //TODO clean up API routes and files
-        [HttpGet("getAllCandidates")]
-        public async Task<IActionResult> GetAll()
-        {
-            var result = await _candidateService.GetAll();
-            return Json(result);
-        }
+        // //TODO clean up API routes and files
+        // [HttpGet("getAllCandidates")]
+        // public async Task<IActionResult> GetAll()
+        // {
+        //     var result = await _candidateService.GetAll();
+        //     return Json(result);
+        // }
         
         // [HttpGet("{id:long}")]
         // public async Task<IActionResult> FindCandidateByUserId(long id)
@@ -43,7 +45,7 @@ namespace Core.Web.Controllers.Api.v1
         // [HttpGet]
         // public async Task<IActionResult> GetCurrentCandidate()
         // {
-        //     //TODO this return the entire row from candidate, FIX!!!!
+        //     //TODO this returns the entire row from candidate, FIX!!!!
         //     var result = await _candidateService.FindByUserId();
         //     return Json(result);
         // }
