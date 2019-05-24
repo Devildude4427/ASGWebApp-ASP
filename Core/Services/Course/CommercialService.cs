@@ -15,12 +15,12 @@ namespace Core.Services.Course
     {
         private readonly ICandidateRepository _candidateRepository;
 
-        private readonly IUserIdentity _user;
+        private readonly UserService _userService;
         
-        public CommercialService(ICandidateRepository candidateRepository, IUserIdentity user)
+        public CommercialService(ICandidateRepository candidateRepository, UserService userService)
         {
             _candidateRepository = candidateRepository;
-            _user = user;
+            _userService = userService;
         }
         
         public async Task<string> GenerateReferenceNumber()
@@ -46,7 +46,7 @@ namespace Core.Services.Course
                 return new CandidateResponse(CandidateRegistrationResponse.AlreadyCourseRegistered);
             
             commercialRegistration.ReferenceNumber = await GenerateReferenceNumber();
-            commercialRegistration.UserId = _user.Id;
+            commercialRegistration.UserId = _userService.FindByEmail(email).Id;
             
             var registered = await _candidateRepository.Register(commercialRegistration);
             return registered ? new CandidateResponse(CandidateRegistrationResponse.Successful)
