@@ -21,17 +21,8 @@ namespace Core.Web.Controllers.Api.v1
             _user = user;
         }
 
-        [HttpGet("session")]
-        public IActionResult GetSession()
-        {
-            return Json(new SessionData
-            {
-                User = _user
-            });
-        }
-
         [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost("login")]
         public async Task<IActionResult> Authenticate([FromBody] LoginRequest loginRequest)
         {
             if (_user.IsAuthenticated)
@@ -61,10 +52,5 @@ namespace Core.Web.Controllers.Api.v1
         //     await _exampleService.Update(id, updatedEntity);
         //     return Ok();
         // }
-    }
-
-    public class SessionData
-    {
-        public IUserIdentity User { get; set; }
     }
 }

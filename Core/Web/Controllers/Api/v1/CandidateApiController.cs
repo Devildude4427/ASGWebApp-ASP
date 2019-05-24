@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.Controllers.Api.v1
 {
-    [Route("/api/v1/commercialCourse")]
+    [Route("/api/v1/candidate")]
     public class CandidateApiController : RootApiController
     {
         private readonly ICandidateService _candidateService;
@@ -15,7 +15,7 @@ namespace Core.Web.Controllers.Api.v1
             _candidateService = candidateService;
         }
         
-        [HttpPost("updateDetails")]
+        [HttpPost("updatePersonalDetails")]
         public async Task<IActionResult> UpdateDetails([FromBody] UpdateContactDetails updateContactDetails)
         {
             var result = await _candidateService.UpdateDetails(updateContactDetails);

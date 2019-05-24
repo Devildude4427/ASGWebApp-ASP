@@ -1,9 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.Domain.ViewModels
+namespace Core.Domain.Models.Course
 {
-    public class CourseRegistration
+    public class CommercialRegistrationRequest
     {
         [Required]
         public Address Address { get; set; }

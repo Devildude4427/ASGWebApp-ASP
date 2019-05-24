@@ -2,13 +2,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Domain;
 using Core.Domain.Entities;
-using Core.Domain.RepositoryInterfaces;
 using Core.Domain.ViewModels;
 using Core.Persistence.Configuration;
 using Dapper;
 
 namespace Core.Persistence.Repositories
 {
+    public interface IUserRepository
+    {
+        Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest);
+        Task<User> FindById(long id);
+        Task<User> FindByEmail(string email);
+        Task<bool> Register(RegistrationRequest registrationRequest);
+        Task<string> GetHashedPassword(string email);
+    }
+    
+    
     public class UserRepository : IUserRepository
     {
         private readonly DatabaseConnection _con;

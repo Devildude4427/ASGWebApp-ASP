@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Core.Domain.Entities;
 using Core.Domain.RepositoryInterfaces;
 using Core.Domain.ViewModels;
+using Core.Persistence.Repositories;
 using Core.Services.Helpers;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
