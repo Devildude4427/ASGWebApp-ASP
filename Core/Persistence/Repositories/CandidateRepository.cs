@@ -22,7 +22,7 @@ namespace Core.Persistence.Repositories
         Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails);
     }
     
-    public class CandidateRepository : ICandidateRepository
+    class CandidateRepository : ICandidateRepository
     {
         private readonly DatabaseConnection _con;
 

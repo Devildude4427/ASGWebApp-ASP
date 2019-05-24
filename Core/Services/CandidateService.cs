@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Domain;
@@ -7,6 +8,7 @@ using Core.Persistence.Repositories;
 
 namespace Core.Services
 {
+    //TODO Fix issue with interface. For now, it is bypassed
     public interface ICandidateService
     {
         Task<IEnumerable<Candidate>> GetAll();
@@ -18,12 +20,6 @@ namespace Core.Services
         private readonly ICandidateRepository _candidateRepository;
 
         private readonly IUserIdentity _user;
-
-        public CandidateService(ICandidateRepository candidateRepository, IUserIdentity user)
-        {
-            _candidateRepository = candidateRepository;
-            _user = user;
-        }
         
         //TODO Tests can't give a user identity, so figure out whether identities should be gathered here, or elsewhere
         public CandidateService(ICandidateRepository candidateRepository)
