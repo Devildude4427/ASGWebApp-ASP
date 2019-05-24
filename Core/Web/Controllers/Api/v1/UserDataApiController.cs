@@ -11,12 +11,12 @@ namespace Core.Web.Controllers.Api.v1
     {
         private readonly UserService _userService;
 
-        // private readonly ICandidateService _candidateService;
+        private readonly CandidateService _candidateService;
 
-        public UserDataApiController(UserService userService)
+        public UserDataApiController(UserService userService, CandidateService candidateService)
         {
             _userService = userService;
-            // _candidateService = candidateService;
+            _candidateService = candidateService;
         }
 
         [HttpGet]
@@ -27,13 +27,12 @@ namespace Core.Web.Controllers.Api.v1
             return Json(result);
         }
         
-        // //TODO clean up API routes and files
-        // [HttpGet("getAllCandidates")]
-        // public async Task<IActionResult> GetAll()
-        // {
-        //     var result = await _candidateService.GetAll();
-        //     return Json(result);
-        // }
+        [HttpGet("getAllCandidates")]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _candidateService.GetAll();
+            return Json(result);
+        }
         
         // [HttpGet("{id:long}")]
         // public async Task<IActionResult> FindCandidateByUserId(long id)
