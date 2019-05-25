@@ -10,9 +10,9 @@ namespace Core.Web.Controllers.Api.v1
     [Route("/api/v1/statistics")]
     public class StatisticsApiController : RootApiController
     {
-        private readonly StatisticsService _statisticsService;
+        private readonly IStatisticsService _statisticsService;
 
-        public StatisticsApiController(StatisticsService statisticsService)
+        public StatisticsApiController(IStatisticsService statisticsService)
         {
             _statisticsService = statisticsService;
         }

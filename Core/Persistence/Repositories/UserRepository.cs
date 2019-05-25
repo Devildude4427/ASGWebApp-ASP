@@ -1,6 +1,4 @@
-using System.Linq;
 using System.Threading.Tasks;
-using Core.Domain;
 using Core.Domain.Entities;
 using Core.Domain.Models.Authentication;
 using Core.Persistence.Configuration;
@@ -10,7 +8,6 @@ namespace Core.Persistence.Repositories
 {
     public interface IUserRepository
     {
-        Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest);
         Task<User> FindById(long id);
         Task<User> FindByEmail(string email);
         Task<bool> Register(RegistrationRequest registrationRequest);
@@ -26,43 +23,9 @@ namespace Core.Persistence.Repositories
             _con = con;
         }
 
-        public async Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest)
-        {
-            var sqlTemplate = @"
-                SELECT *
-                FROM users u
-                WHERE u.name ILIKE :searchTerm
-                {0}
-                OFFSET :offset
-                LIMIT :pageSize;
-                
-                SELECT COUNT(*)
-                FROM users u
-                WHERE u.name ILIKE :searchTerm
-                OFFSET :offset
-                LIMIT :pageSize;
-            ";
-            
-            var sanitisedSql = new SanitisedSql<User>(sqlTemplate, filteredPageRequest.OrderBy, filteredPageRequest.OrderByAsc, "u");
-
-            var sql = sanitisedSql.ToSql();
-
-            var result = await _con.Db.QueryMultipleAsync(sql, new
-            {
-                filteredPageRequest.SearchTerm,
-                offset = (int) filteredPageRequest.Offset,
-                pageSize = (int) filteredPageRequest.PageSize
-            });
-
-            var users = await result.ReadAsync<User>();
-            var count = await result.ReadSingleAsync<long>();
-            
-            return new PaginatedList<User>(users.ToList(), count, filteredPageRequest);
-        }
-
         public async Task<User> FindById(long id)
         {
-            var sql = @"
+            const string sql = @"
                 SELECT *
                 FROM users u
                 WHERE u.id = :id;
@@ -91,10 +54,9 @@ namespace Core.Persistence.Repositories
             return rowsAffected == 1;
         }
 
-        //Other
         public async Task<string> GetHashedPassword(string email)
         {
-            var sql = @"
+            const string sql = @"
                 SELECT password
                 FROM users u
                 WHERE u.email = LOWER(:email);
