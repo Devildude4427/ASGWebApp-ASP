@@ -12,7 +12,13 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Core.Services
 {
-    public class AuthService
+    public interface IAuthService
+    {
+        Task<UserResponse> Login(LoginRequest loginRequest);
+        Task<UserResponse> Register(RegistrationRequest registrationRequest);
+    }
+    
+    public class AuthService : IAuthService
     {
         private readonly IUserRepository _userRepository;
         

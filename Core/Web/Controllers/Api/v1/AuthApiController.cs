@@ -11,9 +11,9 @@ namespace Core.Web.Controllers.Api.v1
     [Route("/api/v1/auth")]
     public class AuthApiController : RootApiController
     {
-        private readonly AuthService _authService;
+        private readonly IAuthService _authService;
 
-        public AuthApiController(AuthService authService)
+        public AuthApiController(IAuthService authService)
         {
             _authService = authService;
         }
