@@ -23,17 +23,15 @@ namespace Core
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
             AppConfig = Configuration.GetSection("App").Get<AppConfig>();
-            _env = env;
         }
 
         private IConfiguration Configuration { get; }
         private AppConfig AppConfig { get; }
         private static IContainer ApplicationContainer { get; set; }
-        private readonly IHostingEnvironment _env;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
@@ -89,7 +87,7 @@ namespace Core
             
             var builder = new ContainerBuilder();
             builder.Populate(services);
-            DIConfig.Configure(AppConfig, builder);
+            DiConfig.Configure(AppConfig, builder);
             ApplicationContainer = builder.Build();
             return new AutofacServiceProvider(ApplicationContainer);
         }
