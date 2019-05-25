@@ -6,7 +6,13 @@ using Core.Persistence.Repositories;
 
 namespace Core.Services
 {
-    public class UserService
+    public interface IUserService
+    {
+        Task<User> FindById(long id);
+        Task<User> FindByEmail(string email);
+    }
+    
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
 
@@ -16,14 +22,6 @@ namespace Core.Services
         {
             _userRepository = userRepository;
             _user = user;
-        }
-
-        public async Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest)
-        {
-            if (!_user.IsAuthorisedAtLevel(UserRole.Admin))
-                throw new UnauthorizedAccessException();
-            
-            return await _userRepository.Find(filteredPageRequest);
         }
         
         public async Task<User> FindById(long id)

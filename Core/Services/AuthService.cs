@@ -18,7 +18,7 @@ namespace Core.Services
         Task<UserResponse> Register(RegistrationRequest registrationRequest);
     }
     
-    public class AuthService : IAuthService
+    class AuthService : IAuthService
     {
         private readonly IUserRepository _userRepository;
         

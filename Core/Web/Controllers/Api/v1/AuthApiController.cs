@@ -28,10 +28,8 @@ namespace Core.Web.Controllers.Api.v1
                 Console.WriteLine("Incomplete Details");
                 return Json(new {Success = false, Response = LoginResponse.IncompleteDetails.ToString()});
             }
-                
             
             var result = await _authService.Login(loginRequest);
-
             return result.LoginResponse != LoginResponse.Successful
                 ? Json(new {Success = false, Response = result.LoginResponse.ToString()})
                 : Json(new {Success = true, result.JwtToken});
@@ -41,7 +39,8 @@ namespace Core.Web.Controllers.Api.v1
         public async Task<IActionResult> Register([FromBody] RegistrationRequest registrationRequest)
         {
             var result = await _authService.Register(registrationRequest);
-            return result.UserRegistrationResponse != UserRegistrationResponse.Successful ? Json(new {Success = false, Response = result.UserRegistrationResponse.ToString()})
+            return result.UserRegistrationResponse != UserRegistrationResponse.Successful
+                ? Json(new {Success = false, Response = result.UserRegistrationResponse.ToString()})
                 : Json(new {Success = true});
         }
     }

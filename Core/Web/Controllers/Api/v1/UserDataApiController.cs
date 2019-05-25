@@ -9,22 +9,14 @@ namespace Core.Web.Controllers.Api.v1
     [Route("/api/v1/user")]
     public class UserDataApiController : RootApiController
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        private readonly CandidateService _candidateService;
+        private readonly ICandidateService _candidateService;
 
-        public UserDataApiController(UserService userService, CandidateService candidateService)
+        public UserDataApiController(IUserService userService, ICandidateService candidateService)
         {
             _userService = userService;
             _candidateService = candidateService;
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Find()
-        {
-            var filteredPageRequest = Request.FilteredPageRequest("id", true);
-            var result = await _userService.Find(filteredPageRequest);
-            return Json(result);
         }
         
         [HttpGet("getAllCandidates")]

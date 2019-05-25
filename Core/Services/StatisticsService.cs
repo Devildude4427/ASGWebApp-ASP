@@ -3,7 +3,13 @@ using Core.Persistence.Repositories;
 
 namespace Core.Services
 {
-    public class StatisticsService
+    public interface IStatisticsService
+    {
+        Task<int> GetCurrentCandidateCount();
+        Task<int> GetNewCandidateCount();
+    }
+    
+    class StatisticsService : IStatisticsService
     {
         private readonly IStatisticsRepository _statisticsRepository;
         

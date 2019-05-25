@@ -13,7 +13,6 @@ namespace Core.Persistence.Repositories
 {
     public interface ICandidateRepository
     {
-        Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest);
         Task<IEnumerable<Candidate>> GetAll();
         Task<Candidate> FindByUserId(long id);
         Task<bool> CheckExists(string email);
@@ -29,42 +28,6 @@ namespace Core.Persistence.Repositories
         public CandidateRepository(DatabaseConnection con)
         {
             _con = con;
-        }
-        
-        //CRUD
-
-        public async Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest)
-        {
-            const string sqlTemplate = @"
-                SELECT *
-                FROM users u
-                WHERE u.name ILIKE :searchTerm
-                
-                OFFSET :offset
-                LIMIT :pageSize;
-                
-                SELECT COUNT(*)
-                FROM users u
-                WHERE u.name ILIKE :searchTerm
-                OFFSET :offset
-                LIMIT :pageSize;
-            ";
-            
-            var sanitisedSql = new SanitisedSql<User>(sqlTemplate, filteredPageRequest.OrderBy, filteredPageRequest.OrderByAsc, "u");
-
-            var sql = sanitisedSql.ToSql();
-
-            var result = await _con.Db.QueryMultipleAsync(sql, new
-            {
-                filteredPageRequest.SearchTerm,
-                offset = (int) filteredPageRequest.Offset,
-                pageSize = (int) filteredPageRequest.PageSize
-            });
-
-            var users = await result.ReadAsync<User>();
-            var count = await result.ReadSingleAsync<long>();
-            
-            return new PaginatedList<User>(users.ToList(), count, filteredPageRequest);
         }
 
         public async Task<IEnumerable<Candidate>> GetAll()

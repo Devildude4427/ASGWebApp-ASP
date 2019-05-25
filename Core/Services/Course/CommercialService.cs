@@ -11,19 +11,19 @@ namespace Core.Services.Course
         Task<CandidateResponse> Register(CommercialRegistrationRequest commercialRegistration, string email);
     }
     
-    public class CommercialService : ICommercialService
+    class CommercialService : ICommercialService
     {
         private readonly ICandidateRepository _candidateRepository;
 
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
         
-        public CommercialService(ICandidateRepository candidateRepository, UserService userService)
+        public CommercialService(ICandidateRepository candidateRepository, IUserService userService)
         {
             _candidateRepository = candidateRepository;
             _userService = userService;
         }
         
-        public async Task<string> GenerateReferenceNumber()
+        private async Task<string> GenerateReferenceNumber()
         {
             var previousReferenceNumber = await _candidateRepository.PreviousCandidateReferenceNumber();
             var referenceNumberParts = previousReferenceNumber.Split('-');
