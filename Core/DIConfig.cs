@@ -7,8 +7,7 @@ using Core.Web.Config;
 
 namespace Core
 {
-    // ReSharper disable once InconsistentNaming
-    public static class DIConfig
+    public static class DiConfig
     {
         public static ContainerBuilder Configure(IAppConfig config, ContainerBuilder builder)
         {
@@ -24,6 +23,7 @@ namespace Core
             var services = Assembly.GetAssembly(typeof(UserService));
             builder.RegisterAssemblyTypes(services)
                 .Where(t => t.Name.EndsWith("Service"))
+                .AsImplementedInterfaces()
                 .AsSelf()
                 .InstancePerLifetimeScope();
 

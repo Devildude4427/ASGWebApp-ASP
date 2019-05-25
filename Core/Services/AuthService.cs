@@ -4,15 +4,21 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Domain.Entities;
-using Core.Domain.RepositoryInterfaces;
-using Core.Domain.ViewModels;
+using Core.Domain.Models.Authentication;
+using Core.Persistence.Repositories;
 using Core.Services.Helpers;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Core.Services
 {
-    public class AuthService
+    public interface IAuthService
+    {
+        Task<UserResponse> Login(LoginRequest loginRequest);
+        Task<UserResponse> Register(RegistrationRequest registrationRequest);
+    }
+    
+    public class AuthService : IAuthService
     {
         private readonly IUserRepository _userRepository;
         
@@ -24,9 +30,9 @@ namespace Core.Services
             _appSettings = appSettings.Value;
         }
 
-        public async Task<UserResponse> Login(string email, string password)
+        public async Task<UserResponse> Login(LoginRequest loginRequest)
         {
-            var user = await GetUserIfValid(email);
+            var user = await GetUserIfValid(loginRequest.Email);
 
             if (user == null)
                 return new UserResponse(LoginResponse.UserNonExistent);
@@ -36,8 +42,8 @@ namespace Core.Services
             if (!user.Activated)
                 return new UserResponse(LoginResponse.UserNotActivated);
 
-            var hashedPassword = await _userRepository.GetHashedPassword(email);
-            if (!Hashing.PasswordsMatch(password, hashedPassword))
+            var hashedPassword = await _userRepository.GetHashedPassword(loginRequest.Email);
+            if (!Hashing.PasswordsMatch(loginRequest.Password, hashedPassword))
                 return new UserResponse(LoginResponse.IncorrectPassword);
 
             return !user.Enabled ? new UserResponse(LoginResponse.UserDisabled) :
@@ -113,7 +119,8 @@ namespace Core.Services
         UserNonExistent,
         IncorrectPassword,
         UserDisabled,
-        UnknownError
+        UnknownError,
+        IncompleteDetails
     }
     
     public enum UserRegistrationResponse

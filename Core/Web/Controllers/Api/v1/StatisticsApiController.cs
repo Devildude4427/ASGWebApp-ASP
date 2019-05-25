@@ -1,11 +1,12 @@
 using System.Threading.Tasks;
 using Core.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.Controllers.Api.v1
 {
-    [Authorize]
+    // [Authorize(Roles = Role.Admin)]
     [Route("/api/v1/statistics")]
     public class StatisticsApiController : RootApiController
     {

@@ -1,3 +1,5 @@
+using Core.Domain.Models.Course;
+
 namespace Core.Domain.ViewModels
 {
     public class UpdateContactDetails
