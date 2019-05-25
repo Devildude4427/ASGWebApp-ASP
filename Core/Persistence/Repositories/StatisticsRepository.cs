@@ -1,10 +1,15 @@
 using System.Threading.Tasks;
-using Core.Domain.RepositoryInterfaces;
 using Core.Persistence.Configuration;
 using Dapper;
 
 namespace Core.Persistence.Repositories
 {
+    public interface IStatisticsRepository
+    {
+        Task<int> GetCurrentCandidateCount();
+        Task<int> GetNewCandidateCount();
+    }
+    
     public class StatisticsRepository : IStatisticsRepository
     {
         private readonly DatabaseConnection _con;

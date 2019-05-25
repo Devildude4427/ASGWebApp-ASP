@@ -4,14 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Domain;
 using Core.Domain.Entities;
-using Core.Domain.RepositoryInterfaces;
+using Core.Domain.Models.Course;
 using Core.Domain.ViewModels;
 using Core.Persistence.Configuration;
 using Dapper;
 
 namespace Core.Persistence.Repositories
 {
-    public class CandidateRepository : ICandidateRepository
+    public interface ICandidateRepository
+    {
+        Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest);
+        Task<IEnumerable<Candidate>> GetAll();
+        Task<Candidate> FindByUserId(long id);
+        Task<bool> CheckExists(string email);
+        Task<string> PreviousCandidateReferenceNumber();
+        Task<bool> Register(CommercialRegistrationRequest commercialRegistration);
+        Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails);
+    }
+    
+    class CandidateRepository : ICandidateRepository
     {
         private readonly DatabaseConnection _con;
 
@@ -77,6 +88,18 @@ namespace Core.Persistence.Repositories
             ";
             return await _con.Db.QuerySingleOrDefaultAsync<Candidate>(sql, new { id });
         }
+        
+        public async Task<bool> CheckExists(string email)
+        {
+            const string sql = @"
+                SELECT exists(
+                    SELECT 1 FROM candidates c
+                    INNER JOIN users u on c.user_id = u.id 
+                    WHERE U.email = :email
+                );
+            ";
+            return await _con.Db.QuerySingleOrDefaultAsync<bool>(sql, new { email });
+        }
 
         public async Task<string> PreviousCandidateReferenceNumber()
         {
@@ -89,7 +112,7 @@ namespace Core.Persistence.Repositories
             return await _con.Db.QuerySingleOrDefaultAsync<string>(sql);
         }
         
-        public async Task<bool> Register(CourseRegistration courseRegistration)
+        public async Task<bool> Register(CommercialRegistrationRequest courseRegistration)
         {
             var sql = @"
                 INSERT INTO addresses(line_1, line_2, city, post_code) VALUES (:Line1, :Line2, :City, :PostCode) RETURNING id;

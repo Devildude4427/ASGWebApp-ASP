@@ -1,4 +1,4 @@
-namespace Core.Domain.ViewModels
+namespace Core.Domain.Models.Authentication
 {
     public class RegistrationRequest
     {

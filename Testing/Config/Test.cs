@@ -21,7 +21,7 @@ namespace Testing.Config
         {
             if (Container != null) return;
             var b = new ContainerBuilder();
-            DIConfig.Configure(new TestConfig(), b);
+            DiConfig.Configure(new TestConfig(), b);
             Container = b.Build();
         }
 

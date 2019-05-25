@@ -1,17 +1,19 @@
 using System.Threading.Tasks;
 using Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.Controllers.Api.v1
 {
+    [Authorize]
     [Route("/api/v1/user")]
-    public class UserApiController : RootApiController
+    public class UserDataApiController : RootApiController
     {
         private readonly UserService _userService;
 
         private readonly CandidateService _candidateService;
 
-        public UserApiController(UserService userService, CandidateService candidateService)
+        public UserDataApiController(UserService userService, CandidateService candidateService)
         {
             _userService = userService;
             _candidateService = candidateService;
@@ -25,7 +27,6 @@ namespace Core.Web.Controllers.Api.v1
             return Json(result);
         }
         
-        //TODO clean up API routes and files
         [HttpGet("getAllCandidates")]
         public async Task<IActionResult> GetAll()
         {
@@ -43,7 +44,7 @@ namespace Core.Web.Controllers.Api.v1
         // [HttpGet]
         // public async Task<IActionResult> GetCurrentCandidate()
         // {
-        //     //TODO this return the entire row from candidate, FIX!!!!
+        //     //TODO this returns the entire row from candidate, FIX!!!!
         //     var result = await _candidateService.FindByUserId();
         //     return Json(result);
         // }

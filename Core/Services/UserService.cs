@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Core.Domain;
 using Core.Domain.Entities;
-using Core.Domain.RepositoryInterfaces;
+using Core.Persistence.Repositories;
 
 namespace Core.Services
 {

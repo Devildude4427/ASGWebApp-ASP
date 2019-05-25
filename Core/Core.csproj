@@ -18,9 +18,4 @@
         <PackageReference Include="TinyLog-Mvc" Version="1.3.0-rc" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Domain\QueryInterfaces" />
-      <Folder Include="Persistence\Queries" />
-    </ItemGroup>
-
 </Project>

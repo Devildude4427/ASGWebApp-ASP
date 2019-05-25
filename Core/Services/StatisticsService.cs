@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Core.Domain.RepositoryInterfaces;
+using Core.Persistence.Repositories;
 
 namespace Core.Services
 {

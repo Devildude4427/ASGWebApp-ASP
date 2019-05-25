@@ -2,13 +2,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Domain;
 using Core.Domain.Entities;
-using Core.Domain.RepositoryInterfaces;
-using Core.Domain.ViewModels;
+using Core.Domain.Models.Authentication;
 using Core.Persistence.Configuration;
 using Dapper;
 
 namespace Core.Persistence.Repositories
 {
+    public interface IUserRepository
+    {
+        Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest);
+        Task<User> FindById(long id);
+        Task<User> FindByEmail(string email);
+        Task<bool> Register(RegistrationRequest registrationRequest);
+        Task<string> GetHashedPassword(string email);
+    }
+    
     public class UserRepository : IUserRepository
     {
         private readonly DatabaseConnection _con;
@@ -17,8 +25,6 @@ namespace Core.Persistence.Repositories
         {
             _con = con;
         }
-        
-        //CRUD
 
         public async Task<PaginatedList<User>> Find(FilteredPageRequest filteredPageRequest)
         {
@@ -78,10 +84,10 @@ namespace Core.Persistence.Repositories
         {
             const string sql = @"
                 INSERT INTO users(name, email, password, role, activated, enabled, authentication_token, expiry_datetime)
-                 VALUES (:Name, :EmailAddress, :Password, 1001, FALSE, TRUE, NULL, NULL) RETURNING id;
+                 VALUES (:Name, :Email, :Password, 1001, FALSE, TRUE, NULL, NULL) RETURNING id;
             ";
-            var rowsAffected = await _con.Db.ExecuteAsync(sql, new {registrationRequest.Name,
-                registrationRequest.Email, registrationRequest.Password});
+            var rowsAffected = await _con.Db.ExecuteAsync(sql, new {
+                registrationRequest.Name, registrationRequest.Email, registrationRequest.Password});
             return rowsAffected == 1;
         }
 
