@@ -10,6 +10,7 @@ namespace Core.Services
     public interface ICandidateService
     {
         Task<IEnumerable<Candidate>> GetAll();
+        Task<Candidate> FindByUserId(long id);
         Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails);
     }
     
@@ -29,9 +30,9 @@ namespace Core.Services
             return await _candidateRepository.GetAll();
         }
 
-        private async Task<Candidate> FindByUserId(long userId)
+        public async Task<Candidate> FindByUserId(long id)
         {
-            return await _candidateRepository.FindByUserId(userId);
+            return await _candidateRepository.FindByUserId(id);
         }
 
         public async Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails)
