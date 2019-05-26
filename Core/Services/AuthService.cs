@@ -29,6 +29,12 @@ namespace Core.Services
             _userRepository = userRepository;
             _appSettings = appSettings.Value;
         }
+        
+        //TODO Find out how to make the above constructor handle the necessary DI for IOptions needed for tests
+        public AuthService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
 
         public async Task<UserResponse> Login(LoginRequest loginRequest)
         {
@@ -46,8 +52,9 @@ namespace Core.Services
             if (!Hashing.PasswordsMatch(loginRequest.Password, hashedPassword))
                 return new UserResponse(LoginResponse.IncorrectPassword);
 
-            return !user.Enabled ? new UserResponse(LoginResponse.UserDisabled) :
-                new UserResponse(jwtToken, LoginResponse.Successful);
+            return !user.Enabled 
+                ? new UserResponse(LoginResponse.UserDisabled)
+                : new UserResponse(jwtToken, LoginResponse.Successful);
         }
         
         private async Task<User> GetUserIfValid(string email) => await _userRepository.FindByEmail(email);
@@ -83,7 +90,8 @@ namespace Core.Services
             registrationRequest.Password = Hashing.HashPassword(registrationRequest.Password);
             
             var registered = await _userRepository.Register(registrationRequest);
-            return registered ? new UserResponse(UserRegistrationResponse.Successful)
+            return registered 
+                ? new UserResponse(UserRegistrationResponse.Successful)
                 : new UserResponse(UserRegistrationResponse.UnknownError);
         }
     }

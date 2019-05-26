@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Domain;
 using Core.Domain.Entities;
 using Core.Domain.Models.Course;
 using Core.Domain.ViewModels;
@@ -45,9 +44,9 @@ namespace Core.Persistence.Repositories
         public async Task<Candidate> FindByUserId(long id)
         {
             const string sql = @"
-                SELECT *
-                FROM candidates c
-                WHERE c.user_id = :id;
+                SELECT reference_number ReferenceNumber, last_completed_stage LastCompletedStage
+                FROM candidates
+                WHERE user_id = :id;
             ";
             return await _con.Db.QuerySingleOrDefaultAsync<Candidate>(sql, new { id });
         }
