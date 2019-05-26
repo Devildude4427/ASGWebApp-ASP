@@ -17,8 +17,9 @@ namespace Testing.Integration
             using (var container = GetContainer())
             {
                 var authService = container.Resolve<IAuthService>();
-                var userResponse = await authService.Register(
-                    new RegistrationRequest("Test User", "testuser@asg.com", "password12345"));
+                var registrationRequest = new RegistrationRequest
+                { Name = "Test User", Email = "test@asg.com", Password = "password12345" };
+                var userResponse = await authService.Register(registrationRequest);
                 userResponse.UserRegistrationResponse.Should().Be(UserRegistrationResponse.Successful);
             }
         }
