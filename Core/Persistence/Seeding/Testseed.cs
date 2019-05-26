@@ -38,7 +38,7 @@ namespace Core.Persistence.Seeding
 
                 INSERT INTO candidates(user_id, reference_number, contact_info_id, general_info_id, last_completed_stage, registration_date)
                 VALUES (1, 'ASG-19-02-001', 1, 1, 7, '2019-03-19'),
-                       (2, 'ASG-19-02-002', 2, 2, 12, '2019-03-16');
+                       (2, 'ASG-19-02-002', 2, 2, 12, current_date - interval '4 days');
             ");
         }
     }

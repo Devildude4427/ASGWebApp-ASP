@@ -28,7 +28,7 @@ namespace Testing.Integration
             {
                 var statisticsService = container.Resolve<IStatisticsService>();
                 var count = await statisticsService.GetNewCandidateCount();
-                count.Should().Be(0);
+                count.Should().Be(1);
             }
         }
     }
