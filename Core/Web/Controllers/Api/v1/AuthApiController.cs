@@ -1,10 +1,8 @@
-using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Core.Domain.Models.Authentication;
 using Core.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Core.Web.Controllers.Api.v1
 {
@@ -25,7 +23,6 @@ namespace Core.Web.Controllers.Api.v1
                 return Json(new { Success = false, Response = LoginResponse.AlreadyLoggedIn.ToString()});
             if (!ModelState.IsValid)
             {
-                Console.WriteLine("Incomplete Details");
                 return Json(new {Success = false, Response = LoginResponse.IncompleteDetails.ToString()});
             }
             
