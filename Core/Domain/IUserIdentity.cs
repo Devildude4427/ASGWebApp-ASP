@@ -12,6 +12,7 @@ namespace Core.Domain
     public enum UserRole
     {
         Standard = 1001,
+        Instructor = 4500,
         Admin = 9001
     }
     

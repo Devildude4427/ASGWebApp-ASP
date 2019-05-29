@@ -1,10 +1,12 @@
 using System.Threading.Tasks;
 using Core.Domain.ViewModels;
 using Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.Controllers.Api.v1
 {
+    [Authorize(Roles = "Standard")]
     [Route("/api/v1/candidate")]
     public class CandidateApiController : RootApiController
     {
@@ -19,7 +21,8 @@ namespace Core.Web.Controllers.Api.v1
         public async Task<IActionResult> UpdateDetails([FromBody] UpdateContactDetails updateContactDetails)
         {
             var result = await _candidateService.UpdateDetails(updateContactDetails);
-            return result ? Json(new {Success = false, Response = "Unknown Server Error"})
+            return result
+                ? Json(new {Success = false, Response = "Unknown Server Error"})
                 : Json(new {Success = true});
         }
     }

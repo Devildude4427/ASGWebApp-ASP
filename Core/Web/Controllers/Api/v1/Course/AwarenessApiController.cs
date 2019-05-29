@@ -2,10 +2,12 @@ using System.Threading.Tasks;
 using Core.Domain.Models.Course;
 using Core.Domain.ViewModels;
 using Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.Controllers.Api.v1.Course
 {
+    [Authorize(Roles= "Standard")]
     [Route("/api/v1/course/awareness")]
     public class AwarenessCourseApiController : RootApiController
     {
@@ -16,12 +18,13 @@ namespace Core.Web.Controllers.Api.v1.Course
             _candidateService = candidateService;
         }
 
-//        [HttpPost("register")]
-//        public async Task<IActionResult> Register([FromBody] AwarenessRegistrationRequest awarenessRegistration)
-//        {
-//            var result = await _candidateService.Register(awarenessRegistration);
-//            return result.CandidateRegistrationResponse != CandidateRegistrationResponse.Successful ? Json(new {Success = false, Response = result.CandidateRegistrationResponse})
-//                : Json(new {Success = true});
-//        }
+        // [HttpPost("register")]
+        // public async Task<IActionResult> Register([FromBody] AwarenessRegistrationRequest awarenessRegistration)
+        // {
+        //     var result = await _candidateService.Register(awarenessRegistration);
+        //     return result.CandidateRegistrationResponse != CandidateRegistrationResponse.Successful
+        //         ? Json(new {Success = false, Response = result.CandidateRegistrationResponse})
+        //         : Json(new {Success = true});
+        // }
     }
 }
