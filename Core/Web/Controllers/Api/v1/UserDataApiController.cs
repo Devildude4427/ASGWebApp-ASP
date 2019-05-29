@@ -19,6 +19,7 @@ namespace Core.Web.Controllers.Api.v1
             _candidateService = candidateService;
         }
         
+        [Authorize(Roles = "Admin")]
         [HttpGet("getAllCandidates")]
         public async Task<IActionResult> GetAll()
         {

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.Controllers.Api.v1
 {
-    // [Authorize(Roles = Role.Admin)]
+    [Authorize(Roles = "Admin")]
     [Route("/api/v1/statistics")]
     public class StatisticsApiController : RootApiController
     {
