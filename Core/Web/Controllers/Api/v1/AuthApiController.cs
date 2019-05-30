@@ -2,10 +2,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Core.Domain.Models.Authentication;
 using Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.Controllers.Api.v1
 {
+    [Authorize]
     [Route("/api/v1/auth")]
     public class AuthApiController : RootApiController
     {
@@ -16,6 +18,7 @@ namespace Core.Web.Controllers.Api.v1
             _authService = authService;
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
@@ -32,6 +35,7 @@ namespace Core.Web.Controllers.Api.v1
                 : Json(new {Success = true, result.JwtToken});
         }
         
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationRequest registrationRequest)
         {

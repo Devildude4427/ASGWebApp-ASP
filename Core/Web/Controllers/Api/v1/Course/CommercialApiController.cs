@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 using Core.Domain.Models.Course;
 using Core.Services;
 using Core.Services.Course;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Web.Controllers.Api.v1.Course
 {
+    [Authorize(Roles = "Standard")]
     [Route("/api/v1/course/commercial")]
     public class CommercialCourseApiController : RootApiController
     {
