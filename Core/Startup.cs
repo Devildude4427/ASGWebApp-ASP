@@ -54,7 +54,8 @@ namespace Core
                     policy
                         .AllowAnyHeader()
                         .AllowAnyMethod()
-                        .AllowCredentials();
+                        .AllowCredentials()
+                        .AllowAnyOrigin();
                     // .WithOrigins("http://localhost:8080");
                 });
             });
