@@ -1,6 +1,6 @@
 using Core.Domain.Models.Course;
 
-namespace Core.Domain.ViewModels
+namespace Core.Domain.Models.Candidate
 {
     public class UpdateContactDetails
     {

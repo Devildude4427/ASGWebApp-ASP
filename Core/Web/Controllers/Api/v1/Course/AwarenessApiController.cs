@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Core.Domain.Models.Course;
-using Core.Domain.ViewModels;
 using Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

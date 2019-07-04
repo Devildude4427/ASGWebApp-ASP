@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core.Domain;
 using Core.Domain.Entities;
-using Core.Domain.ViewModels;
+using Core.Domain.Models.Candidate;
 using Core.Persistence.Repositories;
 
 namespace Core.Services
@@ -17,8 +16,6 @@ namespace Core.Services
     class CandidateService : ICandidateService
     {
         private readonly ICandidateRepository _candidateRepository;
-
-        private readonly IUserIdentity _user;
         
         public CandidateService(ICandidateRepository candidateRepository)
         {
@@ -37,7 +34,7 @@ namespace Core.Services
 
         public async Task<bool> UpdateDetails(UpdateContactDetails updateContactDetails)
         {
-            updateContactDetails.UserId = _user.Id;
+            // updateContactDetails.UserId = _user.Id;
             return await _candidateRepository.UpdateDetails(updateContactDetails);
         }
     }

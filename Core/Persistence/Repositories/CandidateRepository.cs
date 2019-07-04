@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Domain.Entities;
+using Core.Domain.Models.Candidate;
 using Core.Domain.Models.Course;
-using Core.Domain.ViewModels;
 using Core.Persistence.Configuration;
 using Dapper;
 

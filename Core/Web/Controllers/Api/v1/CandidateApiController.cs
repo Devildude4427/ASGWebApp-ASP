@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Core.Domain.ViewModels;
+using Core.Domain.Models.Candidate;
 using Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
