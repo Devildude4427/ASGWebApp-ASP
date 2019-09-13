@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  
+  webapi:
+    container_name: 'webapi'
+    image: 'webapi'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DB_CONNECTION: "Server=postgres;Port=5432;Database=asg;User Id=asgwebapi;Password=admin;"
+    ports:
+     - "5000:5000"
+    depends_on:
+     - postgres
+     
+  postgres:
+    container_name: 'postgres'
+    image: postgres
+    environment:
+      POSTGRES_USER: "asgwebapi"
+      POSTGRES_PASSWORD: "admin"
+      POSTGRES_DB: "asg"

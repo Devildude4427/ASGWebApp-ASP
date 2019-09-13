@@ -28,7 +28,7 @@ namespace Core.Persistence.Configuration
             return Environment.GetEnvironmentVariable("DB_CONNECTION");
         }
 
-        private static string DefaultConnectionString => "Server=127.0.0.1;Port=5432;Database=asg;User Id=asgwebapp;Password=admin;";
+        private static string DefaultConnectionString => "Server=127.0.0.1;Port=5432;Database=asg;User Id=asgwebapi;Password=admin;";
     }
     
     public class DatabaseConnection : IDisposable
